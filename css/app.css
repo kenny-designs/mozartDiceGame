@@ -1,0 +1,33 @@
+#main {
+    margin-left: 200px;
+}
+
+#header-container h1 {
+    font-family: "Times New Roman";
+    font-variant: small-caps;
+}
+
+#mySidebar {
+    width: 200px;
+    display: none;
+    background: linear-gradient(to right, black, white);
+    box-shadow: 5px 5px 25px black;
+}
+
+#side-buttons input {
+    height: 120px;
+    width: 120px;
+    margin-top: 60px;
+    margin-left: 40px;
+}
+
+#side-buttons input:hover {
+    filter: invert(85%);
+}
+
+#play-container img {
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    size: auto;
+}
