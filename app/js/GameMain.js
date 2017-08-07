@@ -1,19 +1,15 @@
-/*
-    Existing problems include:
-        1) Making sure Tone and all its dependencies are up to date and included
-        2) Getting 'require' to work for MidiConvert
-        3) Figuring out gulp and how to use it
-        4) Get module.exports to work
-        5) Connect code to play button
- */
-
 // const MidiConvert   = require('./MidiConvert');
 // const Tone          = require('./Tone');
 
 class GameMain {
     constructor() {
-        console.log('Hello World!');
+        // setup play button
+        this.playButton = document.getElementById('play-button');
+        this.playButton.addEventListener('click', function(event) {
+            console.log('You clicked pay!');
+        }.bind(this));
 
+        /*
         this.theScore = null;
 
         this.synth = new Tone.PolySynth(8, Tone.Synth, {
@@ -29,6 +25,7 @@ class GameMain {
         }).toMaster();
 
         this.init();
+        */
     }
 
     // using init method for proper form
@@ -145,7 +142,5 @@ class GameMain {
         Tone.Transport.start('+0.1');
     }
 }
-
-//const gameMain = new GameMain();
 
 module.exports = GameMain;
