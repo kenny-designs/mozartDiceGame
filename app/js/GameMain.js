@@ -1,17 +1,34 @@
-// const MidiConvert   = require('./MidiConvert');
-// const Tone          = require('./Tone');
+const MidiConvert   = require('./lib/MidiConvert');
+const Tone          = require('./lib/Tone');
 
 class GameMain {
     constructor() {
         // setup play button
         this.playButton = document.getElementById('play-button');
         this.playButton.addEventListener('click', function(event) {
-            console.log('You clicked pay!');
+            let playState = Tone.Transport.state;
+
+            if (playState === 'stopped' || playState === 'paused') {
+                // Tone.Transport.position = '0:0:0';
+                this.playSong();
+                console.log('Now playing...');
+            }
+            else if (playState === 'started') {
+                console.log('Pausing...');
+                this.pauseSong();
+            }
         }.bind(this));
 
-        /*
-        this.theScore = null;
+        this.randomButton = document.getElementById('random-button');
+        this.randomButton.addEventListener('click', function(event) {
+            this.clearSong();
+            // this.randomSong();
+            // this.updatePlayfield();
+        }.bind(this));
 
+        this.playContainer = document.getElementById('play-container');
+        this.selectedNotes = [];
+        this.theScore = null;
         this.synth = new Tone.PolySynth(8, Tone.Synth, {
             "oscillator": {
                 "type": "sine3"
@@ -25,19 +42,17 @@ class GameMain {
         }).toMaster();
 
         this.init();
-        */
     }
 
     // using init method for proper form
     init() {
         this.createScore();
-
-        // go ahead and generate a random song
-        this.genSong(this.theScore);
+        this.randomSong();
+        this.loadSong();
+        this.formPlayfield();
     }
 
     // forms base table for theScore
-    // If I call this twice will it give problems?
     createScore()
     {
         this.theScore = [
@@ -92,54 +107,114 @@ class GameMain {
         ];
     }
 
+    // creates the playfield for the player to interact with
+    formPlayfield() {
+        let self = this;
+
+        var index = 0;
+        this.theScore.forEach(function(column) {
+            var columnContainer = document.createElement('div');
+            columnContainer.id = 'column-' + index;
+            columnContainer.classList.add('column');
+            self.playContainer.appendChild(columnContainer);
+
+            column.measures.forEach(function(element) {
+                var measureElem = document.createElement('div');
+                measureElem.id = 'note-' + element;
+                measureElem.innerHTML = '<label>' + element + '</label>';
+                measureElem.classList.add('note-container');
+
+                if (self.selectedNotes[index] === element) {
+                    measureElem.classList.add('selected');
+                }
+
+                columnContainer.appendChild(measureElem);
+            });
+            index++;
+        });
+    }
+
+    // refreshes the playField with new selections
+    updatePlayfield() {
+        let self = this;
+
+        var index = 0;
+        this.theScore.forEach(function(column) {
+            column.measures.forEach(function(element) {
+                var measureElem = document.getElementById('note-' + element);
+
+                if (self.selectedNotes[index] === element) {
+                    measureElem.classList.add('selected');
+                }
+                else {
+                    measureElem.classList.remove('selected');
+                }
+            });
+            index++;
+        });
+    }
+
     // return random measure from an array
     randMeasure(noteArray) {
         var num = Math.floor(Math.random() * noteArray.length);
         return noteArray[num];
     }
 
+    // creates a random song
+    randomSong() {
+        var selectedNotes = [];
+
+        for (var i = 0; i < this.theScore.length; i++) {
+            selectedNotes.push(this.randMeasure(this.theScore[i].measures));
+        }
+
+        this.selectedNotes = selectedNotes;
+    }
+
     // play a single note
-    playNote(time, event) {
+    playNote(time, event, synth) {
         this.synth.triggerAttackRelease(event.name,
             event.duration,
             time,
             event.velocity);
         // observe midi events as music plays
-        console.log(event);
+        // console.log(event);
     }
 
-    // generates game song
-    genSong(table, index, offset) {
-        // set index and offset to defaults if not supplied
-        // also, do I need the '===' or would '==' work fine?
-        if (index === undefined) {index = 0;}
-        if (offset === undefined) {offset = 0;}
+    // load the entirety of the selectedNotes
+    loadSong() {
+        let self = this;
+        var offset = 0;
 
-        // set up each measure to be played
-        if (index < table.length) {
-            // find a random measure
-            var measureName = this.randMeasure(table[index].measures);
-            console.log("Column " + index + " is " + measureName);
-
+        for (var i = 0; i < this.selectedNotes.length; i++) {
             // load midi file for playing
-            MidiConvert.load("./audio/mozartMidi/" + measureName).then(function(midi){
+            MidiConvert.load("./audio/mozartMidi/" + self.selectedNotes[i]).then(function(midi) {
                 Tone.Transport.bpm.value = midi.bpm; // remove?
                 var theNotes = midi.tracks[0].notes;
-                var aPart = new Tone.Part(this.playNote, theNotes).start(offset);
+                var aPart = new Tone.Part(function(time, note) {
+                    self.playNote(time, note, self.synth);
+                }, theNotes).start(offset);
 
                 // take last note and add to offset
                 var lastNote = theNotes.slice(-1)[0];
 
                 // there appears to be a delay in the measures. using 1.5 as temp fix
                 offset += lastNote.time - 1.5;
-                index++;
-                this.genSong(table, index, offset);
             });
         }
     }
 
-    beginTransport() {
+    // method clears Tone of existing song
+    clearSong() {
+        console.log('clearSong() called...');
+    }
+
+    playSong() {
         Tone.Transport.start('+0.1');
+    }
+
+    pauseSong() {
+        Tone.Transport.pause();
     }
 }
 
