@@ -15,33 +15,7 @@ class GameMain {
         this.allParts = [];
 
         // bool tracking if song is playing
-        this.isPlaying = false;
-
-        /*
-        // setup play button
-        this.playButton = document.getElementById('play-button');
-        this.playButton.addEventListener('click', function(event) {
-            let playState = Tone.Transport.state;
-
-            if (playState === 'stopped' || playState === 'paused') {
-                this.playSong();
-            }
-            else if (playState === 'started') {
-                this.pauseSong();
-            }
-        }.bind(this));
-
-        // setup random button
-        this.randomButton = document.getElementById('random-button');
-        this.randomButton.addEventListener('click', function(event) {
-            this.pauseSong();
-            this.clearSong();
-            this.randomSong();
-            this.loadSong();
-            this.updatePlayfield();
-            this.resetSong();
-        }.bind(this));
-        */
+        //this.isPlaying = false;
 
         this.playContainer = document.getElementById('play-container');
         this.selectedNotes = [];
@@ -233,14 +207,14 @@ class GameMain {
     // play song via transport
     playSong() {
         Tone.Transport.start('+0.1');
-        this.isPlaying = true;
+        this.gameModel.isPlaying = true;
         console.log('Now playing...');
     }
 
     // pauses transport thus pausing song
     pauseSong() {
         Tone.Transport.pause();
-        this.isPlaying = false;
+        this.gameModel.isPlaying = false;
         console.log('Pausing...');
     }
 

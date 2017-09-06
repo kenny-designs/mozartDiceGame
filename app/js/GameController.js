@@ -1,10 +1,10 @@
 class GameController {
     constructor(app) {
-        // setup play button
+        // setup play/pause button
         this.playButton = document.getElementById('play-button');
         this.playButton.addEventListener('click', function(event) {
             // toggle song playing
-            app.isPlaying ? app.pauseSong() : app.playSong();
+            app.gameModel.isPlaying ? app.pauseSong() : app.playSong();
         }.bind(this));
 
         // setup random button
