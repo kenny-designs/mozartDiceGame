@@ -3,7 +3,7 @@ class GameController {
         // setup play button
         this.playButton = document.getElementById('play-button');
         this.playButton.addEventListener('click', function(event) {
-            // toggle song whether or not song is playing
+            // toggle song playing
             app.isPlaying ? app.pauseSong() : app.playSong();
         }.bind(this));
 
