@@ -3,27 +3,31 @@ const Tone          = require('./lib/Tone');
 
 class GameMain {
     constructor() {
+        // tracks all parts
+        this.allParts = [];
+
         // setup play button
         this.playButton = document.getElementById('play-button');
         this.playButton.addEventListener('click', function(event) {
             let playState = Tone.Transport.state;
 
             if (playState === 'stopped' || playState === 'paused') {
-                // Tone.Transport.position = '0:0:0';
                 this.playSong();
-                console.log('Now playing...');
             }
             else if (playState === 'started') {
-                console.log('Pausing...');
                 this.pauseSong();
             }
         }.bind(this));
 
         this.randomButton = document.getElementById('random-button');
         this.randomButton.addEventListener('click', function(event) {
+            this.pauseSong();
             this.clearSong();
-            // this.randomSong();
-            // this.updatePlayfield();
+            this.randomSong();
+            this.loadSong();
+            this.updatePlayfield();
+
+            Tone.Transport.position = '0:0:0';
         }.bind(this));
 
         this.playContainer = document.getElementById('play-container');
@@ -177,44 +181,50 @@ class GameMain {
             event.duration,
             time,
             event.velocity);
-        // observe midi events as music plays
-        // console.log(event);
     }
 
     // load the entirety of the selectedNotes
     loadSong() {
-        let self = this;
         var offset = 0;
 
         for (var i = 0; i < this.selectedNotes.length; i++) {
-            // load midi file for playing
-            MidiConvert.load("./audio/mozartMidi/" + self.selectedNotes[i]).then(function(midi) {
+            // load in each midi file for playing
+            MidiConvert.load("./audio/mozartMidi/" + this.selectedNotes[i]).then(function(midi) {
                 Tone.Transport.bpm.value = midi.bpm; // remove?
                 var theNotes = midi.tracks[0].notes;
                 var aPart = new Tone.Part(function(time, note) {
-                    self.playNote(time, note, self.synth);
-                }, theNotes).start(offset);
+                    this.playNote(time, note, this.synth);
+                }.bind(this), theNotes).start(offset);
+
+                // testing parts
+                this.allParts.push(aPart);
 
                 // take last note and add to offset
                 var lastNote = theNotes.slice(-1)[0];
 
                 // there appears to be a delay in the measures. using 1.5 as temp fix
                 offset += lastNote.time - 1.5;
-            });
+            }.bind(this));
         }
     }
 
     // method clears Tone of existing song
     clearSong() {
         console.log('clearSong() called...');
+        for (var part in this.allParts) {
+            this.allParts[part].removeAll();
+        }
+        this.allParts = [];
     }
 
     playSong() {
         Tone.Transport.start('+0.1');
+        console.log('Now playing...');
     }
 
     pauseSong() {
         Tone.Transport.pause();
+        console.log('Pausing...');
     }
 }
 
