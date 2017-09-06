@@ -1,8 +1,12 @@
 const MidiConvert   = require('./lib/MidiConvert');
 const Tone          = require('./lib/Tone');
+const GameModel     = require('./GameModel');
 
 class GameMain {
     constructor() {
+        // testing GameModel
+        let foo = new GameModel();
+
         // tracks all parts
         this.allParts = [];
 
@@ -26,8 +30,7 @@ class GameMain {
             this.randomSong();
             this.loadSong();
             this.updatePlayfield();
-
-            Tone.Transport.position = '0:0:0';
+            this.resetSong();
         }.bind(this));
 
         this.playContainer = document.getElementById('play-container');
@@ -217,14 +220,22 @@ class GameMain {
         this.allParts = [];
     }
 
+    // play song via transport
     playSong() {
         Tone.Transport.start('+0.1');
         console.log('Now playing...');
     }
 
+    // pauses transport thus pausing song
     pauseSong() {
         Tone.Transport.pause();
         console.log('Pausing...');
+    }
+
+    // restart song by setting transport to beginning
+    resetSong() {
+        Tone.Transport.position = '0:0:0';
+        console.log('Restarting song...');
     }
 }
 
