@@ -1,3 +1,4 @@
+const MidiConvert       = require('./lib/MidiConvert');
 const Tone              = require('./lib/Tone');
 
 class GameModel {
@@ -101,6 +102,39 @@ class GameModel {
         }
 
         this.selectedNotes = selectedNotes;
+    }
+
+    // play a single note
+    playNote(time, event, synth) {
+        this.synth.triggerAttackRelease(event.name,
+            event.duration,
+            time,
+            event.velocity);
+    }
+
+    // load the entirety of the selectedNotes
+    loadSong() {
+        var offset = 0;
+
+        for (var i = 0; i < this.selectedNotes.length; i++) {
+            // load in each midi file for playing
+            MidiConvert.load("./audio/mozartMidi/" + this.selectedNotes[i]).then(function(midi) {
+                Tone.Transport.bpm.value = midi.bpm; // remove?
+                var theNotes = midi.tracks[0].notes;
+                var aPart = new Tone.Part(function(time, note) {
+                    this.playNote(time, note, this.synth);
+                }.bind(this), theNotes).start(offset);
+
+                // testing parts
+                this.allParts.push(aPart);
+
+                // take last note and add to offset
+                var lastNote = theNotes.slice(-1)[0];
+
+                // there appears to be a delay in the measures. using 1.5 as temp fix
+                offset += lastNote.time - 1.5;
+            }.bind(this));
+        }
     }
 
     // method clears Tone of existing song
