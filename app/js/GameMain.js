@@ -92,22 +92,17 @@ class GameMain {
 
     // play song via transport
     playSong() {
-        Tone.Transport.start('+0.1');
-        this.gameModel.isPlaying = true;
-        console.log('Now playing...');
+        this.gameController.playSong(this);
     }
 
     // pauses transport thus pausing song
     pauseSong() {
-        Tone.Transport.pause();
-        this.gameModel.isPlaying = false;
-        console.log('Pausing...');
+        this.gameController.pauseSong(this);
     }
 
     // restart song by setting transport to beginning
     resetSong() {
-        Tone.Transport.position = '0:0:0';
-        console.log('Restarting song...');
+        this.gameController.resetSong();
     }
 }
 
