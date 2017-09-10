@@ -83,11 +83,7 @@ class GameMain {
 
     // method clears Tone of existing song
     clearSong() {
-        console.log('clearSong() called...');
-        for (var part in this.gameModel.allParts) {
-            this.gameModel.allParts[part].removeAll();
-        }
-        this.gameModel.allParts = [];
+        this.gameModel.clearSong();
     }
 
     // play song via transport

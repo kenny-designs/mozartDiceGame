@@ -85,6 +85,15 @@ class GameModel {
             }
         }).toMaster();
     }
+
+    // method clears Tone of existing song
+    clearSong() {
+        console.log('Clearing song...');
+        for (var part in this.allParts) {
+            this.allParts[part].removeAll();
+        }
+        this.allParts = [];
+    }
 }
 
 module.exports = GameModel;
