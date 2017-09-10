@@ -11,12 +11,6 @@ class GameMain {
         this.gameView           = new GameView();
         this.gameController     = new GameController(this);
 
-        // tracks all Tone parts
-        this.allParts = [];
-
-        // bool tracking if song is playing
-        //this.isPlaying = false;
-
         this.playContainer = document.getElementById('play-container');
         this.selectedNotes = [];
         this.theScore = null;
@@ -184,7 +178,7 @@ class GameMain {
                 }.bind(this), theNotes).start(offset);
 
                 // testing parts
-                this.allParts.push(aPart);
+                this.gameModel.allParts.push(aPart);
 
                 // take last note and add to offset
                 var lastNote = theNotes.slice(-1)[0];
@@ -198,10 +192,10 @@ class GameMain {
     // method clears Tone of existing song
     clearSong() {
         console.log('clearSong() called...');
-        for (var part in this.allParts) {
-            this.allParts[part].removeAll();
+        for (var part in this.gameModel.allParts) {
+            this.gameModel.allParts[part].removeAll();
         }
-        this.allParts = [];
+        this.gameModel.allParts = [];
     }
 
     // play song via transport
