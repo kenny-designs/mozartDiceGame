@@ -11,7 +11,7 @@ class GameMain {
         this.gameView           = new GameView();
         this.gameController     = new GameController(this);
 
-        // tracks all parts
+        // tracks all Tone parts
         this.allParts = [];
 
         // bool tracking if song is playing
