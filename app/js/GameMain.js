@@ -12,17 +12,6 @@ class GameMain {
         this.gameController     = new GameController(this);
 
         this.playContainer = document.getElementById('play-container');
-        this.synth = new Tone.PolySynth(8, Tone.Synth, {
-            "oscillator": {
-                "type": "sine3"
-            },
-            "envelope": {
-                "attack": 0.03,
-                "decay": 0.1,
-                "sustain": 0.2,
-                "release": 0.6
-            }
-        }).toMaster();
 
         this.init();
     }
@@ -100,7 +89,7 @@ class GameMain {
 
     // play a single note
     playNote(time, event, synth) {
-        this.synth.triggerAttackRelease(event.name,
+        this.gameModel.synth.triggerAttackRelease(event.name,
             event.duration,
             time,
             event.velocity);
@@ -116,7 +105,7 @@ class GameMain {
                 Tone.Transport.bpm.value = midi.bpm; // remove?
                 var theNotes = midi.tracks[0].notes;
                 var aPart = new Tone.Part(function(time, note) {
-                    this.playNote(time, note, this.synth);
+                    this.playNote(time, note, this.gameModel.synth);
                 }.bind(this), theNotes).start(offset);
 
                 // testing parts

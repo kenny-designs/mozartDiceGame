@@ -1,14 +1,18 @@
+const Tone              = require('./lib/Tone');
+
 class GameModel {
     constructor() {
         this.isPlaying = false;     // track if music playing
         this.allParts = [];         // track all Tone parts
         this.selectedNotes = [];    // measures selected to be played
         this.theScore = null;       // available measures to choose from
+        this.synth = null;          // instrument used to play song
 
         this.init();
     }
 
     init() {
+        this.createSynth();
         this.createScore();
     }
 
@@ -65,6 +69,21 @@ class GameModel {
                 "M93.mid", "M151.mid", "M172.mid", "M111.mid",
                 "M8.mid", "M78.mid", "M131.mid"]},
         ];
+    }
+
+    // create the instrument for playing the song
+    createSynth() {
+        this.synth = new Tone.PolySynth(8, Tone.Synth, {
+            "oscillator": {
+                "type": "sine3"
+            },
+            "envelope": {
+                "attack": 0.03,
+                "decay": 0.1,
+                "sustain": 0.2,
+                "release": 0.6
+            }
+        }).toMaster();
     }
 }
 
