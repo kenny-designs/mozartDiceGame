@@ -86,6 +86,23 @@ class GameModel {
         }).toMaster();
     }
 
+    // return random measure from an array
+    randMeasure(noteArray) {
+        var num = Math.floor(Math.random() * noteArray.length);
+        return noteArray[num];
+    }
+
+    // creates a random song
+    randomSong() {
+        var selectedNotes = [];
+
+        for (var i = 0; i < this.theScore.length; i++) {
+            selectedNotes.push(this.randMeasure(this.theScore[i].measures));
+        }
+
+        this.selectedNotes = selectedNotes;
+    }
+
     // method clears Tone of existing song
     clearSong() {
         console.log('Clearing song...');

@@ -31,21 +31,9 @@ class GameMain {
         this.gameView.updatePlayfield(this);
     }
 
-    // return random measure from an array
-    randMeasure(noteArray) {
-        var num = Math.floor(Math.random() * noteArray.length);
-        return noteArray[num];
-    }
-
     // creates a random song
     randomSong() {
-        var selectedNotes = [];
-
-        for (var i = 0; i < this.gameModel.theScore.length; i++) {
-            selectedNotes.push(this.randMeasure(this.gameModel.theScore[i].measures));
-        }
-
-        this.gameModel.selectedNotes = selectedNotes;
+        this.gameModel.randomSong();
     }
 
     // play a single note
