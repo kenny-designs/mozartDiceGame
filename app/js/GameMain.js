@@ -12,7 +12,6 @@ class GameMain {
         this.gameController     = new GameController(this);
 
         this.playContainer = document.getElementById('play-container');
-        this.selectedNotes = [];
         this.theScore = null;
         this.synth = new Tone.PolySynth(8, Tone.Synth, {
             "oscillator": {
@@ -109,7 +108,7 @@ class GameMain {
                 measureElem.innerHTML = '<label>' + element + '</label>';
                 measureElem.classList.add('note-container');
 
-                if (self.selectedNotes[index] === element) {
+                if (self.gameModel.selectedNotes[index] === element) {
                     measureElem.classList.add('selected');
                 }
 
@@ -128,7 +127,7 @@ class GameMain {
             column.measures.forEach(function(element) {
                 var measureElem = document.getElementById('note-' + element);
 
-                if (self.selectedNotes[index] === element) {
+                if (self.gameModel.selectedNotes[index] === element) {
                     measureElem.classList.add('selected');
                 }
                 else {
@@ -153,7 +152,7 @@ class GameMain {
             selectedNotes.push(this.randMeasure(this.theScore[i].measures));
         }
 
-        this.selectedNotes = selectedNotes;
+        this.gameModel.selectedNotes = selectedNotes;
     }
 
     // play a single note
@@ -168,9 +167,9 @@ class GameMain {
     loadSong() {
         var offset = 0;
 
-        for (var i = 0; i < this.selectedNotes.length; i++) {
+        for (var i = 0; i < this.gameModel.selectedNotes.length; i++) {
             // load in each midi file for playing
-            MidiConvert.load("./audio/mozartMidi/" + this.selectedNotes[i]).then(function(midi) {
+            MidiConvert.load("./audio/mozartMidi/" + this.gameModel.selectedNotes[i]).then(function(midi) {
                 Tone.Transport.bpm.value = midi.bpm; // remove?
                 var theNotes = midi.tracks[0].notes;
                 var aPart = new Tone.Part(function(time, note) {
