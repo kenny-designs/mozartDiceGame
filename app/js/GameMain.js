@@ -11,8 +11,6 @@ class GameMain {
         this.gameView           = new GameView();
         this.gameController     = new GameController(this);
 
-        this.playContainer = document.getElementById('play-container');
-
         this.init();
     }
 
@@ -25,49 +23,12 @@ class GameMain {
 
     // creates the playfield for the player to interact with
     formPlayfield() {
-        let self = this;
-
-        var index = 0;
-        this.gameModel.theScore.forEach(function(column) {
-            var columnContainer = document.createElement('div');
-            columnContainer.id = 'column-' + index;
-            columnContainer.classList.add('column');
-            self.playContainer.appendChild(columnContainer);
-
-            column.measures.forEach(function(element) {
-                var measureElem = document.createElement('div');
-                measureElem.id = 'note-' + element;
-                measureElem.innerHTML = '<label>' + element + '</label>';
-                measureElem.classList.add('note-container');
-
-                if (self.gameModel.selectedNotes[index] === element) {
-                    measureElem.classList.add('selected');
-                }
-
-                columnContainer.appendChild(measureElem);
-            });
-            index++;
-        });
+        this.gameView.formPlayfield(this);
     }
 
     // refreshes the playField with new selections
     updatePlayfield() {
-        let self = this;
-
-        var index = 0;
-        this.gameModel.theScore.forEach(function(column) {
-            column.measures.forEach(function(element) {
-                var measureElem = document.getElementById('note-' + element);
-
-                if (self.gameModel.selectedNotes[index] === element) {
-                    measureElem.classList.add('selected');
-                }
-                else {
-                    measureElem.classList.remove('selected');
-                }
-            });
-            index++;
-        });
+        this.gameView.updatePlayfield(this);
     }
 
     // return random measure from an array
