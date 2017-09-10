@@ -139,7 +139,6 @@ class GameModel {
 
     // method clears Tone of existing song
     clearSong() {
-        console.log('Clearing song...');
         for (var part in this.allParts) {
             this.allParts[part].removeAll();
         }

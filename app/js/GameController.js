@@ -25,20 +25,17 @@ class GameController {
     playSong(app) {
         Tone.Transport.start('+0.1');
         app.gameModel.isPlaying = true;
-        console.log('Now playing...');
     }
 
     // pauses transport thus pausing song
     pauseSong(app) {
         Tone.Transport.pause();
         app.gameModel.isPlaying = false;
-        console.log('Pausing...');
     }
 
     // restart song by setting transport to beginning
     resetSong() {
         Tone.Transport.position = '0:0:0';
-        console.log('Restarting song...');
     }
 }
 

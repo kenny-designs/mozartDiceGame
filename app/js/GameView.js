@@ -22,13 +22,16 @@ class GameView {
 
             column.measures.forEach(function(element) {
                 var measureElem = document.createElement('div');
-                measureElem.id = 'note-' + element;
+                measureElem.id = 'note-' + index + '-' + element;
                 measureElem.innerHTML = '<label>' + element + '</label>';
                 measureElem.classList.add('note-container');
 
-                if (app.gameModel.selectedNotes[index] === element) {
-                    measureElem.classList.add('selected');
-                }
+                // bound an action for when clicked
+                measureElem.addEventListener('click', function(event) {
+                    var elmColumn = measureElem.id.split('-')[1];
+                    app.gameModel.selectedNotes[elmColumn] = element;
+                    app.loadSelection();
+                }.bind(this));
 
                 columnContainer.appendChild(measureElem);
             });
@@ -41,7 +44,7 @@ class GameView {
         var index = 0;
         app.gameModel.theScore.forEach(function(column) {
             column.measures.forEach(function(element) {
-                var measureElem = document.getElementById('note-' + element);
+                var measureElem = document.getElementById('note-' + index + '-' + element);
 
                 if (app.gameModel.selectedNotes[index] === element) {
                     measureElem.classList.add('selected');
@@ -52,6 +55,17 @@ class GameView {
             });
             index++;
         });
+    }
+
+    loadSelection(app) {
+        if (app.gameModel.isPlaying) {
+            app.pauseSong();
+        }
+
+        app.resetSong();
+        app.clearSong();
+        app.loadSong();
+        app.updatePlayfield();
     }
 }
 

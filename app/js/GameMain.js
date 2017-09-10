@@ -17,6 +17,7 @@ class GameMain {
         this.randomSong();
         this.loadSong();
         this.formPlayfield();
+        this.updatePlayfield();
     }
 
     // creates the playfield for the player to interact with
@@ -42,6 +43,11 @@ class GameMain {
     // method clears Tone of existing song
     clearSong() {
         this.gameModel.clearSong();
+    }
+
+    // load in newly selected measure
+    loadSelection() {
+        this.gameView.loadSelection(this);
     }
 
     // play song via transport
