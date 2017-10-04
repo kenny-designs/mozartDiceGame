@@ -19,6 +19,12 @@ class GameController {
             app.updatePlayfield();
             app.resetSong();
         }.bind(this));
+
+        // using export button as a test for soundfont-player
+        this.exportButton = document.getElementById('export-button');
+        this.exportButton.addEventListener('click', function(event) {
+            console.log('You clicked the export button!!!!');
+        });
     }
 
     // play song via transport
