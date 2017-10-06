@@ -17,7 +17,7 @@ class GameModel {
         this.createScore();
     }
 
-    // form base table for theScore
+    // forms base table for theScore
     createScore()
     {
         this.theScore = [
