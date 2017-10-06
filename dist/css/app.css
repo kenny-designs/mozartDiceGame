@@ -1,0 +1,69 @@
+body {
+    height: 100%;
+}
+
+#main {
+    margin-left: 200px;
+}
+
+#header-container h1 {
+    font-family: "Times New Roman", "serif";
+    font-variant: small-caps;
+}
+
+#mySidebar {
+    width: 200px;
+    display: none;
+    background: linear-gradient(to right, black, white);
+    box-shadow: 5px 5px 25px black;
+}
+
+#side-buttons input {
+    height: 120px;
+    width: 120px;
+    margin-top: 60px;
+    margin-left: 40px;
+}
+
+#side-buttons input:hover {
+    filter: invert(85%);
+}
+
+#play-container {
+    margin: auto;
+    overflow: scroll;
+    white-space: nowrap;
+}
+
+.column {
+    display: inline-block;
+}
+
+.note-container {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px grey;
+    width: 100px;
+    height: 40px;
+    margin: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.note-container label {
+    display: block;
+    white-space: normal;
+    word-break: break-all;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #009926;
+}
