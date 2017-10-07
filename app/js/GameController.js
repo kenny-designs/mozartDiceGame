@@ -1,4 +1,5 @@
 const Tone              = require('./lib/Tone');
+const Soundfont         = require('soundfont-player');
 
 class GameController {
     constructor(app) {
@@ -20,11 +21,15 @@ class GameController {
             app.resetSong();
         }.bind(this));
 
+        // create a new AudioContext to work with
+        this.ac = new AudioContext();
         // using export button as a test for soundfont-player
         this.exportButton = document.getElementById('export-button');
         this.exportButton.addEventListener('click', function(event) {
-            console.log('You clicked the export button!!!!');
-        });
+            Soundfont.instrument(this.ac, 'viola').then(function(piano) {
+                piano.play('C4');
+            });
+        }.bind(this));
     }
 
     // play song via transport
