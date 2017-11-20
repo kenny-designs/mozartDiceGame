@@ -19,6 +19,12 @@ class GameController {
             app.updatePlayfield();
             app.resetSong();
         }.bind(this));
+
+        // export button currently does nothing
+        this.exportButton = document.getElementById('export-button');
+        this.exportButton.addEventListener('click', function(event) {
+            console.log('export button pressed');
+        }.bind(this));
     }
 
     // play song via transport
