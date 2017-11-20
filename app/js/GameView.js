@@ -13,23 +13,24 @@ class GameView {
     formPlayfield(app) {
         let self = this;
 
-        var index = 0;
+        let index = 0;
         app.gameModel.theScore.forEach(function(column) {
-            var columnContainer = document.createElement('div');
+            let columnContainer = document.createElement('div');
             columnContainer.id = 'column-' + index;
             columnContainer.classList.add('column');
             self.playContainer.appendChild(columnContainer);
 
             column.measures.forEach(function(element) {
-                var measureElem = document.createElement('div');
+                let measureElem = document.createElement('div');
                 measureElem.id = 'note-' + index + '-' + element;
                 measureElem.innerHTML = '<label>' + element + '</label>';
                 measureElem.classList.add('note-container');
 
                 // bound an action for when clicked
                 measureElem.addEventListener('click', function(event) {
-                    var elmColumn = measureElem.id.split('-')[1];
+                    let elmColumn = measureElem.id.split('-')[1];
                     app.gameModel.selectedNotes[elmColumn] = element;
+                    app.gameModel.notePaths[elmColumn] = app.gameModel.selectedPath + element + '.wav';
                     app.loadSelection();
                 }.bind(this));
 
@@ -41,10 +42,10 @@ class GameView {
 
     // refreshes the playField with new selections
     updatePlayfield(app) {
-        var index = 0;
+        let index = 0;
         app.gameModel.theScore.forEach(function(column) {
             column.measures.forEach(function(element) {
-                var measureElem = document.getElementById('note-' + index + '-' + element);
+                let measureElem = document.getElementById('note-' + index + '-' + element);
 
                 if (app.gameModel.selectedNotes[index] === element) {
                     measureElem.classList.add('selected');
