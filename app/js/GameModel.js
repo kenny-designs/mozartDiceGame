@@ -4,9 +4,9 @@ const Tone              = require('./lib/Tone');
 class GameModel {
     constructor() {
         this.isPlaying = false;         // track if music playing
-        this.allParts = [];             // track all Tone parts
         this.allEvents = [];            // events for playing .wavs
         this.selectedNotes = [];        // measures selected to be played
+        this.notePaths = [];            // paths to selected notes
         this.theScore = null;           // available measures to choose from
 
         this.init();
@@ -65,12 +65,17 @@ class GameModel {
     // creates a random song
     randomSong() {
         var selectedNotes = [];
+        var notePaths = [];
 
         for (var i = 0; i < this.theScore.length; i++) {
-            selectedNotes.push(this.randMeasure(this.theScore[i].measures));
+            let name = this.randMeasure(this.theScore[i].measures);
+
+            selectedNotes.push(name);
+            notePaths.push('./audio/acoustic_grand_piano/' + name + '.wav');
         }
 
         this.selectedNotes = selectedNotes;
+        this.notePaths = notePaths;
     }
 
     // play a single note
@@ -80,51 +85,34 @@ class GameModel {
 
     // load the entirety of the selectedNotes
     loadSong() {
-        // load all wavs as buffers
-        //var song = new Tone.Buffers();
+        var minuets = new Tone.Buffers(this.notePaths, function() {
+            // offset for each
+            var offset = 0;
 
-        /*
-        for (var i = 0; i < this.selectedNotes.length; i++) {
-            // create a new player
-            var player = new Tone.Player('./audio/acoustic_grand_piano/' + this.selectedNotes[i] + '.wav').toMaster();
+            // loop through all minuets
+            for (var i = 0; i < this.notePaths.length; i++) {
+                // get current buffer
+                var buf = minuets.get(i);
 
-            var evt = new Tone.Event(function(time, song) {
-                console.log('time: ' + time + '\nsong:' + song);
-            }.bind(this), this.selectedNotes[i] + '.wav').start();
-        }
-        */
+                // create an event for it
+                var evt = new Tone.Event(function(time, song) {
+                    var player = new Tone.Player(song).toMaster();
+                    player.start();
+                }.bind(this), buf).start(offset);
 
-        /*
-        var offset = 0;
+                this.allEvents.push(evt);
 
-        // this.selectedNotes.length
-        for (var i = 0; i < 1; i++) {
-            // load in each midi file for playing
-            MidiConvert.load("./audio/mozartMidi/" + this.selectedNotes[i]).then(function(midi) {
-                Tone.Transport.bpm.value = midi.bpm; // remove?
-                var theNotes = midi.tracks[0].notes;
-                var aPart = new Tone.Part(function(time, note) {
-                    this.playNote(time, note);
-                }.bind(this), theNotes).start(offset);
-
-                this.allParts.push(aPart);
-
-                // take last note and add to offset
-                var lastNote = theNotes.slice(-1)[0];
-
-                // there appears to be a delay in the measures. using 1.5 as temp fix
-                offset += lastNote.time - 1.5;
-            }.bind(this));
-        }
-        */
+                offset += buf.duration - 2.05;
+            }
+        }.bind(this));
     }
 
     // method clears Tone of existing song
     clearSong() {
-        for (var part in this.allParts) {
-            this.allParts[part].removeAll();
+        for (var evt in this.allEvents) {
+            this.allEvents[evt].dispose();
         }
-        this.allParts = [];
+        this.allEvents = [];
     }
 }
 
