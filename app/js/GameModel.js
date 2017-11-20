@@ -1,4 +1,3 @@
-const MidiConvert       = require('./lib/MidiConvert');
 const Tone              = require('./lib/Tone');
 
 class GameModel {
@@ -13,6 +12,8 @@ class GameModel {
     }
 
     init() {
+        // default instrument to play
+        this.selectedPath = './audio/acoustic_grand_piano/';
         this.createScore();
     }
 
@@ -58,58 +59,53 @@ class GameModel {
 
     // return random measure from an array
     randMeasure(noteArray) {
-        var num = Math.floor(Math.random() * noteArray.length);
+        let num = Math.floor(Math.random() * noteArray.length);
         return noteArray[num];
     }
 
     // creates a random song
     randomSong() {
-        var selectedNotes = [];
-        var notePaths = [];
+        let selectedNotes = [];
+        let notePaths = [];
 
-        for (var i = 0; i < this.theScore.length; i++) {
+        for (let i = 0; i < this.theScore.length; i++) {
             let name = this.randMeasure(this.theScore[i].measures);
 
             selectedNotes.push(name);
-            notePaths.push('./audio/acoustic_grand_piano/' + name + '.wav');
+            notePaths.push(this.selectedPath + name + '.wav');
         }
 
         this.selectedNotes = selectedNotes;
         this.notePaths = notePaths;
     }
 
-    // play a single note
-    playNote(time, event) {
-       // code
-    }
-
     // load the entirety of the selectedNotes
     loadSong() {
-        var minuets = new Tone.Buffers(this.notePaths, function() {
+        let minuets = new Tone.Buffers(this.notePaths, function() {
             // offset for each
-            var offset = 0;
+            let offset = 0;
 
             // loop through all minuets
-            for (var i = 0; i < this.notePaths.length; i++) {
+            for (let i = 0; i < this.notePaths.length; i++) {
                 // get current buffer
-                var buf = minuets.get(i);
+                let buf = minuets.get(i);
 
                 // create an event for it
-                var evt = new Tone.Event(function(time, song) {
-                    var player = new Tone.Player(song).toMaster();
+                let evt = new Tone.Event(function(time, song) {
+                    let player = new Tone.Player(song).toMaster();
                     player.start();
                 }.bind(this), buf).start(offset);
 
                 this.allEvents.push(evt);
 
-                offset += buf.duration - 2.05;
+                offset += buf.duration - 2.0;
             }
         }.bind(this));
     }
 
     // method clears Tone of existing song
     clearSong() {
-        for (var evt in this.allEvents) {
+        for (let evt in this.allEvents) {
             this.allEvents[evt].dispose();
         }
         this.allEvents = [];
