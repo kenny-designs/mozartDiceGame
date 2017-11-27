@@ -64,6 +64,18 @@ class GameMain {
     resetSong() {
         this.gameController.resetSong();
     }
+
+    // reload song
+    // TODO: Fix code to abstain from randomizing song
+    // issue
+    reloadAll() {
+        this.pauseSong();
+        this.clearSong();
+        this.randomSong();
+        this.loadSong();
+        this.updatePlayfield();
+        this.resetSong();
+    }
 }
 
 module.exports = GameMain;
