@@ -70,16 +70,24 @@ class GameModel {
     // creates a random song
     randomSong() {
         let selectedNotes = [];
-        let notePaths = [];
 
         for (let i = 0; i < this.theScore.length; i++) {
-            let name = this.randMeasure(this.theScore[i].measures);
-
-            selectedNotes.push(name);
-            notePaths.push(this.selectedPath + name + '.wav');
+            selectedNotes.push(this.randMeasure(this.theScore[i].measures));
         }
 
         this.selectedNotes = selectedNotes;
+
+        this.loadPaths();
+    }
+
+    // load paths based off of the selectedNotes
+    loadPaths() {
+        let notePaths = [];
+
+        for (let i = 0; i < this.selectedNotes.length; i++) {
+            notePaths.push(this.selectedPath + this.selectedNotes[i] + '.wav');
+        }
+
         this.notePaths = notePaths;
     }
 

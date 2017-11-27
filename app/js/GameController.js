@@ -12,15 +12,7 @@ class GameController {
         // setup random button
         this.randomButton = document.getElementById('random-button');
         this.randomButton.addEventListener('click', function(event) {
-            /*
-            app.pauseSong();
-            app.clearSong();
-            app.randomSong();
-            app.loadSong();
-            app.updatePlayfield();
-            app.resetSong();
-            */
-            app.reloadAll();
+            app.reloadRandom();
         }.bind(this));
 
         // export button currently does nothing
@@ -33,14 +25,14 @@ class GameController {
         this.pianoButton = document.getElementById('piano-button');
         this.pianoButton.addEventListener('click', function(event) {
             app.gameModel.selectedPath = app.gameModel.instruments['piano'];
-            app.reloadAll();
+            app.reloadInstrum();
         }.bind(this));
 
         // switch to clavinet sound files
         this.clavButton = document.getElementById('clav-button');
         this.clavButton.addEventListener('click', function(event) {
             app.gameModel.selectedPath = app.gameModel.instruments['clavinet'];
-            app.reloadAll();
+            app.reloadInstrum();
         }.bind(this));
     }
 
