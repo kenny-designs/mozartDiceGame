@@ -8,7 +8,7 @@ class GameModel {
         this.notePaths = [];            // paths to selected notes
         this.theScore = null;           // available measures to choose from
 
-        // object with possible instruments
+        // object instrument choices
         this.instruments = {'piano'    : './audio/acoustic_grand_piano/',
                             'clavinet' : './audio/clavinet/'};
 
@@ -110,7 +110,7 @@ class GameModel {
 
                 this.allEvents.push(evt);
 
-                offset += buf.duration - 2.0;
+                offset += buf.duration - 2.0; // -2.0 is fix for delay in wavs
             }
         }.bind(this));
     }
