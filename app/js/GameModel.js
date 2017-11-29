@@ -8,12 +8,17 @@ class GameModel {
         this.notePaths = [];            // paths to selected notes
         this.theScore = null;           // available measures to choose from
 
+        // object instrument choices
+        this.instruments = {'piano'       : './audio/acoustic_grand_piano/',
+                            'clavinet'    : './audio/clavinet/',
+                            'harpsichord' : './audio/harpsichord/'};
+
         this.init();
     }
 
     init() {
         // default instrument to play
-        this.selectedPath = './audio/acoustic_grand_piano/';
+        this.selectedPath = this.instruments['piano'];
         this.createScore();
     }
 
@@ -66,16 +71,24 @@ class GameModel {
     // creates a random song
     randomSong() {
         let selectedNotes = [];
-        let notePaths = [];
 
         for (let i = 0; i < this.theScore.length; i++) {
-            let name = this.randMeasure(this.theScore[i].measures);
-
-            selectedNotes.push(name);
-            notePaths.push(this.selectedPath + name + '.wav');
+            selectedNotes.push(this.randMeasure(this.theScore[i].measures));
         }
 
         this.selectedNotes = selectedNotes;
+
+        this.loadPaths();
+    }
+
+    // load paths based off of the selectedNotes
+    loadPaths() {
+        let notePaths = [];
+
+        for (let i = 0; i < this.selectedNotes.length; i++) {
+            notePaths.push(this.selectedPath + this.selectedNotes[i] + '.wav');
+        }
+
         this.notePaths = notePaths;
     }
 
@@ -98,7 +111,7 @@ class GameModel {
 
                 this.allEvents.push(evt);
 
-                offset += buf.duration - 2.0;
+                offset += buf.duration - 2.0; // -2.0 is fix for delay in wavs
             }
         }.bind(this));
     }
