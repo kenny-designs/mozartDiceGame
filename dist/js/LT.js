@@ -13,18 +13,27 @@ class GameController {
         // setup random button
         this.randomButton = document.getElementById('random-button');
         this.randomButton.addEventListener('click', function(event) {
-            app.pauseSong();
-            app.clearSong();
-            app.randomSong();
-            app.loadSong();
-            app.updatePlayfield();
-            app.resetSong();
+            app.reloadRandom();
         }.bind(this));
 
         // export button currently does nothing
         this.exportButton = document.getElementById('export-button');
         this.exportButton.addEventListener('click', function(event) {
             console.log('export button pressed');
+        }.bind(this));
+
+        // switch to piano sound files
+        this.pianoButton = document.getElementById('piano-button');
+        this.pianoButton.addEventListener('click', function(event) {
+            app.gameModel.selectedPath = app.gameModel.instruments['piano'];
+            app.reloadInstrum();
+        }.bind(this));
+
+        // switch to clavinet sound files
+        this.clavButton = document.getElementById('clav-button');
+        this.clavButton.addEventListener('click', function(event) {
+            app.gameModel.selectedPath = app.gameModel.instruments['clavinet'];
+            app.reloadInstrum();
         }.bind(this));
     }
 
@@ -100,6 +109,11 @@ class GameMain {
         this.gameView.loadSelection(this);
     }
 
+    // load paths, good for instrument changes
+    loadPaths() {
+        this.gameModel.loadPaths();
+    }
+
     // play song via transport
     playSong() {
         this.gameController.playSong(this);
@@ -113,6 +127,27 @@ class GameMain {
     // restart song by setting transport to beginning
     resetSong() {
         this.gameController.resetSong();
+    }
+
+    // TODO: simplify this code with reloadRandom()
+    // reload song with correct instrument
+    reloadInstrum() {
+        this.pauseSong();
+        this.clearSong();
+        this.loadPaths();
+        this.loadSong();
+        this.updatePlayfield();
+        this.resetSong();
+    }
+
+    // reload a random song with the correct instrument
+    reloadRandom() {
+        this.pauseSong();
+        this.clearSong();
+        this.randomSong();
+        this.loadSong();
+        this.updatePlayfield();
+        this.resetSong();
     }
 }
 
@@ -128,12 +163,17 @@ class GameModel {
         this.notePaths = [];            // paths to selected notes
         this.theScore = null;           // available measures to choose from
 
+        // object instrument choices
+        this.instruments = {'piano'       : './audio/acoustic_grand_piano/',
+                            'clavinet'    : './audio/clavinet/',
+                            'harpsichord' : './audio/harpsichord/'};
+
         this.init();
     }
 
     init() {
         // default instrument to play
-        this.selectedPath = './audio/acoustic_grand_piano/';
+        this.selectedPath = this.instruments['piano'];
         this.createScore();
     }
 
@@ -186,16 +226,24 @@ class GameModel {
     // creates a random song
     randomSong() {
         let selectedNotes = [];
-        let notePaths = [];
 
         for (let i = 0; i < this.theScore.length; i++) {
-            let name = this.randMeasure(this.theScore[i].measures);
-
-            selectedNotes.push(name);
-            notePaths.push(this.selectedPath + name + '.wav');
+            selectedNotes.push(this.randMeasure(this.theScore[i].measures));
         }
 
         this.selectedNotes = selectedNotes;
+
+        this.loadPaths();
+    }
+
+    // load paths based off of the selectedNotes
+    loadPaths() {
+        let notePaths = [];
+
+        for (let i = 0; i < this.selectedNotes.length; i++) {
+            notePaths.push(this.selectedPath + this.selectedNotes[i] + '.wav');
+        }
+
         this.notePaths = notePaths;
     }
 
@@ -218,7 +266,7 @@ class GameModel {
 
                 this.allEvents.push(evt);
 
-                offset += buf.duration - 2.0;
+                offset += buf.duration - 2.0; // -2.0 is fix for delay in wavs
             }
         }.bind(this));
     }

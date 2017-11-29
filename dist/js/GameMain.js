@@ -50,6 +50,11 @@ class GameMain {
         this.gameView.loadSelection(this);
     }
 
+    // load paths, good for instrument changes
+    loadPaths() {
+        this.gameModel.loadPaths();
+    }
+
     // play song via transport
     playSong() {
         this.gameController.playSong(this);
@@ -63,6 +68,27 @@ class GameMain {
     // restart song by setting transport to beginning
     resetSong() {
         this.gameController.resetSong();
+    }
+
+    // TODO: simplify this code with reloadRandom()
+    // reload song with correct instrument
+    reloadInstrum() {
+        this.pauseSong();
+        this.clearSong();
+        this.loadPaths();
+        this.loadSong();
+        this.updatePlayfield();
+        this.resetSong();
+    }
+
+    // reload a random song with the correct instrument
+    reloadRandom() {
+        this.pauseSong();
+        this.clearSong();
+        this.randomSong();
+        this.loadSong();
+        this.updatePlayfield();
+        this.resetSong();
     }
 }
 
