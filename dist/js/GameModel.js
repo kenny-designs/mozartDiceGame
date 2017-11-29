@@ -92,7 +92,7 @@ class GameModel {
         this.notePaths = notePaths;
     }
 
-    // load the entirety of the selectedNotes
+    // load selectedNotes
     loadSong() {
         let minuets = new Tone.Buffers(this.notePaths, function() {
             // offset for each
