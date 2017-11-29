@@ -9,8 +9,9 @@ class GameModel {
         this.theScore = null;           // available measures to choose from
 
         // object instrument choices
-        this.instruments = {'piano'    : './audio/acoustic_grand_piano/',
-                            'clavinet' : './audio/clavinet/'};
+        this.instruments = {'piano'       : './audio/acoustic_grand_piano/',
+                            'clavinet'    : './audio/clavinet/',
+                            'harpsichord' : './audio/harpsichord/'};
 
         this.init();
     }
