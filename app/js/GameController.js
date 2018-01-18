@@ -34,6 +34,13 @@ class GameController {
             app.gameModel.selectedPath = app.gameModel.instruments['clavinet'];
             app.reloadInstrum();
         }.bind(this));
+
+        // switch to harpsichord sound files
+        this.harpsiButton = document.getElementById('harpsi-button');
+        this.harpsiButton.addEventListener('click', function(event) {
+            app.gameModel.selectedPath = app.gameModel.instruments['harpsichord'];
+            app.reloadInstrum();
+        }.bind(this));
     }
 
     // play song via transport
