@@ -42,7 +42,6 @@ body {
     align-items: center;
 }
 
-/* Base class for elements that require flex */
 .flex-box {
     display: flex;
     justify-content: space-evenly;
