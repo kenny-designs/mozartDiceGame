@@ -26,20 +26,40 @@ body {
 */
 
 .square {
-    width: 25%;
-    padding-bottom: 25%;
+    position: relative;
+    box-sizing: border-box;
 }
 
-.row {
+.square::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+}
+
+.square .content {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0; left: 0;
+    height: 100%;
+    width: 100%;
 }
 
-.flex-center {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.grid2x2 {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 15px;
+    padding: 15px;
+}
+
+.grid4x4 {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 15px;
+    padding: 15px;
+}
+
+/* Delete soon */
+.temp {
+    background-color: #333333;
 }
 
 .flex-box {
@@ -55,15 +75,14 @@ body {
 
 #play-container {
     width: 40%;
-    padding-bottom: 40%;
+    /*padding-bottom: 40%;*/
     background-color: #EDC951;
 }
 
 #options-container {
     width: 40%;
-    padding-bottom: 40%;
+    /*padding-bottom: 40%;*/
     background-color: #999988;
-    position: relative;
 }
 
 #play-button {
@@ -79,7 +98,7 @@ body {
 }
 
 #random-button {
-    background-color: white;
+    background-color: grey;
 }
 
 /*
