@@ -2,6 +2,7 @@ const Tone              = require('./lib/Tone');
 
 class GameController {
     constructor(app) {
+        /*
         // setup play/pause button
         this.playButton = document.getElementById('play-button');
         this.playButton.addEventListener('click', function(event) {
@@ -41,6 +42,7 @@ class GameController {
             app.gameModel.selectedPath = app.gameModel.instruments['harpsichord'];
             app.reloadInstrum();
         }.bind(this));
+        */
     }
 
     // play song via transport

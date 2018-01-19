@@ -1,5 +1,11 @@
+html {
+    height: 100%;
+}
+
 body {
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #main {
@@ -39,10 +45,32 @@ body {
     filter: invert(85%);
 }
 
+/*
 #play-container {
     margin: auto;
     overflow: scroll;
     white-space: nowrap;
+}
+*/
+
+#main-container {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#play-container {
+    float: right;
+    width: 50%;
+    height: 100%;
+    background-color: #009926;
+}
+
+#options-container {
+    float: left;
+    width: 50%;
+    height: 100%;
+    background-color: #000066;
 }
 
 .column {
