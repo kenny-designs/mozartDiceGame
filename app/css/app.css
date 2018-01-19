@@ -8,13 +8,6 @@ body {
     padding: 0;
 }
 
-/*
-#header-container h1 {
-    font-family: "Times New Roman", "serif";
-    font-variant: small-caps;
-}
-*/
-
 .square {
     position: relative;
     box-sizing: border-box;
@@ -65,13 +58,11 @@ body {
 
 #play-container {
     width: 40%;
-    /*padding-bottom: 40%;*/
     background-color: #EDC951;
 }
 
 #options-container {
     width: 40%;
-    /*padding-bottom: 40%;*/
     background-color: #999988;
 }
 
@@ -91,3 +82,12 @@ body {
     background-color: grey;
 }
 
+@media screen and (orientation: portrait) {
+    .flex-box {
+        flex-direction: column;
+    }
+
+    #play-container {
+        width: 90%;
+    }
+}
