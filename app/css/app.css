@@ -13,16 +13,6 @@ body {
     font-family: "Times New Roman", "serif";
     font-variant: small-caps;
 }
-
-#instrum-buttons {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-#instrum-buttons input {
-    width: 50px;
-    height: 50px;
-}
 */
 
 .square {
@@ -101,37 +91,3 @@ body {
     background-color: grey;
 }
 
-/*
-.column {
-    display: inline-block;
-}
-
-.note-container {
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-    box-shadow: 3px 3px 5px grey;
-    width: 60px;
-    height: 40px;
-    margin: 10px;
-    position: relative;
-    cursor: pointer;
-}
-
-.note-container label {
-    display: block;
-    white-space: normal;
-    word-break: break-all;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    font-weight: 400;
-    cursor: pointer;
-}
-
-.selected {
-    background-color: #009926;
-}
-*/
