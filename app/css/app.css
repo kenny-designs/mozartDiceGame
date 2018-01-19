@@ -96,8 +96,10 @@ body {
     }
 
     #options-container.grid2x2 {
-        grid-template-columns: 100px auto auto auto;
-        grid-template-rows: 100px auto;
+        grid-template-columns: 140px 140px 140px 140px;
+        grid-template-rows: 140px 140px;
+        justify-content: space-evenly;
+        padding: 40px 15px 40px 15px;
     }
 
     .item-1 {
