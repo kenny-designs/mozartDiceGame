@@ -5,8 +5,8 @@ const GameController    = require('./GameController');
 class GameMain {
     constructor() {
         // create objects of needed classes
-        /*
         this.gameModel          = new GameModel();
+        /*
         this.gameView           = new GameView();
         this.gameController     = new GameController(this);
 
