@@ -7,9 +7,14 @@ class GameMain {
         // create objects of needed classes
         this.gameModel          = new GameModel();
         this.gameView           = new GameView();
-        /*
         this.gameController     = new GameController(this);
 
+        // testing code to see if user is mobile
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            alert('You are running mobile!');
+        }
+
+        /*
         this.init();
         */
     }

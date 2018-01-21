@@ -2,8 +2,8 @@ const Tone              = require('./lib/Tone');
 
 class GameController {
     constructor(app) {
-        /*
         // setup play/pause button
+        /*
         this.playButton = document.getElementById('play-button');
         this.playButton.addEventListener('click', function(event) {
             // toggle song playing
