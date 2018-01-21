@@ -22,10 +22,6 @@ body {
   height: 45vw;
 }
 
-.temp {
-  background-color: black;
-}
-
 #options-container {
   background-color: pink;
   width: 45vw;
@@ -39,13 +35,13 @@ body {
   padding: 15px;
 }
 
+#options-container div {
+    background-color: black;
+}
+
 .item-1 {
   grid-column-start: 1;
   grid-column-end: 3;
-
-  /*
-  background: url(img/buttonPlay.png);
-  */
 
   background-size: cover;
   background-position: center;
@@ -85,6 +81,10 @@ body {
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-gap: 15px;
   padding: 15px;
+}
+
+#play-container div {
+    background-color: black;
 }
 
 @media screen and (orientation: portrait) {
