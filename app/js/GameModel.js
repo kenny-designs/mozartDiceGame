@@ -1,4 +1,5 @@
 const Tone              = require('./lib/Tone');
+const StartAudioContext = require('StartAudioContext');
 
 class GameModel {
     constructor() {
@@ -12,6 +13,19 @@ class GameModel {
         this.instruments = {'piano'       : './audio/acoustic_grand_piano/',
                             'clavinet'    : './audio/clavinet/',
                             'harpsichord' : './audio/harpsichord/'};
+
+        // test if mobile and act accordingly
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // a crude button for getting sound working
+            let mobileButton = document.createElement('button');
+            mobileButton.textContent = 'Enter';
+            let body = document.getElementsByTagName('body')[0];
+            body.appendChild(mobileButton);
+
+            StartAudioContext(Tone.context, mobileButton, function() {
+                mobileButton.remove();
+            });
+        }
 
         this.init();
     }

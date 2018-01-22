@@ -3,13 +3,17 @@ const Tone              = require('./lib/Tone');
 class GameController {
     constructor(app) {
         // setup play/pause button
-        /*
         this.playButton = document.getElementById('play-button');
         this.playButton.addEventListener('click', function(event) {
             // toggle song playing
-            app.gameModel.isPlaying ? app.pauseSong() : app.playSong();
+            //app.gameModel.isPlaying ? app.pauseSong() : app.playSong();
+
+            // testing for phones
+            let synth = new Tone.Synth().toMaster();
+            synth.triggerAttackRelease('C4', '8n');
         }.bind(this));
 
+        /*
         // setup random button
         this.randomButton = document.getElementById('random-button');
         this.randomButton.addEventListener('click', function(event) {
