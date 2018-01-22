@@ -1,4 +1,4 @@
-const Tone              = require('./lib/Tone');
+const Tone              = require('Tone');
 const StartAudioContext = require('StartAudioContext');
 
 class GameModel {
