@@ -1,90 +1,96 @@
 html {
-  height: 100vh;
+    height: 100vh;
 }
 
 body {
-  height: 100vh;
-  margin: 0;
-  padding: 0;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 #main-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #7d2c2c;
 }
 
 .content {
-  width: 45vw;
-  height: 45vw;
+    width: 45vw;
+    height: 45vw;
 }
 
 #options-container {
-  background-color: pink;
-  width: 45vw;
-  height: 45vw;
+    background-color: #ebc256;
+    border-radius: 5px;
+    width: 45vw;
+    height: 45vw;
 
-  /* Creating 4x2 grid */
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 15px;
-  padding: 15px;
+    /* Creating 4x2 grid */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 15px;
+    padding: 15px;
 }
 
 #options-container div {
-    background-color: black;
+    background-color: #e6d3b2;
+    border-radius: 5px;
 }
 
 .item-1 {
-  grid-column-start: 1;
-  grid-column-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
 
-  background-size: cover;
-  background-position: center;
-  background-image: url("../img/buttonPlay.png");
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonPlay.png");
 }
 
 .item-2 {
-  grid-column-start: 3;
-  grid-column-end: 5;
-  
-  background-size: cover;
-  background-position: center;
-  background-image: url("../img/buttonPiano.png");
+    grid-column-start: 3;
+    grid-column-end: 5;
+
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonPiano.png");
 }
 
 .item-3 {
-  grid-column-start: 1;
-  grid-column-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 
 .item-4 {
-  grid-column-start: 3;
-  grid-column-end: 5;
-  background-size: cover;
-  background-position: center;
-  background-image: url("../img/buttonDice.png");
+    grid-column-start: 3;
+    grid-column-end: 5;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonDice.png");
 }
 
 #play-container {
-  background-color: green;
-  width: 45vw;
-  height: 45vw;
+    background-color: #ebc256;
+    border-radius: 5px;
+    width: 45vw;
+    height: 45vw;
 
-  /* Creating 4x4 grid */
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-gap: 15px;
-  padding: 15px;
+    /* Creating 4x4 grid */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-gap: 15px;
+    padding: 15px;
 }
 
 #play-container div {
-    background-color: black;
+    background-color: #e6d3b2;
+    border-radius: 5px;
+    color: white;
 }
 
 #mobile-container {
@@ -113,40 +119,40 @@ body {
 }
 
 @media screen and (orientation: portrait) {
-  #main-container {
-    flex-direction: column;
-    align-items: center;
+    #main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #options-container {
+        width: 46vh;
+        height: 23vh;
   }
 
-  #options-container {
-    width: 46vh;
-    height: 23vh;
+    #play-container {
+        width: 45vh;
+        height: 45vh;
   }
 
-  #play-container {
-    width: 45vh;
-    height: 45vh;
+    .item-1 {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 3;
   }
 
-  .item-1 {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 3;
+    .item-2 {
+        grid-column-start: 3;
+        grid-column-end: 5;
   }
 
-  .item-2 {
-    grid-column-start: 3;
-    grid-column-end: 5;
+    .item-3 {
+        grid-column-start: 3;
+        grid-column-end: 4;
   }
 
-  .item-3 {
-    grid-column-start: 3;
-    grid-column-end: 4;
-  }
-
-  .item-4 {
-    grid-column-start: 4;
-    grid-column-end: 5;
+    .item-4 {
+        grid-column-start: 4;
+        grid-column-end: 5;
   }
 }
