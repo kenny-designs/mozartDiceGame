@@ -9,17 +9,19 @@ class GameMain {
         this.gameView           = new GameView();
         this.gameController     = new GameController(this);
 
-        /*
         this.init();
-        */
     }
 
     // using init method for proper form
     init() {
         this.randomSong();
         this.loadSong();
+
+        // commenting out for testing
+        /*
         this.formPlayfield();
         this.updatePlayfield();
+        */
     }
 
     // creates the playfield for the player to interact with

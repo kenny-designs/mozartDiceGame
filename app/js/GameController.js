@@ -6,11 +6,7 @@ class GameController {
         this.playButton = document.getElementById('play-button');
         this.playButton.addEventListener('click', function(event) {
             // toggle song playing
-            //app.gameModel.isPlaying ? app.pauseSong() : app.playSong();
-
-            // testing for phones
-            let synth = new Tone.Synth().toMaster();
-            synth.triggerAttackRelease('C4', '8n');
+            app.gameModel.isPlaying ? app.pauseSong() : app.playSong();
         }.bind(this));
 
         /*
