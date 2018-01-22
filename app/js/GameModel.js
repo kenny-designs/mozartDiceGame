@@ -14,15 +14,21 @@ class GameModel {
                             'clavinet'    : './audio/clavinet/',
                             'harpsichord' : './audio/harpsichord/'};
 
-        // test if mobile and act accordingly
+        // allows tonejs to play on mobile
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            let mobileButton = document.createElement('button');
-            mobileButton.textContent = 'Enter';
             let body = document.getElementsByTagName('body')[0];
-            body.appendChild(mobileButton);
+
+            let mobileContainer = document.createElement('div');
+            mobileContainer.id = 'mobile-container';
+            body.appendChild(mobileContainer);
+
+            let mobileButton = document.createElement('div');
+            mobileButton.id = 'mobile-button';
+            mobileButton.textContent = 'Enter';
+            mobileContainer.appendChild(mobileButton);
 
             StartAudioContext(Tone.context, mobileButton, function() {
-                mobileButton.remove();
+                mobileContainer.remove();
             });
         }
 
