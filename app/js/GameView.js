@@ -57,23 +57,6 @@ class GameView {
             let elm = document.getElementById('slot-' + i);
             elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
         }
-
-        /*
-        let index = 0;
-        app.gameModel.theScore.forEach(function(column) {
-            column.measures.forEach(function(element) {
-                let measureElem = document.getElementById('note-' + index + '-' + element);
-
-                if (app.gameModel.selectedNotes[index] === element) {
-                    measureElem.classList.add('selected');
-                }
-                else {
-                    measureElem.classList.remove('selected');
-                }
-            });
-            index++;
-        });
-        */
     }
 
     // returns the innerHTML for a play-text element
