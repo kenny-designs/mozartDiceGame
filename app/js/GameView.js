@@ -16,6 +16,10 @@ class GameView {
             elm.innerHTML = '<label>' +
                                 app.gameModel.selectedNotes[i].match(/(\d+)/)[0] +
                             '</label>';
+
+            elm.addEventListener('click', function() {
+                //console.log(app.gameModel.notePaths[i]);
+            }.bind(this));
         }
 
         /*
