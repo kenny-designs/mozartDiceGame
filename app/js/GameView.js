@@ -11,6 +11,14 @@ class GameView {
 
     // creates the playfield for the player to interact with
     formPlayfield(app) {
+        for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
+            let elm = document.getElementById('slot-' + i);
+            elm.innerHTML = '<label>' +
+                                app.gameModel.selectedNotes[i].match(/(\d+)/)[0] +
+                            '</label>';
+        }
+
+        /*
         let self = this;
 
         let index = 0;
@@ -38,6 +46,7 @@ class GameView {
             });
             index++;
         });
+        */
     }
 
     // refreshes the playField with new selections

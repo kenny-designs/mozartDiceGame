@@ -16,10 +16,9 @@ class GameMain {
     init() {
         this.randomSong();
         this.loadSong();
-
-        // commenting out for testing
-        /*
         this.formPlayfield();
+
+        /*
         this.updatePlayfield();
         */
     }
