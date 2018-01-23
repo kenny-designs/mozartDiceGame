@@ -17,10 +17,6 @@ class GameMain {
         this.randomSong();
         this.loadSong();
         this.formPlayfield();
-
-        /*
-        this.updatePlayfield();
-        */
     }
 
     // creates the playfield for the player to interact with

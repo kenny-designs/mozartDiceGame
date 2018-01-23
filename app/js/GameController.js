@@ -16,6 +16,12 @@ class GameController {
             //console.log(app.gameModel.selectedNotes);
         }.bind(this));
 
+        // setup instrument select button
+        this.instrumButton = document.getElementById('instrum-button');
+        this.instrumButton.addEventListener('click', function() {
+            console.log('You clicked the instrum button!');
+        }.bind(this));
+
         /*
         // export button currently does nothing
         this.exportButton = document.getElementById('export-button');
