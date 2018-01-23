@@ -50,7 +50,6 @@ body {
 .item-1 {
     grid-column-start: 1;
     grid-column-end: 3;
-
     background-size: cover;
     background-position: center;
     background-image: url("../img/buttonPlay.png");
@@ -59,7 +58,6 @@ body {
 .item-2 {
     grid-column-start: 3;
     grid-column-end: 5;
-
     background-size: cover;
     background-position: center;
     background-image: url("../img/buttonPiano.png");
@@ -68,6 +66,9 @@ body {
 .item-3 {
     grid-column-start: 1;
     grid-column-end: 3;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonReset.png");
 }
 
 .item-4 {
