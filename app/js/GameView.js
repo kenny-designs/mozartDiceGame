@@ -13,9 +13,7 @@ class GameView {
     formPlayfield(app) {
         for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
             let elm = document.getElementById('slot-' + i);
-            elm.innerHTML = '<div class="play-text">' +
-                                app.gameModel.selectedNotes[i].match(/(\d+)/)[0] +
-                            '</div>';
+            elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
 
             elm.addEventListener('click', function() {
                 //console.log(app.gameModel.notePaths[i]);
@@ -55,6 +53,12 @@ class GameView {
 
     // refreshes the playField with new selections
     updatePlayfield(app) {
+        for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
+            let elm = document.getElementById('slot-' + i);
+            elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
+        }
+
+        /*
         let index = 0;
         app.gameModel.theScore.forEach(function(column) {
             column.measures.forEach(function(element) {
@@ -69,6 +73,14 @@ class GameView {
             });
             index++;
         });
+        */
+    }
+
+    // returns the innerHTML for a play-text element
+    createPlayHTML(note) {
+        return  '<div class="play-text">'   +
+                    note.match(/(\d+)/)[0]  +
+                '</div>';
     }
 
     loadSelection(app) {

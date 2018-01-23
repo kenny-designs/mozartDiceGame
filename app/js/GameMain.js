@@ -90,8 +90,7 @@ class GameMain {
         this.clearSong();
         this.randomSong();
         this.loadSong();
-        // commenting out for testing random button
-        //this.updatePlayfield();
+        this.updatePlayfield();
         this.resetSong();
     }
 }
