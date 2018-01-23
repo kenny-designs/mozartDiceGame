@@ -4,18 +4,19 @@ class GameController {
     constructor(app) {
         // setup play/pause button
         this.playButton = document.getElementById('play-button');
-        this.playButton.addEventListener('click', function(event) {
+        this.playButton.addEventListener('click', function() {
             // toggle song playing
             app.gameModel.isPlaying ? app.pauseSong() : app.playSong();
         }.bind(this));
 
-        /*
         // setup random button
         this.randomButton = document.getElementById('random-button');
-        this.randomButton.addEventListener('click', function(event) {
+        this.randomButton.addEventListener('click', function() {
             app.reloadRandom();
+            //console.log(app.gameModel.selectedNotes);
         }.bind(this));
 
+        /*
         // export button currently does nothing
         this.exportButton = document.getElementById('export-button');
         this.exportButton.addEventListener('click', function(event) {

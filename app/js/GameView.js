@@ -13,9 +13,9 @@ class GameView {
     formPlayfield(app) {
         for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
             let elm = document.getElementById('slot-' + i);
-            elm.innerHTML = '<label>' +
+            elm.innerHTML = '<div class="play-text">' +
                                 app.gameModel.selectedNotes[i].match(/(\d+)/)[0] +
-                            '</label>';
+                            '</div>';
 
             elm.addEventListener('click', function() {
                 //console.log(app.gameModel.notePaths[i]);

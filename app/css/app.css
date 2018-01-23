@@ -90,8 +90,17 @@ body {
 #play-container div {
     background-color: #e6d3b2;
     border-radius: 5px;
+}
+
+.slots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-text {
     color: white;
-    text-align: center;
+    font-size: calc(100% + 3vw);
 }
 
 #mobile-container {
