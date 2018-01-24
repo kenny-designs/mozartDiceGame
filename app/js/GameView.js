@@ -1,5 +1,6 @@
 class GameView {
     constructor() {
+        this.selectionContainer = document.getElementById('selection-container');
         this.playContainer = document.getElementById('play-container');
 
         this.init();
