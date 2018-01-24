@@ -49,6 +49,11 @@ class GameMain {
         this.gameView.loadSelection(this);
     }
 
+    // toggles image for play button
+    togglePlayImage() {
+        this.gameView.togglePlayImage(this.gameController.playButton, this.gameModel.isPlaying);
+    }
+
     // load paths, good for instrument changes
     loadPaths() {
         this.gameModel.loadPaths();

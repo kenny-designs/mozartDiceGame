@@ -77,6 +77,13 @@ class GameView {
         app.loadSong();
         app.updatePlayfield();
     }
+
+    togglePlayImage(playButton, isPlaying) {
+        playButton.style.backgroundImage =
+            'url(\'' +
+            (!isPlaying ? './img/buttonPlay.png' : './img/buttonPause.png') +
+            '\')';
+    }
 }
 
 module.exports = GameView;
