@@ -66,7 +66,7 @@ class GameMain {
 
     // restart song by setting transport to beginning
     resetSong() {
-        this.gameController.resetSong();
+        this.gameController.resetSong(this);
     }
 
     // TODO: simplify this code with reloadRandom()
