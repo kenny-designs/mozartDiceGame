@@ -127,7 +127,7 @@ body {
     z-index: 10000;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0.3);
     display: none;
 }
 
@@ -140,6 +140,7 @@ body {
     text-align: center;
     line-height: 25vh;
     font-size: calc(100% + 2vh);
+    box-shadow: 5px 5px 20px dimgrey;
 }
 
 #exit-button {

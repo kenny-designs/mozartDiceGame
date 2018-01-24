@@ -25,7 +25,13 @@ class GameController {
         this.resetButton = document.getElementById('reset-button');
         this.resetButton.addEventListener('click', function() {
             app.resetSong();
-        }.bind(this))
+        }.bind(this));
+
+        // setup exit button to hide the selection-container
+        this.exitButton = document.getElementById('exit-button');
+        this.exitButton.addEventListener('click', function() {
+            app.gameView.selectionContainer.style.display = 'none';
+        }.bind(this));
 
         /*
         // export button currently does nothing
