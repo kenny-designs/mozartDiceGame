@@ -131,20 +131,22 @@ body {
     display: none;
 }
 
+.circle {
+    background-color: #e6d3b2;
+    color: #b53232;
+    border-radius: 50%;
+    width: 25vh;
+    height: 25vh;
+    text-align: center;
+    line-height: 25vh;
+    font-size: calc(100% + 2vh);
+}
+
 #exit-button {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    background-color: #990073;
-    color: white;
-    border-radius: 50%;
-    margin-top: -40px;
-    margin-left: -50px;
-    width: 100px;
-    height: 80px;
+    top: 0; left: 0; bottom: 0; right: 0;
+    margin: auto;
     text-align: center;
-    line-height: 80px;
-    font-size: calc(100% + 2vw);
 }
 
 #mobile-container {
@@ -209,5 +211,12 @@ body {
     .item-4 {
         grid-column-start: 4;
         grid-column-end: 5;
+    }
+
+    .circle {
+        width: 25vw;
+        height: 25vw;
+        line-height: 25vw;
+        font-size: calc(100% + 2vw);
     }
 }
