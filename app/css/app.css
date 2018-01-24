@@ -48,22 +48,14 @@ body {
 }
 
 #play-button {
-    background-size: cover;
-    background-position: center;
-    background-image: url("../img/buttonPlay.png");
-}
-
-.item-1 {
     grid-column-start: 1;
     grid-column-end: 3;
-    /*
     background-size: cover;
     background-position: center;
     background-image: url("../img/buttonPlay.png");
-    */
 }
 
-.item-2 {
+#instrum-button {
     grid-column-start: 3;
     grid-column-end: 5;
     background-size: cover;
@@ -71,7 +63,7 @@ body {
     background-image: url("../img/buttonPiano.png");
 }
 
-.item-3 {
+#reset-button {
     grid-column-start: 1;
     grid-column-end: 3;
     background-size: cover;
@@ -79,7 +71,7 @@ body {
     background-image: url("../img/buttonReset.png");
 }
 
-.item-4 {
+#random-button {
     grid-column-start: 3;
     grid-column-end: 5;
     background-size: cover;
@@ -199,24 +191,24 @@ body {
         height: 45vh;
     }
 
-    .item-1 {
+    #play-button {
         grid-column-start: 1;
         grid-column-end: 3;
         grid-row-start: 1;
         grid-row-end: 3;
     }
 
-    .item-2 {
+    #instrum-button {
         grid-column-start: 3;
         grid-column-end: 5;
     }
 
-    .item-3 {
+    #reset-button {
         grid-column-start: 3;
         grid-column-end: 4;
     }
 
-    .item-4 {
+    #random-button {
         grid-column-start: 4;
         grid-column-end: 5;
     }
