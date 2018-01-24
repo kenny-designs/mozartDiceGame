@@ -141,6 +141,7 @@ body {
     line-height: 25vh;
     font-size: calc(100% + 2vh);
     box-shadow: 5px 5px 20px dimgrey;
+    cursor: pointer;
 }
 
 #exit-button {
@@ -148,6 +149,33 @@ body {
     top: 0; left: 0; bottom: 0; right: 0;
     margin: auto;
     text-align: center;
+}
+
+#piano-button {
+    position: absolute;
+    top: -55vh; left: 0; bottom: 0; right: 0;
+    margin: auto;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonPiano.png");
+}
+
+#clav-button {
+    position: absolute;
+    top: 40vh; left: 40vh; bottom: 0; right: 0;
+    margin: auto;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonClav.png");
+}
+
+#harpsi-button {
+    position: absolute;
+    top: 40vh; left: -40vh; bottom: 0; right: 0;
+    margin: auto;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonHarpsi.png");
 }
 
 #mobile-container {
@@ -219,5 +247,19 @@ body {
         height: 25vw;
         line-height: 25vw;
         font-size: calc(100% + 2vw);
+    }
+
+    #piano-button {
+        top: -55vw;
+    }
+
+    #clav-button {
+        top: 40vw;
+        left: 40vw;
+    }
+
+    #harpsi-button {
+        top: 40vw;
+        left: -40vw;
     }
 }
