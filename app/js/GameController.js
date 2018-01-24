@@ -21,6 +21,12 @@ class GameController {
             app.gameView.selectionContainer.style.display = 'block';
         }.bind(this));
 
+        // setup reset button
+        this.resetButton = document.getElementById('reset-button');
+        this.resetButton.addEventListener('click', function() {
+            app.resetSong();
+        }.bind(this))
+
         /*
         // export button currently does nothing
         this.exportButton = document.getElementById('export-button');
@@ -55,16 +61,19 @@ class GameController {
     playSong(app) {
         Tone.Transport.start('+0.1');
         app.gameModel.isPlaying = true;
+        app.togglePlayImage();
     }
 
     // pauses transport thus pausing song
     pauseSong(app) {
         Tone.Transport.pause();
         app.gameModel.isPlaying = false;
+        app.togglePlayImage();
     }
 
     // restart song by setting transport to beginning
-    resetSong() {
+    resetSong(app) {
+        app.pauseSong();
         Tone.Transport.position = '0:0:0';
     }
 }

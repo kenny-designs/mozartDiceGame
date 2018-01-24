@@ -49,6 +49,11 @@ class GameMain {
         this.gameView.loadSelection(this);
     }
 
+    // toggles image for play button
+    togglePlayImage() {
+        this.gameView.togglePlayImage(this.gameController.playButton, this.gameModel.isPlaying);
+    }
+
     // load paths, good for instrument changes
     loadPaths() {
         this.gameModel.loadPaths();
@@ -66,7 +71,7 @@ class GameMain {
 
     // restart song by setting transport to beginning
     resetSong() {
-        this.gameController.resetSong();
+        this.gameController.resetSong(this);
     }
 
     // TODO: simplify this code with reloadRandom()
