@@ -39,7 +39,7 @@ class GameMain {
         this.gameModel.loadSong();
     }
 
-    // method clears Tone of existing song
+    // clears Tone of existing song
     clearSong() {
         this.gameModel.clearSong();
     }
