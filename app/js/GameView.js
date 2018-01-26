@@ -1,5 +1,8 @@
 class GameView {
     constructor() {
+        this.selectionContainer = document.getElementById('selection-container');
+        this.instrumContainer = document.getElementById('instrum-container');
+        this.minuetContainer = document.getElementById('minuet-container');
         this.playContainer = document.getElementById('play-container');
 
         this.init();
@@ -11,6 +14,23 @@ class GameView {
 
     // creates the playfield for the player to interact with
     formPlayfield(app) {
+        for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
+            let elm = document.getElementById('slot-' + i);
+            elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
+
+            elm.addEventListener('click', function() {
+                // populate minuetContainer with appropriate minuets
+                for (let j = 0; j < app.gameModel.theScore[i].length; j++) {
+                    let minuet = document.getElementById('min-' + j);
+                    minuet.innerHTML = this.createPlayHTML(app.gameModel.theScore[i][j]);
+                }
+
+                this.selectionContainer.style.display = 'block';
+                this.minuetContainer.style.display = 'block';
+            }.bind(this));
+        }
+
+        /*
         let self = this;
 
         let index = 0;
@@ -38,24 +58,22 @@ class GameView {
             });
             index++;
         });
+        */
     }
 
     // refreshes the playField with new selections
     updatePlayfield(app) {
-        let index = 0;
-        app.gameModel.theScore.forEach(function(column) {
-            column.measures.forEach(function(element) {
-                let measureElem = document.getElementById('note-' + index + '-' + element);
+        for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
+            let elm = document.getElementById('slot-' + i);
+            elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
+        }
+    }
 
-                if (app.gameModel.selectedNotes[index] === element) {
-                    measureElem.classList.add('selected');
-                }
-                else {
-                    measureElem.classList.remove('selected');
-                }
-            });
-            index++;
-        });
+    // returns the innerHTML for a play-text element
+    createPlayHTML(note) {
+        return  '<div class="play-text">'   +
+                    note.match(/(\d+)/)[0]  +
+                '</div>';
     }
 
     loadSelection(app) {
@@ -67,6 +85,33 @@ class GameView {
         app.clearSong();
         app.loadSong();
         app.updatePlayfield();
+    }
+
+    togglePlayImage(playButton, isPlaying) {
+        playButton.style.backgroundImage =
+            'url(\'' +
+            (!isPlaying ? './img/buttonPlay.png' : './img/buttonPause.png') +
+            '\')';
+    }
+
+    // TODO: make this better. Seems a little excess
+    updateInstrumImage(instrum, button) {
+        let path;
+        switch (instrum) {
+            case 'piano':
+                path = './img/buttonPiano.png'
+                break;
+
+            case 'clavinet':
+                path = './img/buttonClav.png'
+                break;
+
+            case 'harpsichord':
+                path = './img/buttonHarpsi.png'
+                break;
+        }
+
+        button.style.backgroundImage = 'url(\'' + path + '\')';
     }
 }
 

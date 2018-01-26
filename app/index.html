@@ -2,46 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/app.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Mozart Dice Game</title>
 
 </head>
 <body>
 
-<div class="w3-sidebar w3-bar-block w3-collapse w3-card-2" id="mySidebar">
-    <button class="w3-bar-item w3-button w3-hide-large"
-            onclick="w3_close()">Close &times;</button>
-    <div id="side-buttons">
-        <a href="#"><input type="image" id="play-button" src="img/buttonPlay.png"     /></a>
-        <a href="#"><input type="image" id="random-button" src="img/buttonDice.png"   /></a>
-        <a href="#"><input type="image" id="export-button" src="img/buttonExport.png" /></a>
+<div id="selection-container">
+    <div id="exit-button" class="circle">Exit</div>
+
+    <div id="instrum-container">
+        <div id="piano-button" class="circle"></div>
+        <div id="clav-button" class="circle"></div>
+        <div id="harpsi-button" class="circle"></div>
+    </div>
+
+    <div id="minuet-container" >
+        <div id="min-0" class="circle">0</div>
+        <div id="min-1" class="circle">1</div>
+        <div id="min-2" class="circle">2</div>
+        <div id="min-3" class="circle">3</div>
+        <div id="min-4" class="circle">4</div>
+        <div id="min-5" class="circle">5</div>
+        <div id="min-6" class="circle">6</div>
+        <div id="min-7" class="circle">7</div>
+        <div id="min-8" class="circle">8</div>
+        <div id="min-9" class="circle">9</div>
+        <div id="min-10" class="circle">10</div>
     </div>
 </div>
 
-<div class="w3-main" id="main">
-        <div class="w3-container w3-black" id="header-container">
-            <button class="w3-button w3-xlarge" onclick="w3_open()">&#9776;</button>
-            <h1 class="w3-xlarge" style="display: inline-block;">The Mozart Dice Game</h1>
-            <div id="instrum-buttons">
-                <a href="#"><input type="image" id="piano-button" src="img/buttonPiano.png" /></a>
-                <a href="#"><input type="image" id="clav-button" src="img/buttonClav.png" /></a>
-                <a href="#"><input type="image" id="harpsi-button" src="img/buttonHarpsi.png" /></a>
-            </div>
-        </div>
+<div id="main-container">
+	<div id="options-container">
+		<div id="play-button"></div>
+		<div id="instrum-button"></div>
+		<div id="reset-button"></div>
+		<div id="random-button"></div>
+	</div>
 
-    <div id="play-container"></div>
+	<div id="play-container">
+		<div id="slot-0" class="slots"></div>
+		<div id="slot-1" class="slots"></div>
+		<div id="slot-2" class="slots"></div>
+		<div id="slot-3" class="slots"></div>
+		<div id="slot-4" class="slots"></div>
+		<div id="slot-5" class="slots"></div>
+		<div id="slot-6" class="slots"></div>
+		<div id="slot-7" class="slots"></div>
+		<div id="slot-8" class="slots"></div>
+		<div id="slot-9" class="slots"></div>
+		<div id="slot-10" class="slots"></div>
+		<div id="slot-11" class="slots"></div>
+		<div id="slot-12" class="slots"></div>
+		<div id="slot-13" class="slots"></div>
+		<div id="slot-14" class="slots"></div>
+		<div id="slot-15" class="slots"></div>
+	</div>
 </div>
-
-<!-- place code into view script -->
-<script>
-    function w3_open() {
-        document.getElementById("mySidebar").style.display = "block"
-    }
-    function w3_close() {
-        document.getElementById("mySidebar").style.display = "none";
-    }
-</script>
 
 <script language="javascript" type="text/javascript" src="js/LT.js"></script>
 
