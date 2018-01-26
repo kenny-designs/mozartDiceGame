@@ -1,14 +1,13 @@
 # The Mozart Musical Dice Game
 ## A recreation of Mozart's classic game of dice and music
 
-This game is being created as an educational tool to show the different ways music can be pieced together. So far, it's still in its
-infancy but can be played in your web browser [here.](https://kenny-designs.github.io/mozartDiceGame/dist/)
+This game is being created as an educational tool to show the different ways music can be pieced together. It can be played in your web browser [here.](https://kenny-designs.github.io/mozartDiceGame/dist/)
 
-### Future milestones include:
-* Full mobile support
-* Several instruments to play with
-* A slick and approachable UI
-* Ability to export your songs
+<p align="center">
+  <img src="./app/img/mozartUI.jpg" width=188 height=313 />
+  <br>
+  <i>Screenshot of the new UI</i>
+</p>
 
 ## Editing the Code
 If you wish to make changes to the code, you'll need to have several things first. In particular, you will need npm. I recommend
