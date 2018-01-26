@@ -129,7 +129,7 @@ class GameMain {
         this.gameModel.randomSong();
     }
 
-    // load the entirety of the selectedNotes
+    // load selectedNotes
     loadSong() {
         this.gameModel.loadSong();
     }
