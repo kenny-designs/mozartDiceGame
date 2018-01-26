@@ -131,6 +131,10 @@ body {
     display: none;
 }
 
+#instrum-container, #minuet-container {
+    display: none;
+}
+
 .circle {
     background-color: #e6d3b2;
     color: #b53232;

@@ -118,6 +118,7 @@ class GameModel {
     }
 
     // method clears Tone of existing song
+    // TODO: This method might be causing the double up effect, fix ASAP!
     clearSong() {
         for (let evt in this.allEvents) {
             this.allEvents[evt].dispose();

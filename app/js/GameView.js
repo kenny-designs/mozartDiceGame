@@ -1,6 +1,8 @@
 class GameView {
     constructor() {
         this.selectionContainer = document.getElementById('selection-container');
+        this.instrumContainer = document.getElementById('instrum-container');
+        this.minuetContainer = document.getElementById('minuet-container');
         this.playContainer = document.getElementById('play-container');
 
         this.init();
@@ -17,7 +19,8 @@ class GameView {
             elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
 
             elm.addEventListener('click', function() {
-                //console.log(app.gameModel.notePaths[i]);
+                this.selectionContainer.style.display = 'block';
+                this.minuetContainer.style.display = 'block';
             }.bind(this));
         }
 

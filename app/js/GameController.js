@@ -19,6 +19,7 @@ class GameController {
         this.instrumButton = document.getElementById('instrum-button');
         this.instrumButton.addEventListener('click', function() {
             app.gameView.selectionContainer.style.display = 'block';
+            app.gameView.instrumContainer.style.display = 'block'
         }.bind(this));
 
         // setup reset button
@@ -31,6 +32,8 @@ class GameController {
         this.exitButton = document.getElementById('exit-button');
         this.exitButton.addEventListener('click', function() {
             app.gameView.selectionContainer.style.display = 'none';
+            app.gameView.instrumContainer.style.display = 'none';
+            app.gameView.minuetContainer.style.display = 'none';
         }.bind(this));
 
         /*
