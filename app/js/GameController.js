@@ -39,6 +39,7 @@ class GameController {
         this.exportButton.addEventListener('click', function(event) {
             console.log('export button pressed');
         }.bind(this));
+        */
 
         // switch to piano sound files
         this.pianoButton = document.getElementById('piano-button');
@@ -60,7 +61,6 @@ class GameController {
             app.gameModel.selectedPath = app.gameModel.instruments['harpsichord'];
             app.reloadInstrum();
         }.bind(this));
-        */
     }
 
     // play song via transport
