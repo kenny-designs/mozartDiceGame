@@ -17,7 +17,6 @@ class GameMain {
         this.randomSong();
         this.loadSong();
         this.formPlayfield();
-        this.updatePlayfield();
     }
 
     // creates the playfield for the player to interact with
@@ -40,7 +39,7 @@ class GameMain {
         this.gameModel.loadSong();
     }
 
-    // method clears Tone of existing song
+    // clears Tone of existing song
     clearSong() {
         this.gameModel.clearSong();
     }
@@ -48,6 +47,16 @@ class GameMain {
     // load in newly selected measure
     loadSelection() {
         this.gameView.loadSelection(this);
+    }
+
+    // toggles image for play button
+    togglePlayImage() {
+        this.gameView.togglePlayImage(this.gameController.playButton, this.gameModel.isPlaying);
+    }
+
+    // updates the cover instrum image
+    updateInstrumImage() {
+        this.gameView.updateInstrumImage(this.gameModel.selectedInstrum, this.gameController.instrumButton);
     }
 
     // load paths, good for instrument changes
@@ -67,12 +76,13 @@ class GameMain {
 
     // restart song by setting transport to beginning
     resetSong() {
-        this.gameController.resetSong();
+        this.gameController.resetSong(this);
     }
 
     // TODO: simplify this code with reloadRandom()
     // reload song with correct instrument
     reloadInstrum() {
+        this.updateInstrumImage();
         this.pauseSong();
         this.clearSong();
         this.loadPaths();
