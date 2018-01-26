@@ -93,6 +93,26 @@ class GameView {
             (!isPlaying ? './img/buttonPlay.png' : './img/buttonPause.png') +
             '\')';
     }
+
+    // TODO: make this better. Seems a little excess
+    updateInstrumImage(instrum, button) {
+        let path;
+        switch (instrum) {
+            case 'piano':
+                path = './img/buttonPiano.png'
+                break;
+
+            case 'clavinet':
+                path = './img/buttonClav.png'
+                break;
+
+            case 'harpsichord':
+                path = './img/buttonHarpsi.png'
+                break;
+        }
+
+        button.style.backgroundImage = 'url(\'' + path + '\')';
+    }
 }
 
 module.exports = GameView;

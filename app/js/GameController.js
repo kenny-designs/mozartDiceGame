@@ -46,21 +46,24 @@ class GameController {
 
         // switch to piano sound files
         this.pianoButton = document.getElementById('piano-button');
-        this.pianoButton.addEventListener('click', function(event) {
+        this.pianoButton.addEventListener('click', function() {
+            app.gameModel.selectedInstrum = 'piano';
             app.gameModel.selectedPath = app.gameModel.instruments['piano'];
             app.reloadInstrum();
         }.bind(this));
 
         // switch to clavinet sound files
         this.clavButton = document.getElementById('clav-button');
-        this.clavButton.addEventListener('click', function(event) {
+        this.clavButton.addEventListener('click', function() {
+            app.gameModel.selectedInstrum = 'clavinet';
             app.gameModel.selectedPath = app.gameModel.instruments['clavinet'];
             app.reloadInstrum();
         }.bind(this));
 
         // switch to harpsichord sound files
         this.harpsiButton = document.getElementById('harpsi-button');
-        this.harpsiButton.addEventListener('click', function(event) {
+        this.harpsiButton.addEventListener('click', function() {
+            app.gameModel.selectedInstrum = 'harpsichord';
             app.gameModel.selectedPath = app.gameModel.instruments['harpsichord'];
             app.reloadInstrum();
         }.bind(this));

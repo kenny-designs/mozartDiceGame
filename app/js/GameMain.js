@@ -54,6 +54,11 @@ class GameMain {
         this.gameView.togglePlayImage(this.gameController.playButton, this.gameModel.isPlaying);
     }
 
+    // updates the cover instrum image
+    updateInstrumImage() {
+        this.gameView.updateInstrumImage(this.gameModel.selectedInstrum, this.gameController.instrumButton);
+    }
+
     // load paths, good for instrument changes
     loadPaths() {
         this.gameModel.loadPaths();
@@ -77,6 +82,7 @@ class GameMain {
     // TODO: simplify this code with reloadRandom()
     // reload song with correct instrument
     reloadInstrum() {
+        this.updateInstrumImage();
         this.pauseSong();
         this.clearSong();
         this.loadPaths();
