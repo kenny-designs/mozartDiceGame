@@ -19,6 +19,12 @@ class GameView {
             elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
 
             elm.addEventListener('click', function() {
+                // populate minuetContainer with appropriate minuets
+                for (let j = 0; j < app.gameModel.theScore[i].length; j++) {
+                    let minuet = document.getElementById('min-' + j);
+                    minuet.innerHTML = this.createPlayHTML(app.gameModel.theScore[i][j]);
+                }
+
                 this.selectionContainer.style.display = 'block';
                 this.minuetContainer.style.display = 'block';
             }.bind(this));
