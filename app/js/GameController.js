@@ -67,6 +67,15 @@ class GameController {
             app.gameModel.selectedPath = app.gameModel.instruments['harpsichord'];
             app.reloadInstrum();
         }.bind(this));
+
+        // adding event listeners to children divs of minuet-container
+        app.gameView.minuetContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('circle')) {
+                let item = event.target;
+                console.log('Item:', item);
+            }
+            event.stopPropagation(); // TODO: Needed?
+        }.bind(this));
     }
 
     // play song via transport

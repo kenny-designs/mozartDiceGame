@@ -98,12 +98,6 @@ body {
     border-radius: 5px;
 }
 
-/* Hack that should be simplified */
-#play-container div:hover .play-text {
-    background-color: #d0b992;
-    cursor: pointer;
-}
-
 #play-container div:hover {
     background-color: #d0b992;
     cursor: pointer;
@@ -113,9 +107,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.play-text {
     color: #b53232;
     font-size: calc(100% + 3vw);
 }
@@ -145,9 +136,9 @@ body {
     height: 15vw;
     text-align: center;
     line-height: 15vw;
-    font-size: calc(100% + 3vw);
     box-shadow: 5px 5px 20px dimgrey;
     cursor: pointer;
+    font-size: calc(100% + 3vw);
 }
 
 #exit-button {
@@ -287,7 +278,6 @@ body {
         width: 25vw;
         height: 25vw;
         line-height: 25vw;
-        font-size: calc(100% + 2vw);
     }
 
     #piano-button {

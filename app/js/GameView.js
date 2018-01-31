@@ -69,11 +69,9 @@ class GameView {
         }
     }
 
-    // returns the innerHTML for a play-text element
+    // returns the simplified innerHTML for a given note
     createPlayHTML(note) {
-        return  '<div class="play-text">'   +
-                    note.match(/(\d+)/)[0]  +
-                '</div>';
+        return note.match(/(\d+)/)[0];
     }
 
     loadSelection(app) {
