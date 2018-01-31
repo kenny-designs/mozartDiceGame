@@ -9,6 +9,7 @@ class GameModel {
         this.notePaths = [];            // paths to selected notes
         this.theScore = null;           // available measures to choose from
         this.selectedInstrum = 'piano'; // currently selected instrument
+        this.currentSlot = -1;          // currently open slot
 
         // object instrument choices
         this.instruments = {'piano'       : './audio/acoustic_grand_piano/',

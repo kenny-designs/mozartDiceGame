@@ -27,6 +27,9 @@ class GameView {
 
                 this.selectionContainer.style.display = 'block';
                 this.minuetContainer.style.display = 'block';
+
+                // update the currently selected slot
+                app.currentSlot = i;
             }.bind(this));
         }
 
@@ -69,22 +72,9 @@ class GameView {
         }
     }
 
-    // returns the innerHTML for a play-text element
+    // returns the simplified innerHTML for a given note
     createPlayHTML(note) {
-        return  '<div class="play-text">'   +
-                    note.match(/(\d+)/)[0]  +
-                '</div>';
-    }
-
-    loadSelection(app) {
-        if (app.gameModel.isPlaying) {
-            app.pauseSong();
-        }
-
-        app.resetSong();
-        app.clearSong();
-        app.loadSong();
-        app.updatePlayfield();
+        return note.match(/(\d+)/)[0];
     }
 
     togglePlayImage(playButton, isPlaying) {
@@ -99,15 +89,15 @@ class GameView {
         let path;
         switch (instrum) {
             case 'piano':
-                path = './img/buttonPiano.png'
+                path = './img/buttonPiano.png';
                 break;
 
             case 'clavinet':
-                path = './img/buttonClav.png'
+                path = './img/buttonClav.png';
                 break;
 
             case 'harpsichord':
-                path = './img/buttonHarpsi.png'
+                path = './img/buttonHarpsi.png';
                 break;
         }
 
