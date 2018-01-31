@@ -44,11 +44,6 @@ class GameMain {
         this.gameModel.clearSong();
     }
 
-    // load in newly selected measure
-    loadSelection() {
-        this.gameView.loadSelection(this);
-    }
-
     // toggles image for play button
     togglePlayImage() {
         this.gameView.togglePlayImage(this.gameController.playButton, this.gameModel.isPlaying);
@@ -79,23 +74,22 @@ class GameMain {
         this.gameController.resetSong(this);
     }
 
-    // TODO: simplify this code with reloadRandom()
-    // reload song with correct instrument
-    reloadInstrum() {
-        this.updateInstrumImage();
+    // reload a random song
+    // TODO: Simplify with the reloadSong() method
+    reloadRandom() {
         this.pauseSong();
         this.clearSong();
-        this.loadPaths();
+        this.randomSong();
         this.loadSong();
         this.updatePlayfield();
         this.resetSong();
     }
 
-    // reload a random song with the correct instrument
-    reloadRandom() {
+    // general reloading of song
+    reloadSong() {
         this.pauseSong();
         this.clearSong();
-        this.randomSong();
+        this.loadPaths();
         this.loadSong();
         this.updatePlayfield();
         this.resetSong();

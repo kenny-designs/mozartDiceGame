@@ -49,7 +49,8 @@ class GameController {
         this.pianoButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'piano';
             app.gameModel.selectedPath = app.gameModel.instruments['piano'];
-            app.reloadInstrum();
+            app.updateInstrumImage();
+            app.reloadSong();
         }.bind(this));
 
         // switch to clavinet sound files
@@ -57,7 +58,8 @@ class GameController {
         this.clavButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'clavinet';
             app.gameModel.selectedPath = app.gameModel.instruments['clavinet'];
-            app.reloadInstrum();
+            app.updateInstrumImage();
+            app.reloadSong();
         }.bind(this));
 
         // switch to harpsichord sound files
@@ -65,16 +67,17 @@ class GameController {
         this.harpsiButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'harpsichord';
             app.gameModel.selectedPath = app.gameModel.instruments['harpsichord'];
-            app.reloadInstrum();
+            app.updateInstrumImage();
+            app.reloadSong();
         }.bind(this));
 
         // adding event listeners to children divs of minuet-container
         app.gameView.minuetContainer.addEventListener('click', function(event) {
             if (event.target.classList.contains('circle')) {
-                let item = event.target;
-                console.log('Item:', item);
+                let pos = event.target.id.match(/(\d+)/)[0];
+                app.gameModel.selectedNotes[app.currentSlot] = app.gameModel.theScore[app.currentSlot][pos];
+                app.reloadSong();
             }
-            event.stopPropagation(); // TODO: Needed?
         }.bind(this));
     }
 
