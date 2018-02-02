@@ -32,36 +32,6 @@ class GameView {
                 app.currentSlot = i;
             }.bind(this));
         }
-
-        /*
-        let self = this;
-
-        let index = 0;
-        app.gameModel.theScore.forEach(function(column) {
-            let columnContainer = document.createElement('div');
-            columnContainer.id = 'column-' + index;
-            columnContainer.classList.add('column');
-            self.playContainer.appendChild(columnContainer);
-
-            column.measures.forEach(function(element) {
-                let measureElem = document.createElement('div');
-                measureElem.id = 'note-' + index + '-' + element;
-                measureElem.innerHTML = '<label>' + element + '</label>';
-                measureElem.classList.add('note-container');
-
-                // bound an action for when clicked
-                measureElem.addEventListener('click', function(event) {
-                    let elmColumn = measureElem.id.split('-')[1];
-                    app.gameModel.selectedNotes[elmColumn] = element;
-                    app.gameModel.notePaths[elmColumn] = app.gameModel.selectedPath + element + '.wav';
-                    app.loadSelection();
-                }.bind(this));
-
-                columnContainer.appendChild(measureElem);
-            });
-            index++;
-        });
-        */
     }
 
     // refreshes the playField with new selections
