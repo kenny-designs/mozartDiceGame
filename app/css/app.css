@@ -111,6 +111,10 @@ body {
     font-size: calc(100% + 3vw);
 }
 
+.playing {
+    /* */
+}
+
 #selection-container {
     position: absolute;
     width: 100vw;
