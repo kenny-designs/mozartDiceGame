@@ -5,6 +5,7 @@ class GameModel {
     constructor() {
         this.isPlaying = false;         // track if music playing
         this.allEvents = [];            // events for playing .wavs
+        this.allSlots = [];             // tracks all slots
         this.selectedNotes = [];        // measures selected to be played
         this.notePaths = [];            // paths to selected notes
         this.theScore = null;           // available measures to choose from
@@ -96,7 +97,7 @@ class GameModel {
     }
 
     // load selectedNotes
-    loadSong() {
+    loadSong(app) {
         let minuets = new Tone.Buffers(this.notePaths, function() {
             // offset for each
             let offset = 0;
@@ -108,6 +109,7 @@ class GameModel {
 
                 // create an event for it
                 let evt = new Tone.Event(function(time, song) {
+                    app.updateNowPlaying(app.gameModel.allSlots[i]);
                     let player = new Tone.Player(song).toMaster();
                     player.start();
                 }.bind(this), buf).start(offset);

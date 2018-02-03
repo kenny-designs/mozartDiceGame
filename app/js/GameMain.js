@@ -29,6 +29,11 @@ class GameMain {
         this.gameView.updatePlayfield(this);
     }
 
+    // highlights which slot is currently playing
+    updateNowPlaying(slot) {
+        this.gameView.updateNowPlaying(this, slot);
+    }
+
     // creates a random song
     randomSong() {
         this.gameModel.randomSong();
@@ -36,7 +41,7 @@ class GameMain {
 
     // load the entirety of the selectedNotes
     loadSong() {
-        this.gameModel.loadSong();
+        this.gameModel.loadSong(this);
     }
 
     // clears Tone of existing song
