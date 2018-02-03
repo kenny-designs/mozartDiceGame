@@ -25,7 +25,8 @@ class GameController {
         // setup reset button
         this.resetButton = document.getElementById('reset-button');
         this.resetButton.addEventListener('click', function() {
-            app.resetSong();
+            // TODO: this is much more responsive but is overkill. Make simpler
+            app.reloadSong();
         }.bind(this));
 
         // setup exit button to hide the selection-container
@@ -35,14 +36,6 @@ class GameController {
             app.gameView.instrumContainer.style.display = 'none';
             app.gameView.minuetContainer.style.display = 'none';
         }.bind(this));
-
-        /*
-        // export button currently does nothing
-        this.exportButton = document.getElementById('export-button');
-        this.exportButton.addEventListener('click', function(event) {
-            console.log('export button pressed');
-        }.bind(this));
-        */
 
         // switch to piano sound files
         this.pianoButton = document.getElementById('piano-button');
@@ -96,8 +89,7 @@ class GameController {
     }
 
     // restart song by setting transport to beginning
-    resetSong(app) {
-        app.pauseSong();
+    resetSong() {
         Tone.Transport.position = '0:0:0';
     }
 }

@@ -12,7 +12,7 @@ class GameView {
         // code
     }
 
-    // creates the playfield for the player to interact with
+    // creates the initial playfield for the player to interact with
     formPlayfield(app) {
         for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
             let elm = document.getElementById('slot-' + i);
@@ -31,45 +31,24 @@ class GameView {
                 // update the currently selected slot
                 app.currentSlot = i;
             }.bind(this));
+
+            app.gameModel.allSlots.push(elm);
         }
-
-        /*
-        let self = this;
-
-        let index = 0;
-        app.gameModel.theScore.forEach(function(column) {
-            let columnContainer = document.createElement('div');
-            columnContainer.id = 'column-' + index;
-            columnContainer.classList.add('column');
-            self.playContainer.appendChild(columnContainer);
-
-            column.measures.forEach(function(element) {
-                let measureElem = document.createElement('div');
-                measureElem.id = 'note-' + index + '-' + element;
-                measureElem.innerHTML = '<label>' + element + '</label>';
-                measureElem.classList.add('note-container');
-
-                // bound an action for when clicked
-                measureElem.addEventListener('click', function(event) {
-                    let elmColumn = measureElem.id.split('-')[1];
-                    app.gameModel.selectedNotes[elmColumn] = element;
-                    app.gameModel.notePaths[elmColumn] = app.gameModel.selectedPath + element + '.wav';
-                    app.loadSelection();
-                }.bind(this));
-
-                columnContainer.appendChild(measureElem);
-            });
-            index++;
-        });
-        */
     }
 
     // refreshes the playField with new selections
     updatePlayfield(app) {
-        for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
-            let elm = document.getElementById('slot-' + i);
-            elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
+        for (let i = 0; i < app.gameModel.allSlots.length; i++) {
+            app.gameModel.allSlots[i].innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
         }
+    }
+
+    // update which slot has the playing class
+    updateNowPlaying(app, slot) {
+        for (let i = 0; i < app.gameModel.allSlots.length; i++) {
+            app.gameModel.allSlots[i].classList.remove('playing');
+        }
+        slot.classList.add('playing');
     }
 
     // returns the simplified innerHTML for a given note
