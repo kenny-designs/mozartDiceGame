@@ -81,7 +81,7 @@ class GameController {
         app.togglePlayImage();
     }
 
-    // pauses transport thus pausing song
+    // pauses transport
     pauseSong(app) {
         Tone.Transport.pause();
         app.gameModel.isPlaying = false;
