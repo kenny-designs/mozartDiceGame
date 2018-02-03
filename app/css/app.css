@@ -109,12 +109,11 @@ body {
     align-items: center;
     color: #b53232;
     font-size: calc(100% + 3vw);
-    transition: box-shadow linear 1s;
+    transition: box-shadow linear 0.1s;
 }
 
 .playing {
-    box-shadow: 0 0 10px;
-    outline-style: auto;
+    box-shadow: 0 0 0 3px;
 }
 
 #selection-container {

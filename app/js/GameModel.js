@@ -4,11 +4,11 @@ const StartAudioContext = require('StartAudioContext');
 class GameModel {
     constructor() {
         this.isPlaying = false;         // track if music playing
-        this.allEvents = [];            // events for playing .wavs
+        this.allEvents = [];            // events for lighting slots
         this.allSlots = [];             // tracks all slots
         this.selectedNotes = [];        // measures selected to be played
         this.notePaths = [];            // paths to selected notes
-        this.theScore = null;           // available measures to choose from
+        this.theScore = [];             // available measures to choose from
         this.selectedInstrum = 'piano'; // currently selected instrument
         this.currentSlot = -1;          // currently open slot
 
@@ -98,38 +98,21 @@ class GameModel {
 
     // load selectedNotes
     loadSong(app) {
-        this.minuets = new Tone.Buffers(this.notePaths, function() {
-            // offset for each
-            let offset = 0;
+        let offset = 0;
 
-            // loop through all minuets
+        this.players = new Tone.Players(this.notePaths, function() {
             for (let i = 0; i < this.notePaths.length; i++) {
-                // get current buffer
-                let buf = this.minuets.get(i);
+                let player = this.players.get(i);
+                player.toMaster();
+                player.sync().start(offset);
 
-                // create an event for it
-                /*
-                let evt = new Tone.Event(function(time, song) {
+                let evt = new Tone.Event(function() {
                     app.updateNowPlaying(app.gameModel.allSlots[i]);
-                    let player = new Tone.Player(song).toMaster();
-                    player.start();
-                    console.log(player.state);
-                }.bind(this), buf).start(offset);
+                }.bind(this)).start(offset + 2.0);
 
                 this.allEvents.push(evt);
-                */
 
-                Tone.Transport.schedule(function(time) {
-                    console.log('Seconds:', new Tone.TransportTime(time).toSeconds());
-                    console.log('Pure:', time);
-                    console.log('Actual:', Tone.Transport.toSeconds());
-
-                    let player = new Tone.Player(buf).toMaster();
-                    player.sync().start(time);
-                    app.updateNowPlaying(app.gameModel.allSlots[i]);
-                }, offset);
-
-                offset += buf.duration - 2.0; // -2.0 is fix for delay in wavs
+                offset += player.buffer.duration - 2.0;
             }
         }.bind(this));
     }
@@ -137,15 +120,12 @@ class GameModel {
     // method clears Tone of existing song
     // TODO: This method might be causing the double up effect, fix ASAP!
     clearSong() {
-        /*
         for (let evt in this.allEvents) {
             this.allEvents[evt].dispose();
         }
         this.allEvents = [];
-        */
 
-        // seems like it would work wonders...
-        // Tone.Transport.cancel();
+        this.players.dispose();
     }
 }
 
