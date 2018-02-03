@@ -98,23 +98,36 @@ class GameModel {
 
     // load selectedNotes
     loadSong(app) {
-        let minuets = new Tone.Buffers(this.notePaths, function() {
+        this.minuets = new Tone.Buffers(this.notePaths, function() {
             // offset for each
             let offset = 0;
 
             // loop through all minuets
             for (let i = 0; i < this.notePaths.length; i++) {
                 // get current buffer
-                let buf = minuets.get(i);
+                let buf = this.minuets.get(i);
 
                 // create an event for it
+                /*
                 let evt = new Tone.Event(function(time, song) {
-                    //app.updateNowPlaying(app.gameModel.allSlots[i]);
+                    app.updateNowPlaying(app.gameModel.allSlots[i]);
                     let player = new Tone.Player(song).toMaster();
                     player.start();
+                    console.log(player.state);
                 }.bind(this), buf).start(offset);
 
                 this.allEvents.push(evt);
+                */
+
+                Tone.Transport.schedule(function(time) {
+                    console.log('Seconds:', new Tone.TransportTime(time).toSeconds());
+                    console.log('Pure:', time);
+                    console.log('Actual:', Tone.Transport.toSeconds());
+
+                    let player = new Tone.Player(buf).toMaster();
+                    player.sync().start(time);
+                    app.updateNowPlaying(app.gameModel.allSlots[i]);
+                }, offset);
 
                 offset += buf.duration - 2.0; // -2.0 is fix for delay in wavs
             }
@@ -124,10 +137,15 @@ class GameModel {
     // method clears Tone of existing song
     // TODO: This method might be causing the double up effect, fix ASAP!
     clearSong() {
+        /*
         for (let evt in this.allEvents) {
             this.allEvents[evt].dispose();
         }
         this.allEvents = [];
+        */
+
+        // seems like it would work wonders...
+        // Tone.Transport.cancel();
     }
 }
 
