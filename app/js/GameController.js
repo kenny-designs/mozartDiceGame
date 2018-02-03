@@ -36,14 +36,6 @@ class GameController {
             app.gameView.minuetContainer.style.display = 'none';
         }.bind(this));
 
-        /*
-        // export button currently does nothing
-        this.exportButton = document.getElementById('export-button');
-        this.exportButton.addEventListener('click', function(event) {
-            console.log('export button pressed');
-        }.bind(this));
-        */
-
         // switch to piano sound files
         this.pianoButton = document.getElementById('piano-button');
         this.pianoButton.addEventListener('click', function() {

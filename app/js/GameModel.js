@@ -109,7 +109,7 @@ class GameModel {
 
                 // create an event for it
                 let evt = new Tone.Event(function(time, song) {
-                    app.updateNowPlaying(app.gameModel.allSlots[i]);
+                    //app.updateNowPlaying(app.gameModel.allSlots[i]);
                     let player = new Tone.Player(song).toMaster();
                     player.start();
                 }.bind(this), buf).start(offset);
