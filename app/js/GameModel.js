@@ -98,6 +98,7 @@ class GameModel {
 
     // load selectedNotes
     loadSong(app) {
+        app.toggleLoading();
         let offset = 0;
 
         this.players = new Tone.Players(this.notePaths, function() {
@@ -114,6 +115,7 @@ class GameModel {
 
                 offset += player.buffer.duration - 2.0;
             }
+            app.toggleLoading();
         }.bind(this));
     }
 
