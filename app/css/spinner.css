@@ -18,7 +18,7 @@
     margin: 0 auto;
     width: 15%;
     height: 15%;
-    background-color: #5f1818;
+    background-color: #d8b519;
     border-radius: 100%;
     -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
     animation: sk-circleBounceDelay 1.2s infinite ease-in-out both; }
@@ -115,3 +115,10 @@
     40% {
         -webkit-transform: scale(1);
         transform: scale(1); } }
+
+@media screen and (orientation: portrait) {
+    .sk-circle {
+        width: 25vh;
+        height: 25vh;
+    }
+}
