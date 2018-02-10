@@ -11,6 +11,7 @@ class GameModel {
         this.theScore = [];             // available measures to choose from
         this.selectedInstrum = 'piano'; // currently selected instrument
         this.currentSlot = -1;          // currently open slot
+        this.sampleBufs = null;         // bufs for sampling individual mins
 
         // object instrument choices
         this.instruments = {'piano'       : './audio/acoustic_grand_piano/',
@@ -129,6 +130,7 @@ class GameModel {
         this.allEvents = [];
 
         this.players.dispose();
+        this.sampleBufs.dispose();
     }
 }
 

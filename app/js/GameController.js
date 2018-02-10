@@ -67,7 +67,6 @@ class GameController {
             if (event.target.classList.contains('circle')) {
                 let pos = event.target.id.match(/(\d+)/)[0];
                 app.gameModel.selectedNotes[app.currentSlot] = app.gameModel.theScore[app.currentSlot][pos];
-                app.reloadSong();
             }
         }.bind(this));
     }

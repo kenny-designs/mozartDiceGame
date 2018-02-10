@@ -1,16 +1,12 @@
+const Tone = require('Tone');
+
 class GameView {
     constructor() {
         this.selectionContainer = document.getElementById('selection-container');
-        this.instrumContainer = document.getElementById('instrum-container');
-        this.minuetContainer = document.getElementById('minuet-container');
-        this.playContainer = document.getElementById('play-container');
-        this.loadingContainer = document.getElementById('loading-container');
-
-        this.init();
-    }
-
-    init() {
-        // code
+        this.instrumContainer   = document.getElementById('instrum-container');
+        this.minuetContainer    = document.getElementById('minuet-container');
+        this.playContainer      = document.getElementById('play-container');
+        this.loadingContainer   = document.getElementById('loading-container');
     }
 
     // creates the initial playfield for the player to interact with
@@ -20,11 +16,28 @@ class GameView {
             elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
 
             elm.addEventListener('click', function() {
-                // populate minuetContainer with appropriate minuets
-                for (let j = 0; j < app.gameModel.theScore[i].length; j++) {
-                    let minuet = document.getElementById('min-' + j);
-                    minuet.innerHTML = this.createPlayHTML(app.gameModel.theScore[i][j]);
+                app.toggleLoading();
+
+                // gather paths we need to load in
+                let paths = [];
+                for (let k = 0; k < app.gameModel.theScore[i].length; k++) {
+                    paths.push(app.gameModel.selectedPath + app.gameModel.theScore[i][k] + '.wav');
                 }
+
+                // create buffers
+                app.gameModel.sampleBufs = new Tone.Buffers(paths, function() {
+                    for (let j = 0; j < app.gameModel.theScore[i].length; j++) {
+                        let minuet = document.getElementById('min-' + j);
+                        minuet.innerHTML = this.createPlayHTML(app.gameModel.theScore[i][j]);
+
+                        // allows the user to sample individual minuets
+                        minuet.addEventListener('click', function() {
+                            let player = new Tone.Player(app.gameModel.sampleBufs.get(j)).toMaster();
+                            player.start();
+                        }.bind(this));
+                    }
+                    app.toggleLoading();
+                }.bind(this));
 
                 this.selectionContainer.style.display = 'block';
                 this.minuetContainer.style.display = 'block';
