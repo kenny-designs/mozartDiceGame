@@ -32,6 +32,7 @@ class GameController {
         // setup exit button to hide the selection-container
         this.exitButton = document.getElementById('exit-button');
         this.exitButton.addEventListener('click', function() {
+            app.reloadSong();
             app.gameView.selectionContainer.style.display = 'none';
             app.gameView.instrumContainer.style.display = 'none';
             app.gameView.minuetContainer.style.display = 'none';
@@ -43,7 +44,6 @@ class GameController {
             app.gameModel.selectedInstrum = 'piano';
             app.gameModel.selectedPath = app.gameModel.instruments['piano'];
             app.updateInstrumImage();
-            app.reloadSong();
         }.bind(this));
 
         // switch to clavinet sound files
@@ -52,7 +52,6 @@ class GameController {
             app.gameModel.selectedInstrum = 'clavinet';
             app.gameModel.selectedPath = app.gameModel.instruments['clavinet'];
             app.updateInstrumImage();
-            app.reloadSong();
         }.bind(this));
 
         // switch to harpsichord sound files
@@ -61,7 +60,6 @@ class GameController {
             app.gameModel.selectedInstrum = 'harpsichord';
             app.gameModel.selectedPath = app.gameModel.instruments['harpsichord'];
             app.updateInstrumImage();
-            app.reloadSong();
         }.bind(this));
 
         // adding event listeners to children divs of minuet-container
