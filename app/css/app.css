@@ -120,7 +120,7 @@ body {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    z-index: 10000;
+    z-index: 500;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.3);
@@ -213,6 +213,22 @@ body {
 
 #min-10 {
     top: 60vh; left: 80vw; bottom: 0; right: 0;
+}
+
+/* Copying mobile-container for testing */
+#loading-container {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.active {
+    display: block !important;
 }
 
 #mobile-container {

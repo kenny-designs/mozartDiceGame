@@ -59,6 +59,11 @@ class GameMain {
         this.gameView.updateInstrumImage(this.gameModel.selectedInstrum, this.gameController.instrumButton);
     }
 
+    // toggles the loading screen
+    toggleLoading() {
+        this.gameView.toggleLoading();
+    }
+
     // load paths, good for instrument changes
     loadPaths() {
         this.gameModel.loadPaths();

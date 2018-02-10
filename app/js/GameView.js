@@ -4,6 +4,7 @@ class GameView {
         this.instrumContainer = document.getElementById('instrum-container');
         this.minuetContainer = document.getElementById('minuet-container');
         this.playContainer = document.getElementById('play-container');
+        this.loadingContainer = document.getElementById('loading-container');
 
         this.init();
     }
@@ -81,6 +82,14 @@ class GameView {
         }
 
         button.style.backgroundImage = 'url(\'' + path + '\')';
+    }
+
+    // toggles the loading screen
+    toggleLoading() {
+        if (this.loadingContainer.classList.contains('active'))
+            this.loadingContainer.classList.remove('active');
+        else
+            this.loadingContainer.classList.add('active');
     }
 }
 
