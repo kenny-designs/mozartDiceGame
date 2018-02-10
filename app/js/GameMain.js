@@ -93,6 +93,7 @@ class GameMain {
         this.loadSong();
         this.updatePlayfield();
         this.resetSong();
+        this.updateNowPlaying();
     }
 
     // general reloading of song
@@ -103,6 +104,7 @@ class GameMain {
         this.loadSong();
         this.updatePlayfield();
         this.resetSong();
+        this.updateNowPlaying();
     }
 }
 

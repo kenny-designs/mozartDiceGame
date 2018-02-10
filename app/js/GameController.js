@@ -18,6 +18,7 @@ class GameController {
         // setup instrument select button
         this.instrumButton = document.getElementById('instrum-button');
         this.instrumButton.addEventListener('click', function() {
+            app.pauseSong();
             app.gameView.selectionContainer.style.display = 'block';
             app.gameView.instrumContainer.style.display = 'block'
         }.bind(this));

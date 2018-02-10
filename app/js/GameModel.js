@@ -3,15 +3,15 @@ const StartAudioContext = require('StartAudioContext');
 
 class GameModel {
     constructor() {
-        this.isPlaying = false;         // track if music playing
-        this.allEvents = [];            // events for lighting slots
-        this.allSlots = [];             // tracks all slots
-        this.selectedNotes = [];        // measures selected to be played
-        this.notePaths = [];            // paths to selected notes
-        this.theScore = [];             // available measures to choose from
-        this.selectedInstrum = 'piano'; // currently selected instrument
-        this.currentSlot = -1;          // currently open slot
-        this.sampleBufs = null;         // bufs for sampling individual mins
+        this.isPlaying          = false;    // track if music playing
+        this.allEvents          = [];       // events for lighting slots
+        this.allSlots           = [];       // tracks all slots
+        this.selectedNotes      = [];       // measures selected to be played
+        this.notePaths          = [];       // paths to selected notes
+        this.theScore           = [];       // available measures to choose from
+        this.selectedInstrum    = 'piano';  // currently selected instrument
+        this.currentSlot        = -1;       // currently open slot
+        this.sampleBufs         = null;     // bufs for sampling individual mins
 
         // object instrument choices
         this.instruments = {'piano'       : './audio/acoustic_grand_piano/',
@@ -122,7 +122,6 @@ class GameModel {
     }
 
     // method clears Tone of existing song
-    // TODO: This method might be causing the double up effect, fix ASAP!
     clearSong() {
         for (let evt in this.allEvents) {
             this.allEvents[evt].dispose();
@@ -130,7 +129,9 @@ class GameModel {
         this.allEvents = [];
 
         this.players.dispose();
-        this.sampleBufs.dispose();
+
+        if (this.sampleBufs)
+            this.sampleBufs.dispose();
     }
 }
 

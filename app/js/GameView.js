@@ -16,6 +16,7 @@ class GameView {
             elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
 
             elm.addEventListener('click', function() {
+                app.pauseSong();
                 app.toggleLoading();
 
                 // gather paths we need to load in
@@ -62,7 +63,9 @@ class GameView {
         for (let i = 0; i < app.gameModel.allSlots.length; i++) {
             app.gameModel.allSlots[i].classList.remove('playing');
         }
-        slot.classList.add('playing');
+
+        if (slot)
+            slot.classList.add('playing');
     }
 
     // returns the simplified innerHTML for a given note
