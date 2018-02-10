@@ -146,7 +146,7 @@ body {
     font-size: calc(100% + 3vw);
 }
 
-#exit-button {
+#exit-button, #mobile-button {
     top: 0; left: 0; bottom: 0; right: 0;
 }
 
@@ -215,9 +215,7 @@ body {
     top: 60vh; left: 80vw; bottom: 0; right: 0;
 }
 
-/* Copying mobile-container for testing */
-#loading-container {
-    display: none;
+#loading-container, #mobile-container{
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -227,34 +225,12 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+#loading-container {
+    display: none;
+}
+
 .active {
     display: block !important;
-}
-
-#mobile-container {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    z-index: 10000;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-#mobile-container #mobile-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background-color: #990073;
-    color: white;
-    border-radius: 3px;
-    margin-top: -40px;
-    margin-left: -50px;
-    width: 100px;
-    height: 80px;
-    text-align: center;
-    line-height: 80px;
-    font-size: calc(100% + 2vw);
 }
 
 @media screen and (orientation: portrait) {

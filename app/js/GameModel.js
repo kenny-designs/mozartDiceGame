@@ -27,6 +27,7 @@ class GameModel {
 
             let mobileButton = document.createElement('div');
             mobileButton.id = 'mobile-button';
+            mobileButton.classList.add('circle');
             mobileButton.textContent = 'Enter';
             mobileContainer.appendChild(mobileButton);
 
