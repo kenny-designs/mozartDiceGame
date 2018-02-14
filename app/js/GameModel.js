@@ -4,6 +4,7 @@ const StartAudioContext = require('StartAudioContext');
 class GameModel {
     constructor() {
         this.isPlaying          = false;    // track if music playing
+        this.isSampling         = false;    // track if sample is playing
         this.allEvents          = [];       // events for lighting slots
         this.allSlots           = [];       // tracks all slots
         this.selectedNotes      = [];       // measures selected to be played

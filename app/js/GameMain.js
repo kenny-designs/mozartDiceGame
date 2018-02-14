@@ -59,6 +59,11 @@ class GameMain {
         this.gameView.updateInstrumImage(this.gameModel.selectedInstrum, this.gameController.instrumButton);
     }
 
+    // updates which min is currently selected
+    updateHighlightedMin(min) {
+        this.gameView.updateHighlightedMin(this, min);
+    }
+
     // toggles the loading screen
     toggleLoading() {
         this.gameView.toggleLoading();

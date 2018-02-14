@@ -11,13 +11,15 @@ class GameView {
     // creates the initial playfield for the player to interact with
     formPlayfield(app) {
         for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
-            let elm = document.getElementById('slot-' + i);
-            elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
+            let slot = document.getElementById('slot-' + i);
+            slot.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
 
             // event listener for clicking a single slot
-            elm.addEventListener('click', function() {
+            slot.addEventListener('click', function() {
                 app.pauseSong();
                 app.toggleLoading();
+
+                app.updateHighlightedMin(app.gameModel.theScore[i].indexOf(app.gameModel.selectedNotes[i]));
 
                 // gather paths we need to load in for user to sample
                 let paths = [];
@@ -33,8 +35,22 @@ class GameView {
 
                         // allows the user to sample individual minuets
                         minuet.addEventListener('click', function() {
-                            let player = new Tone.Player(app.gameModel.sampleBufs.get(j)).toMaster();
-                            player.start();
+                            // sample the minuet if not already doing so
+                            if (!app.gameModel.isSampling) {
+                                app.gameModel.isSampling = true;
+
+                                minuet.classList.add('pulse');
+                                app.updateHighlightedMin(j);
+
+                                let player = new Tone.Player(app.gameModel.sampleBufs.get(j)).toMaster();
+                                player.start();
+
+                                // check for end of animation
+                                minuet.addEventListener('animationend', function() {
+                                    minuet.classList.remove('pulse');
+                                    app.gameModel.isSampling = false;
+                                }.bind(this));
+                            }
                         }.bind(this));
                     }
                     app.toggleLoading();
@@ -47,7 +63,7 @@ class GameView {
                 app.currentSlot = i;
             }.bind(this));
 
-            app.gameModel.allSlots.push(elm);
+            app.gameModel.allSlots.push(slot);
         }
     }
 
@@ -98,6 +114,18 @@ class GameView {
         }
 
         button.style.backgroundImage = 'url(\'' + path + '\')';
+    }
+
+    // updates which min is currently hightlighted based on given index
+    updateHighlightedMin(app, min) {
+        for (let i = 0; i < app.gameModel.theScore[0].length; i++) {
+            let elm = document.getElementById('min-' + i);
+
+            if (i != min)
+                elm.classList.remove('highlight-min');
+            else
+                elm.classList.add('highlight-min');
+        }
     }
 
     // toggles the loading screen
