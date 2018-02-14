@@ -12,7 +12,7 @@ class GameMain {
         this.init();
     }
 
-    // using init method for proper form
+    // form game
     init() {
         this.randomSong();
         this.loadSong();

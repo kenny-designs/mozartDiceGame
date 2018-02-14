@@ -10,6 +10,7 @@ class GameModel {
         this.notePaths          = [];       // paths to selected notes
         this.theScore           = [];       // available measures to choose from
         this.selectedInstrum    = 'piano';  // currently selected instrument
+        this.selectedPath       = '';       // currently selected path
         this.currentSlot        = -1;       // currently open slot
         this.sampleBufs         = null;     // bufs for sampling individual mins
 
@@ -76,26 +77,23 @@ class GameModel {
 
     // creates a random song
     randomSong() {
-        let selectedNotes = [];
+        this.selectedNotes = [];
 
         for (let i = 0; i < this.theScore.length; i++) {
-            selectedNotes.push(this.randMeasure(this.theScore[i]));
+            this.selectedNotes.push(this.randMeasure(this.theScore[i]));
         }
 
-        this.selectedNotes = selectedNotes;
-
+        // TODO: Find way to remove this and place within reloadRandom in GameMain
         this.loadPaths();
     }
 
     // load paths based off of the selectedNotes
     loadPaths() {
-        let notePaths = [];
+        this.notePaths = [];
 
         for (let i = 0; i < this.selectedNotes.length; i++) {
-            notePaths.push(this.selectedPath + this.selectedNotes[i] + '.wav');
+            this.notePaths.push(this.selectedPath + this.selectedNotes[i] + '.wav');
         }
-
-        this.notePaths = notePaths;
     }
 
     // load selectedNotes

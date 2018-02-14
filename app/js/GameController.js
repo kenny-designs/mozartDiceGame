@@ -39,7 +39,7 @@ class GameController {
             app.gameView.minuetContainer.style.display = 'none';
         }.bind(this));
 
-        // switch to piano sound files
+        // switch to piano
         this.pianoButton = document.getElementById('piano-button');
         this.pianoButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'piano';
@@ -47,7 +47,7 @@ class GameController {
             app.updateInstrumImage();
         }.bind(this));
 
-        // switch to clavinet sound files
+        // switch to clavinet
         this.clavButton = document.getElementById('clav-button');
         this.clavButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'clavinet';
@@ -55,7 +55,7 @@ class GameController {
             app.updateInstrumImage();
         }.bind(this));
 
-        // switch to harpsichord sound files
+        // switch to harpsichord
         this.harpsiButton = document.getElementById('harpsi-button');
         this.harpsiButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'harpsichord';

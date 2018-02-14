@@ -5,7 +5,6 @@ class GameView {
         this.selectionContainer = document.getElementById('selection-container');
         this.instrumContainer   = document.getElementById('instrum-container');
         this.minuetContainer    = document.getElementById('minuet-container');
-        this.playContainer      = document.getElementById('play-container');
         this.loadingContainer   = document.getElementById('loading-container');
     }
 
@@ -15,17 +14,18 @@ class GameView {
             let elm = document.getElementById('slot-' + i);
             elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
 
+            // event listener for clicking a single slot
             elm.addEventListener('click', function() {
                 app.pauseSong();
                 app.toggleLoading();
 
-                // gather paths we need to load in
+                // gather paths we need to load in for user to sample
                 let paths = [];
                 for (let k = 0; k < app.gameModel.theScore[i].length; k++) {
                     paths.push(app.gameModel.selectedPath + app.gameModel.theScore[i][k] + '.wav');
                 }
 
-                // create buffers
+                // create buffers for sound files that user can sample
                 app.gameModel.sampleBufs = new Tone.Buffers(paths, function() {
                     for (let j = 0; j < app.gameModel.theScore[i].length; j++) {
                         let minuet = document.getElementById('min-' + j);
