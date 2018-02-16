@@ -35,22 +35,21 @@ class GameView {
 
                         // allows the user to sample individual minuets
                         minuet.addEventListener('click', function() {
-                            // sample the minuet if not already doing so
-                            if (!app.gameModel.isSampling) {
-                                app.gameModel.isSampling = true;
+                            // if sampling, stop it and start this one instead
+                            app.clearPulse();
+                            app.clearSampler();
 
-                                minuet.classList.add('pulse');
-                                app.updateHighlightedMin(j);
+                            minuet.classList.add('pulse');
+                            app.updateHighlightedMin(j);
 
-                                let player = new Tone.Player(app.gameModel.sampleBufs.get(j)).toMaster();
-                                player.start();
+                            app.gameModel.samplePlayer = new Tone.Player(app.gameModel.sampleBufs.get(j)).toMaster();
+                            app.gameModel.samplePlayer.start(Tone.now(), 2.0); // starts with 2 second offset
 
-                                // check for end of animation
-                                minuet.addEventListener('animationend', function() {
-                                    minuet.classList.remove('pulse');
-                                    app.gameModel.isSampling = false;
-                                }.bind(this));
-                            }
+                            // check for end of animation
+                            minuet.addEventListener('animationend', function() {
+                                app.clearPulse();
+                                app.clearSampler();
+                            }.bind(this));
                         }.bind(this));
                     }
                     app.toggleLoading();
@@ -125,6 +124,15 @@ class GameView {
                 elm.classList.remove('highlight-min');
             else
                 elm.classList.add('highlight-min');
+        }
+    }
+
+    // clears all pulsing mins
+    clearPulse(app) {
+        for (let i = 0; i < app.gameModel.theScore[0].length; i++) {
+            let elm = document.getElementById('min-' + i);
+
+            elm.classList.remove('pulse');
         }
     }
 

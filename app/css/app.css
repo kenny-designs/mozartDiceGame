@@ -118,7 +118,7 @@ body {
 
 .pulse {
     animation-name: pulse;
-    animation-duration: 5s;
+    animation-duration: 3s;
 }
 
 @keyframes pulse {

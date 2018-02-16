@@ -49,6 +49,11 @@ class GameMain {
         this.gameModel.clearSong();
     }
 
+    // clears samplePlayer
+    clearSampler() {
+        this.gameModel.clearSampler();
+    }
+
     // toggles image for play button
     togglePlayImage() {
         this.gameView.togglePlayImage(this.gameController.playButton, this.gameModel.isPlaying);
@@ -59,9 +64,14 @@ class GameMain {
         this.gameView.updateInstrumImage(this.gameModel.selectedInstrum, this.gameController.instrumButton);
     }
 
-    // updates which min is currently selected
+    // updates which min is currently selected based on index
     updateHighlightedMin(min) {
         this.gameView.updateHighlightedMin(this, min);
+    }
+
+    // clears all pulsing mins
+    clearPulse() {
+        this.gameView.clearPulse(this);
     }
 
     // toggles the loading screen

@@ -4,7 +4,6 @@ const StartAudioContext = require('StartAudioContext');
 class GameModel {
     constructor() {
         this.isPlaying          = false;    // track if music playing
-        this.isSampling         = false;    // track if sample is playing
         this.allEvents          = [];       // events for lighting slots
         this.allSlots           = [];       // tracks all slots
         this.selectedNotes      = [];       // measures selected to be played
@@ -14,6 +13,7 @@ class GameModel {
         this.selectedPath       = '';       // currently selected path
         this.currentSlot        = -1;       // currently open slot
         this.sampleBufs         = null;     // bufs for sampling individual mins
+        this.samplePlayer       = null;     // player used to play sample minuets
 
         // object instrument choices
         this.instruments = {'piano'       : './audio/acoustic_grand_piano/',
@@ -131,6 +131,13 @@ class GameModel {
 
         if (this.sampleBufs)
             this.sampleBufs.dispose();
+    }
+
+    // clears the samplePlayer only
+    clearSampler() {
+        if (this.samplePlayer) {
+            this.samplePlayer.stop();
+        }
     }
 }
 
