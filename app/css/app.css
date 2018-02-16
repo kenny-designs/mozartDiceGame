@@ -118,15 +118,15 @@ body {
 
 .pulse {
     animation-name: pulse;
-    animation-duration: 3s;
+    animation-duration: 2s;
 }
 
 @keyframes pulse {
-    0%, 40%, 80%{
+    0%, 66%  {
         transform: scale(0.95, 0.95);
     }
 
-    20%, 60%, 100%{
+    33%, 100% {
         transform: scale(1.05, 1.05);
     }
 }
@@ -156,10 +156,10 @@ body {
     background-color: #e6d3b2;
     color: #b53232;
     border-radius: 50%;
-    width: 15vw;
-    height: 15vw;
+    width: 13vw;
+    height: 13vw;
     text-align: center;
-    line-height: 15vw;
+    line-height: 13vw;
     box-shadow: 5px 5px 20px dimgrey;
     cursor: pointer;
     font-size: calc(100% + 3vw);
@@ -191,47 +191,47 @@ body {
 }
 
 #min-0 {
-    top: -35vw; left: -80vw; bottom: 0; right: 0;
+    top: -30vw; left: -80vw; bottom: 0; right: 0;
 }
 
 #min-1 {
-    top: -35vw; left: -40vw; bottom: 0; right: 0;
+    top: -30vw; left: -40vw; bottom: 0; right: 0;
 }
 
 #min-2 {
-    top: -35vw; left: 0; bottom: 0; right: 0;
+    top: -30vw; left: 0; bottom: 0; right: 0;
 }
 
 #min-3 {
-    top: -35vw; left: 40vw; bottom: 0; right: 0;
+    top: -30vw; left: 40vw; bottom: 0; right: 0;
 }
 
 #min-4 {
-    top: -35vw; left: 80vw; bottom: 0; right: 0;
+    top: -30vw; left: 80vw; bottom: 0; right: 0;
 }
 
 #min-5 {
-    top: 35vw; left: -80vw; bottom: 0; right: 0;
+    top: 30vw; left: -80vw; bottom: 0; right: 0;
 }
 
 #min-6 {
-    top: 35vw; left: -48vw; bottom: 0; right: 0;
+    top: 30vw; left: -48vw; bottom: 0; right: 0;
 }
 
 #min-7 {
-    top: 35vw; left: -17vw; bottom: 0; right: 0;
+    top: 30vw; left: -17vw; bottom: 0; right: 0;
 }
 
 #min-8 {
-    top: 35vw; left: 17vw; bottom: 0; right: 0;
+    top: 30vw; left: 17vw; bottom: 0; right: 0;
 }
 
 #min-9 {
-    top: 35vw; left: 48vw; bottom: 0; right: 0;
+    top: 30vw; left: 48vw; bottom: 0; right: 0;
 }
 
 #min-10 {
-    top: 35vw; left: 80vw; bottom: 0; right: 0;
+    top: 30vw; left: 80vw; bottom: 0; right: 0;
 }
 
 #loading-container, #mobile-container{
@@ -268,6 +268,10 @@ body {
         height: 45vh;
     }
 
+    .slots {
+        font-size: calc(100% + 3vh);
+    }
+
     #play-button {
         grid-column-start: 1;
         grid-column-end: 3;
@@ -291,9 +295,10 @@ body {
     }
 
     .circle {
-        width: 25vw;
-        height: 25vw;
-        line-height: 25vw;
+        width: 15vh;
+        height: 15vh;
+        line-height: 15vh;
+        font-size: calc(100% + 3vh);
     }
 
     #piano-button {
@@ -311,11 +316,11 @@ body {
     }
 
     #min-0 {
-        top: -40vh; left: -60vw;
+        top: -40vh; left: -38vh;
     }
 
     #min-1 {
-        top: -70vh; left: -30vw;
+        top: -70vh; left: -23vh;
     }
 
     #min-2 {
@@ -323,19 +328,19 @@ body {
     }
 
     #min-3 {
-        top: -70vh; left: 30vw;
+        top: -70vh; left: 23vh;
     }
 
     #min-4 {
-        top: -40vh; left: 60vw;
+        top: -40vh; left: 38vh;
     }
 
     #min-5 {
-        top: 70vh; left: -60vw;
+        top: 70vh; left: -38vh;
     }
 
     #min-6 {
-        top: 40vh; left: -60vw;
+        top: 35vh; left: -38vh;
     }
 
     #min-7 {
@@ -343,14 +348,14 @@ body {
     }
 
     #min-8 {
-        top: 40vh; left: 0;
+        top: 35vh; left: 0;
     }
 
     #min-9 {
-        top: 70vh; left: 60vw;
+        top: 70vh; left: 38vh;
     }
 
     #min-10 {
-        top: 40vh; left: 60vw;
+        top: 35vh; left: 38vh;
     }
 }
