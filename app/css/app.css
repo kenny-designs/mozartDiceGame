@@ -26,8 +26,8 @@ body {
 #options-container {
     background-color: #ebc256;
     border-radius: 0.75vw;
-    width: 45vw;
-    height: 45vw;
+    width: 40vw;
+    height: 40vw;
 
     /* Creating 4x2 grid */
     display: grid;
@@ -82,8 +82,8 @@ body {
 #play-container {
     background-color: #ebc256;
     border-radius: 0.75vw;
-    width: 45vw;
-    height: 45vw;
+    width: 40vw;
+    height: 40vw;
 
     /* Creating 4x4 grid */
     display: grid;
@@ -327,7 +327,7 @@ body {
     }
 
     #min-1 {
-        top: -70vh; left: -23vh;
+        top: -70vh; left: -20vh;
     }
 
     #min-2 {
@@ -335,7 +335,7 @@ body {
     }
 
     #min-3 {
-        top: -70vh; left: 23vh;
+        top: -70vh; left: 20vh;
     }
 
     #min-4 {
