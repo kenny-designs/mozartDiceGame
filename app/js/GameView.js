@@ -127,6 +127,16 @@ class GameView {
         }
     }
 
+    // updates currently highlighted instrum
+    // TODO: condense this and the previous method into a single function
+    updateHighlightedInstrum(app, instrum) {
+        app.gameController.pianoButton.classList.remove('highlight');
+        app.gameController.clavButton.classList.remove('highlight');
+        app.gameController.harpsiButton.classList.remove('highlight');
+
+        instrum.classList.add('highlight');
+    }
+
     // clears all pulsing mins
     clearPulse(app) {
         for (let i = 0; i < app.gameModel.theScore[0].length; i++) {
