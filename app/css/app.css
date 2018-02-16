@@ -25,21 +25,21 @@ body {
 
 #options-container {
     background-color: #ebc256;
-    border-radius: 5px;
-    width: 45vw;
-    height: 45vw;
+    border-radius: 0.5vw;
+    width: 40vw;
+    height: 40vw;
 
     /* Creating 4x2 grid */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-gap: 15px;
-    padding: 15px;
+    grid-gap: 1.5vw;
+    padding: 1.5vw;
 }
 
 #options-container div {
     background-color: #e6d3b2;
-    border-radius: 5px;
+    border-radius: 0.5vw;
 }
 
 #options-container div:hover {
@@ -81,21 +81,21 @@ body {
 
 #play-container {
     background-color: #ebc256;
-    border-radius: 5px;
-    width: 45vw;
-    height: 45vw;
+    border-radius: 0.5vw;
+    width: 40vw;
+    height: 40vw;
 
     /* Creating 4x4 grid */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-gap: 15px;
-    padding: 15px;
+    grid-gap: 1.5vw;
+    padding: 1.5vw;
 }
 
 #play-container div {
     background-color: #e6d3b2;
-    border-radius: 5px;
+    border-radius: 0.5vw;
 }
 
 #play-container div:hover {
@@ -108,7 +108,7 @@ body {
     justify-content: center;
     align-items: center;
     color: #b53232;
-    font-size: calc(100% + 3vw);
+    font-size: calc(100% + 2.5vw);
     transition: box-shadow linear 0.1s;
 }
 
@@ -118,20 +118,20 @@ body {
 
 .pulse {
     animation-name: pulse;
-    animation-duration: 3s;
+    animation-duration: 2s;
 }
 
 @keyframes pulse {
-    0%, 40%, 80%{
+    0%, 66%  {
         transform: scale(0.95, 0.95);
     }
 
-    20%, 60%, 100%{
+    33%, 100% {
         transform: scale(1.05, 1.05);
     }
 }
 
-.highlight-min {
+.highlight {
     background-color: #f3e8d6 !important;
 }
 
@@ -144,6 +144,7 @@ body {
     left: 0;
     background-color: rgba(0, 0, 0, 0.3);
     display: none;
+    overflow: hidden;
 }
 
 #instrum-container, #minuet-container {
@@ -156,10 +157,10 @@ body {
     background-color: #e6d3b2;
     color: #b53232;
     border-radius: 50%;
-    width: 15vw;
-    height: 15vw;
+    width: 13vw;
+    height: 13vw;
     text-align: center;
-    line-height: 15vw;
+    line-height: 13vw;
     box-shadow: 5px 5px 20px dimgrey;
     cursor: pointer;
     font-size: calc(100% + 3vw);
@@ -170,68 +171,68 @@ body {
 }
 
 #piano-button {
-    top: -65vh; left: 0; bottom: 0; right: 0;
+    top: -30vw; left: 0; bottom: 0; right: 0;
     background-size: cover;
     background-position: center;
     background-image: url("../img/buttonPiano.png");
 }
 
 #clav-button {
-    top: 50vh; left: 25vw; bottom: 0; right: 0;
+    top: 25vw; left: 20vw; bottom: 0; right: 0;
     background-size: cover;
     background-position: center;
     background-image: url("../img/buttonClav.png");
 }
 
 #harpsi-button {
-    top: 50vh; left: -25vw; bottom: 0; right: 0;
+    top: 25vw; left: -20vw; bottom: 0; right: 0;
     background-size: cover;
     background-position: center;
     background-image: url("../img/buttonHarpsi.png");
 }
 
 #min-0 {
-    top: -60vh; left: -80vw; bottom: 0; right: 0;
+    top: -30vw; left: -80vw; bottom: 0; right: 0;
 }
 
 #min-1 {
-    top: -60vh; left: -40vw; bottom: 0; right: 0;
+    top: -30vw; left: -40vw; bottom: 0; right: 0;
 }
 
 #min-2 {
-    top: -60vh; left: 0; bottom: 0; right: 0;
+    top: -30vw; left: 0; bottom: 0; right: 0;
 }
 
 #min-3 {
-    top: -60vh; left: 40vw; bottom: 0; right: 0;
+    top: -30vw; left: 40vw; bottom: 0; right: 0;
 }
 
 #min-4 {
-    top: -60vh; left: 80vw; bottom: 0; right: 0;
+    top: -30vw; left: 80vw; bottom: 0; right: 0;
 }
 
 #min-5 {
-    top: 60vh; left: -80vw; bottom: 0; right: 0;
+    top: 30vw; left: -80vw; bottom: 0; right: 0;
 }
 
 #min-6 {
-    top: 60vh; left: -48vw; bottom: 0; right: 0;
+    top: 30vw; left: -48vw; bottom: 0; right: 0;
 }
 
 #min-7 {
-    top: 60vh; left: -17vw; bottom: 0; right: 0;
+    top: 30vw; left: -17vw; bottom: 0; right: 0;
 }
 
 #min-8 {
-    top: 60vh; left: 17vw; bottom: 0; right: 0;
+    top: 30vw; left: 17vw; bottom: 0; right: 0;
 }
 
 #min-9 {
-    top: 60vh; left: 48vw; bottom: 0; right: 0;
+    top: 30vw; left: 48vw; bottom: 0; right: 0;
 }
 
 #min-10 {
-    top: 60vh; left: 80vw; bottom: 0; right: 0;
+    top: 30vw; left: 80vw; bottom: 0; right: 0;
 }
 
 #loading-container, #mobile-container{
@@ -261,11 +262,21 @@ body {
     #options-container {
         width: 46vh;
         height: 23vh;
+        border-radius: 0.5vh;
+        grid-gap: 1.5vh;
+        padding: 1.5vh;
     }
 
     #play-container {
         width: 45vh;
         height: 45vh;
+        border-radius: 0.5vh;
+        grid-gap: 1.5vh;
+        padding: 1.5vh;
+    }
+
+    .slots {
+        font-size: calc(100% + 2.5vh);
     }
 
     #play-button {
@@ -291,31 +302,32 @@ body {
     }
 
     .circle {
-        width: 25vw;
-        height: 25vw;
-        line-height: 25vw;
+        width: 15vh;
+        height: 15vh;
+        line-height: 15vh;
+        font-size: calc(100% + 3vh);
     }
 
     #piano-button {
-        top: -55vw;
+        top: -35vh;
     }
 
     #clav-button {
-        top: 40vw;
-        left: 40vw;
+        top: 25vh;
+        left: 25vh;
     }
 
     #harpsi-button {
-        top: 40vw;
-        left: -40vw;
+        top: 25vh;
+        left: -25vh;
     }
 
     #min-0 {
-        top: -40vh; left: -60vw;
+        top: -40vh; left: -38vh;
     }
 
     #min-1 {
-        top: -70vh; left: -30vw;
+        top: -70vh; left: -20vh;
     }
 
     #min-2 {
@@ -323,19 +335,19 @@ body {
     }
 
     #min-3 {
-        top: -70vh; left: 30vw;
+        top: -70vh; left: 20vh;
     }
 
     #min-4 {
-        top: -40vh; left: 60vw;
+        top: -40vh; left: 38vh;
     }
 
     #min-5 {
-        top: 70vh; left: -60vw;
+        top: 70vh; left: -38vh;
     }
 
     #min-6 {
-        top: 40vh; left: -60vw;
+        top: 35vh; left: -38vh;
     }
 
     #min-7 {
@@ -343,14 +355,14 @@ body {
     }
 
     #min-8 {
-        top: 40vh; left: 0;
+        top: 35vh; left: 0;
     }
 
     #min-9 {
-        top: 70vh; left: 60vw;
+        top: 70vh; left: 38vh;
     }
 
     #min-10 {
-        top: 40vh; left: 60vw;
+        top: 35vh; left: 38vh;
     }
 }

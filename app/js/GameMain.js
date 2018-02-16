@@ -69,6 +69,11 @@ class GameMain {
         this.gameView.updateHighlightedMin(this, min);
     }
 
+    // updates which instrum is currently highlighted
+    updateHighlightedInstrum(instrum) {
+        this.gameView.updateHighlightedInstrum(this, instrum);
+    }
+
     // clears all pulsing mins
     clearPulse() {
         this.gameView.clearPulse(this);

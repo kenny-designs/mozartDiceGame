@@ -47,6 +47,7 @@ class GameController {
         this.pianoButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'piano';
             app.gameModel.selectedPath = app.gameModel.instruments['piano'];
+            app.updateHighlightedInstrum(this.pianoButton);
             app.updateInstrumImage();
         }.bind(this));
 
@@ -55,6 +56,7 @@ class GameController {
         this.clavButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'clavinet';
             app.gameModel.selectedPath = app.gameModel.instruments['clavinet'];
+            app.updateHighlightedInstrum(this.clavButton);
             app.updateInstrumImage();
         }.bind(this));
 
@@ -63,6 +65,7 @@ class GameController {
         this.harpsiButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'harpsichord';
             app.gameModel.selectedPath = app.gameModel.instruments['harpsichord'];
+            app.updateHighlightedInstrum(this.harpsiButton);
             app.updateInstrumImage();
         }.bind(this));
 
