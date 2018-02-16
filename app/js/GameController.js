@@ -18,6 +18,7 @@ class GameController {
         // setup instrument select button
         this.instrumButton = document.getElementById('instrum-button');
         this.instrumButton.addEventListener('click', function() {
+            app.pauseSong();
             app.gameView.selectionContainer.style.display = 'block';
             app.gameView.instrumContainer.style.display = 'block'
         }.bind(this));
@@ -25,47 +26,55 @@ class GameController {
         // setup reset button
         this.resetButton = document.getElementById('reset-button');
         this.resetButton.addEventListener('click', function() {
-            app.resetSong();
+            // TODO: this is much more responsive but is overkill. Make simpler
+            app.reloadSong();
         }.bind(this));
 
         // setup exit button to hide the selection-container
         this.exitButton = document.getElementById('exit-button');
         this.exitButton.addEventListener('click', function() {
+            app.reloadSong();
+            app.clearPulse();
+            app.stopSampler();
+
             app.gameView.selectionContainer.style.display = 'none';
             app.gameView.instrumContainer.style.display = 'none';
             app.gameView.minuetContainer.style.display = 'none';
         }.bind(this));
 
-        /*
-        // export button currently does nothing
-        this.exportButton = document.getElementById('export-button');
-        this.exportButton.addEventListener('click', function(event) {
-            console.log('export button pressed');
-        }.bind(this));
-        */
-
-        // switch to piano sound files
+        // switch to piano
         this.pianoButton = document.getElementById('piano-button');
         this.pianoButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'piano';
             app.gameModel.selectedPath = app.gameModel.instruments['piano'];
-            app.reloadInstrum();
+            app.updateHighlightedInstrum(this.pianoButton);
+            app.updateInstrumImage();
         }.bind(this));
 
-        // switch to clavinet sound files
+        // switch to clavinet
         this.clavButton = document.getElementById('clav-button');
         this.clavButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'clavinet';
             app.gameModel.selectedPath = app.gameModel.instruments['clavinet'];
-            app.reloadInstrum();
+            app.updateHighlightedInstrum(this.clavButton);
+            app.updateInstrumImage();
         }.bind(this));
 
-        // switch to harpsichord sound files
+        // switch to harpsichord
         this.harpsiButton = document.getElementById('harpsi-button');
         this.harpsiButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'harpsichord';
             app.gameModel.selectedPath = app.gameModel.instruments['harpsichord'];
-            app.reloadInstrum();
+            app.updateHighlightedInstrum(this.harpsiButton);
+            app.updateInstrumImage();
+        }.bind(this));
+
+        // adding event listeners to children divs of minuet-container
+        app.gameView.minuetContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('circle')) {
+                let pos = event.target.id.match(/(\d+)/)[0];
+                app.gameModel.selectedNotes[app.currentSlot] = app.gameModel.theScore[app.currentSlot][pos];
+            }
         }.bind(this));
     }
 
@@ -76,7 +85,7 @@ class GameController {
         app.togglePlayImage();
     }
 
-    // pauses transport thus pausing song
+    // pauses transport
     pauseSong(app) {
         Tone.Transport.pause();
         app.gameModel.isPlaying = false;
@@ -84,8 +93,7 @@ class GameController {
     }
 
     // restart song by setting transport to beginning
-    resetSong(app) {
-        app.pauseSong();
+    resetSong() {
         Tone.Transport.position = '0:0:0';
     }
 }

@@ -12,7 +12,7 @@ class GameMain {
         this.init();
     }
 
-    // using init method for proper form
+    // form game
     init() {
         this.randomSong();
         this.loadSong();
@@ -29,6 +29,11 @@ class GameMain {
         this.gameView.updatePlayfield(this);
     }
 
+    // highlights which slot is currently playing
+    updateNowPlaying(slot) {
+        this.gameView.updateNowPlaying(this, slot);
+    }
+
     // creates a random song
     randomSong() {
         this.gameModel.randomSong();
@@ -36,7 +41,7 @@ class GameMain {
 
     // load selectedNotes
     loadSong() {
-        this.gameModel.loadSong();
+        this.gameModel.loadSong(this);
     }
 
     // clears Tone of existing song
@@ -44,9 +49,9 @@ class GameMain {
         this.gameModel.clearSong();
     }
 
-    // load in newly selected measure
-    loadSelection() {
-        this.gameView.loadSelection(this);
+    // clears samplePlayer
+    stopSampler() {
+        this.gameModel.stopSampler();
     }
 
     // toggles image for play button
@@ -57,6 +62,26 @@ class GameMain {
     // updates the cover instrum image
     updateInstrumImage() {
         this.gameView.updateInstrumImage(this.gameModel.selectedInstrum, this.gameController.instrumButton);
+    }
+
+    // updates which min is currently selected based on index
+    updateHighlightedMin(min) {
+        this.gameView.updateHighlightedMin(this, min);
+    }
+
+    // updates which instrum is currently highlighted
+    updateHighlightedInstrum(instrum) {
+        this.gameView.updateHighlightedInstrum(this, instrum);
+    }
+
+    // clears all pulsing mins
+    clearPulse() {
+        this.gameView.clearPulse(this);
+    }
+
+    // toggles the loading screen
+    toggleLoading() {
+        this.gameView.toggleLoading();
     }
 
     // load paths, good for instrument changes
@@ -76,22 +101,11 @@ class GameMain {
 
     // restart song by setting transport to beginning
     resetSong() {
-        this.gameController.resetSong(this);
+        this.gameController.resetSong();
     }
 
-    // TODO: simplify this code with reloadRandom()
-    // reload song with correct instrument
-    reloadInstrum() {
-        this.updateInstrumImage();
-        this.pauseSong();
-        this.clearSong();
-        this.loadPaths();
-        this.loadSong();
-        this.updatePlayfield();
-        this.resetSong();
-    }
-
-    // reload a random song with the correct instrument
+    // reload a random song
+    // TODO: Simplify with the reloadSong() method
     reloadRandom() {
         this.pauseSong();
         this.clearSong();
@@ -99,6 +113,18 @@ class GameMain {
         this.loadSong();
         this.updatePlayfield();
         this.resetSong();
+        this.updateNowPlaying();
+    }
+
+    // general reloading of song
+    reloadSong() {
+        this.pauseSong();
+        this.clearSong();
+        this.loadPaths();
+        this.loadSong();
+        this.updatePlayfield();
+        this.resetSong();
+        this.updateNowPlaying();
     }
 }
 
