@@ -191,47 +191,47 @@ body {
 }
 
 #min-0 {
-    top: -60vh; left: -80vw; bottom: 0; right: 0;
+    top: -35vw; left: -80vw; bottom: 0; right: 0;
 }
 
 #min-1 {
-    top: -60vh; left: -40vw; bottom: 0; right: 0;
+    top: -35vw; left: -40vw; bottom: 0; right: 0;
 }
 
 #min-2 {
-    top: -60vh; left: 0; bottom: 0; right: 0;
+    top: -35vw; left: 0; bottom: 0; right: 0;
 }
 
 #min-3 {
-    top: -60vh; left: 40vw; bottom: 0; right: 0;
+    top: -35vw; left: 40vw; bottom: 0; right: 0;
 }
 
 #min-4 {
-    top: -60vh; left: 80vw; bottom: 0; right: 0;
+    top: -35vw; left: 80vw; bottom: 0; right: 0;
 }
 
 #min-5 {
-    top: 60vh; left: -80vw; bottom: 0; right: 0;
+    top: 35vw; left: -80vw; bottom: 0; right: 0;
 }
 
 #min-6 {
-    top: 60vh; left: -48vw; bottom: 0; right: 0;
+    top: 35vw; left: -48vw; bottom: 0; right: 0;
 }
 
 #min-7 {
-    top: 60vh; left: -17vw; bottom: 0; right: 0;
+    top: 35vw; left: -17vw; bottom: 0; right: 0;
 }
 
 #min-8 {
-    top: 60vh; left: 17vw; bottom: 0; right: 0;
+    top: 35vw; left: 17vw; bottom: 0; right: 0;
 }
 
 #min-9 {
-    top: 60vh; left: 48vw; bottom: 0; right: 0;
+    top: 35vw; left: 48vw; bottom: 0; right: 0;
 }
 
 #min-10 {
-    top: 60vh; left: 80vw; bottom: 0; right: 0;
+    top: 35vw; left: 80vw; bottom: 0; right: 0;
 }
 
 #loading-container, #mobile-container{
