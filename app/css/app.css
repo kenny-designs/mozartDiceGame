@@ -25,7 +25,7 @@ body {
 
 #options-container {
     background-color: #ebc256;
-    border-radius: 0.75vw;
+    border-radius: 0.5vw;
     width: 40vw;
     height: 40vw;
 
@@ -39,7 +39,7 @@ body {
 
 #options-container div {
     background-color: #e6d3b2;
-    border-radius: 0.75vw;
+    border-radius: 0.5vw;
 }
 
 #options-container div:hover {
@@ -81,7 +81,7 @@ body {
 
 #play-container {
     background-color: #ebc256;
-    border-radius: 0.75vw;
+    border-radius: 0.5vw;
     width: 40vw;
     height: 40vw;
 
@@ -95,7 +95,7 @@ body {
 
 #play-container div {
     background-color: #e6d3b2;
-    border-radius: 0.75vw;
+    border-radius: 0.5vw;
 }
 
 #play-container div:hover {
@@ -108,7 +108,7 @@ body {
     justify-content: center;
     align-items: center;
     color: #b53232;
-    font-size: calc(100% + 3vw);
+    font-size: calc(100% + 2.5vw);
     transition: box-shadow linear 0.1s;
 }
 
@@ -262,7 +262,7 @@ body {
     #options-container {
         width: 46vh;
         height: 23vh;
-        border-radius: 0.75vh;
+        border-radius: 0.5vh;
         grid-gap: 1.5vh;
         padding: 1.5vh;
     }
@@ -270,13 +270,13 @@ body {
     #play-container {
         width: 45vh;
         height: 45vh;
-        border-radius: 0.75vh;
+        border-radius: 0.5vh;
         grid-gap: 1.5vh;
         padding: 1.5vh;
     }
 
     .slots {
-        font-size: calc(100% + 3vh);
+        font-size: calc(100% + 2.5vh);
     }
 
     #play-button {
