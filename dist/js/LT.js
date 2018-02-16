@@ -19,6 +19,7 @@ class GameController {
         // setup instrument select button
         this.instrumButton = document.getElementById('instrum-button');
         this.instrumButton.addEventListener('click', function() {
+            app.pauseSong();
             app.gameView.selectionContainer.style.display = 'block';
             app.gameView.instrumContainer.style.display = 'block'
         }.bind(this));
@@ -26,47 +27,55 @@ class GameController {
         // setup reset button
         this.resetButton = document.getElementById('reset-button');
         this.resetButton.addEventListener('click', function() {
-            app.resetSong();
+            // TODO: this is much more responsive but is overkill. Make simpler
+            app.reloadSong();
         }.bind(this));
 
         // setup exit button to hide the selection-container
         this.exitButton = document.getElementById('exit-button');
         this.exitButton.addEventListener('click', function() {
+            app.reloadSong();
+            app.clearPulse();
+            app.stopSampler();
+
             app.gameView.selectionContainer.style.display = 'none';
             app.gameView.instrumContainer.style.display = 'none';
             app.gameView.minuetContainer.style.display = 'none';
         }.bind(this));
 
-        /*
-        // export button currently does nothing
-        this.exportButton = document.getElementById('export-button');
-        this.exportButton.addEventListener('click', function(event) {
-            console.log('export button pressed');
-        }.bind(this));
-        */
-
-        // switch to piano sound files
+        // switch to piano
         this.pianoButton = document.getElementById('piano-button');
         this.pianoButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'piano';
             app.gameModel.selectedPath = app.gameModel.instruments['piano'];
-            app.reloadInstrum();
+            app.updateHighlightedInstrum(this.pianoButton);
+            app.updateInstrumImage();
         }.bind(this));
 
-        // switch to clavinet sound files
+        // switch to clavinet
         this.clavButton = document.getElementById('clav-button');
         this.clavButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'clavinet';
             app.gameModel.selectedPath = app.gameModel.instruments['clavinet'];
-            app.reloadInstrum();
+            app.updateHighlightedInstrum(this.clavButton);
+            app.updateInstrumImage();
         }.bind(this));
 
-        // switch to harpsichord sound files
+        // switch to harpsichord
         this.harpsiButton = document.getElementById('harpsi-button');
         this.harpsiButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'harpsichord';
             app.gameModel.selectedPath = app.gameModel.instruments['harpsichord'];
-            app.reloadInstrum();
+            app.updateHighlightedInstrum(this.harpsiButton);
+            app.updateInstrumImage();
+        }.bind(this));
+
+        // adding event listeners to children divs of minuet-container
+        app.gameView.minuetContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('circle')) {
+                let pos = event.target.id.match(/(\d+)/)[0];
+                app.gameModel.selectedNotes[app.currentSlot] = app.gameModel.theScore[app.currentSlot][pos];
+            }
         }.bind(this));
     }
 
@@ -77,7 +86,7 @@ class GameController {
         app.togglePlayImage();
     }
 
-    // pauses transport thus pausing song
+    // pauses transport
     pauseSong(app) {
         Tone.Transport.pause();
         app.gameModel.isPlaying = false;
@@ -85,8 +94,7 @@ class GameController {
     }
 
     // restart song by setting transport to beginning
-    resetSong(app) {
-        app.pauseSong();
+    resetSong() {
         Tone.Transport.position = '0:0:0';
     }
 }
@@ -107,7 +115,7 @@ class GameMain {
         this.init();
     }
 
-    // using init method for proper form
+    // form game
     init() {
         this.randomSong();
         this.loadSong();
@@ -124,6 +132,11 @@ class GameMain {
         this.gameView.updatePlayfield(this);
     }
 
+    // highlights which slot is currently playing
+    updateNowPlaying(slot) {
+        this.gameView.updateNowPlaying(this, slot);
+    }
+
     // creates a random song
     randomSong() {
         this.gameModel.randomSong();
@@ -131,7 +144,7 @@ class GameMain {
 
     // load selectedNotes
     loadSong() {
-        this.gameModel.loadSong();
+        this.gameModel.loadSong(this);
     }
 
     // clears Tone of existing song
@@ -139,9 +152,9 @@ class GameMain {
         this.gameModel.clearSong();
     }
 
-    // load in newly selected measure
-    loadSelection() {
-        this.gameView.loadSelection(this);
+    // clears samplePlayer
+    stopSampler() {
+        this.gameModel.stopSampler();
     }
 
     // toggles image for play button
@@ -152,6 +165,26 @@ class GameMain {
     // updates the cover instrum image
     updateInstrumImage() {
         this.gameView.updateInstrumImage(this.gameModel.selectedInstrum, this.gameController.instrumButton);
+    }
+
+    // updates which min is currently selected based on index
+    updateHighlightedMin(min) {
+        this.gameView.updateHighlightedMin(this, min);
+    }
+
+    // updates which instrum is currently highlighted
+    updateHighlightedInstrum(instrum) {
+        this.gameView.updateHighlightedInstrum(this, instrum);
+    }
+
+    // clears all pulsing mins
+    clearPulse() {
+        this.gameView.clearPulse(this);
+    }
+
+    // toggles the loading screen
+    toggleLoading() {
+        this.gameView.toggleLoading();
     }
 
     // load paths, good for instrument changes
@@ -171,22 +204,11 @@ class GameMain {
 
     // restart song by setting transport to beginning
     resetSong() {
-        this.gameController.resetSong(this);
+        this.gameController.resetSong();
     }
 
-    // TODO: simplify this code with reloadRandom()
-    // reload song with correct instrument
-    reloadInstrum() {
-        this.updateInstrumImage();
-        this.pauseSong();
-        this.clearSong();
-        this.loadPaths();
-        this.loadSong();
-        this.updatePlayfield();
-        this.resetSong();
-    }
-
-    // reload a random song with the correct instrument
+    // reload a random song
+    // TODO: Simplify with the reloadSong() method
     reloadRandom() {
         this.pauseSong();
         this.clearSong();
@@ -194,6 +216,18 @@ class GameMain {
         this.loadSong();
         this.updatePlayfield();
         this.resetSong();
+        this.updateNowPlaying();
+    }
+
+    // general reloading of song
+    reloadSong() {
+        this.pauseSong();
+        this.clearSong();
+        this.loadPaths();
+        this.loadSong();
+        this.updatePlayfield();
+        this.resetSong();
+        this.updateNowPlaying();
     }
 }
 
@@ -204,12 +238,17 @@ const StartAudioContext = require('StartAudioContext');
 
 class GameModel {
     constructor() {
-        this.isPlaying = false;         // track if music playing
-        this.allEvents = [];            // events for playing .wavs
-        this.selectedNotes = [];        // measures selected to be played
-        this.notePaths = [];            // paths to selected notes
-        this.theScore = null;           // available measures to choose from
-        this.selectedInstrum = 'piano'; // currently selected instrument
+        this.isPlaying          = false;    // track if music playing
+        this.allEvents          = [];       // events for lighting slots
+        this.allSlots           = [];       // tracks all slots
+        this.selectedNotes      = [];       // measures selected to be played
+        this.notePaths          = [];       // paths to selected notes
+        this.theScore           = [];       // available measures to choose from
+        this.selectedInstrum    = 'piano';  // currently selected instrument
+        this.selectedPath       = '';       // currently selected path
+        this.currentSlot        = -1;       // currently open slot
+        this.sampleBufs         = null;     // bufs for sampling individual mins
+        this.samplePlayer       = null;     // player used to play sample minuets
 
         // object instrument choices
         this.instruments = {'piano'       : './audio/acoustic_grand_piano/',
@@ -226,6 +265,7 @@ class GameModel {
 
             let mobileButton = document.createElement('div');
             mobileButton.id = 'mobile-button';
+            mobileButton.classList.add('circle');
             mobileButton.textContent = 'Enter';
             mobileContainer.appendChild(mobileButton);
 
@@ -273,151 +313,159 @@ class GameModel {
 
     // creates a random song
     randomSong() {
-        let selectedNotes = [];
+        this.selectedNotes = [];
 
         for (let i = 0; i < this.theScore.length; i++) {
-            selectedNotes.push(this.randMeasure(this.theScore[i]));
+            this.selectedNotes.push(this.randMeasure(this.theScore[i]));
         }
 
-        this.selectedNotes = selectedNotes;
-
+        // TODO: Find way to remove this and place within reloadRandom in GameMain
         this.loadPaths();
     }
 
     // load paths based off of the selectedNotes
     loadPaths() {
-        let notePaths = [];
+        this.notePaths = [];
 
         for (let i = 0; i < this.selectedNotes.length; i++) {
-            notePaths.push(this.selectedPath + this.selectedNotes[i] + '.wav');
+            this.notePaths.push(this.selectedPath + this.selectedNotes[i] + '.wav');
         }
-
-        this.notePaths = notePaths;
     }
 
     // load selectedNotes
-    loadSong() {
-        let minuets = new Tone.Buffers(this.notePaths, function() {
-            // offset for each
-            let offset = 0;
+    loadSong(app) {
+        app.toggleLoading();
+        let offset = 0;
 
-            // loop through all minuets
+        this.players = new Tone.Players(this.notePaths, function() {
             for (let i = 0; i < this.notePaths.length; i++) {
-                // get current buffer
-                let buf = minuets.get(i);
+                let player = this.players.get(i);
+                player.toMaster();
+                player.sync().start(offset);
 
-                // create an event for it
-                let evt = new Tone.Event(function(time, song) {
-                    let player = new Tone.Player(song).toMaster();
-                    player.start();
-                }.bind(this), buf).start(offset);
+                let evt = new Tone.Event(function() {
+                    app.updateNowPlaying(app.gameModel.allSlots[i]);
+                }.bind(this)).start(offset + 2.0);
 
                 this.allEvents.push(evt);
 
-                offset += buf.duration - 2.0; // -2.0 is fix for delay in wavs
+                offset += player.buffer.duration - 2.0;
             }
+            app.toggleLoading();
         }.bind(this));
     }
 
     // method clears Tone of existing song
-    // TODO: This method might be causing the double up effect, fix ASAP!
     clearSong() {
         for (let evt in this.allEvents) {
             this.allEvents[evt].dispose();
         }
         this.allEvents = [];
+
+        this.players.dispose();
+
+        if (this.sampleBufs)
+            this.sampleBufs.dispose();
+    }
+
+    // stops the samplePlayer from playing
+    stopSampler() {
+        if (this.samplePlayer) {
+            this.samplePlayer.stop();
+        }
     }
 }
 
 module.exports = GameModel;
 },{"StartAudioContext":6,"Tone":7}],4:[function(require,module,exports){
+const Tone = require('Tone');
+
 class GameView {
     constructor() {
         this.selectionContainer = document.getElementById('selection-container');
-        this.instrumContainer = document.getElementById('instrum-container');
-        this.minuetContainer = document.getElementById('minuet-container');
-        this.playContainer = document.getElementById('play-container');
-
-        this.init();
+        this.instrumContainer   = document.getElementById('instrum-container');
+        this.minuetContainer    = document.getElementById('minuet-container');
+        this.loadingContainer   = document.getElementById('loading-container');
     }
 
-    init() {
-        // code
-    }
-
-    // creates the playfield for the player to interact with
+    // creates the initial playfield for the player to interact with
     formPlayfield(app) {
         for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
-            let elm = document.getElementById('slot-' + i);
-            elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
+            let slot = document.getElementById('slot-' + i);
+            slot.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
 
-            elm.addEventListener('click', function() {
-                // populate minuetContainer with appropriate minuets
-                for (let j = 0; j < app.gameModel.theScore[i].length; j++) {
-                    let minuet = document.getElementById('min-' + j);
-                    minuet.innerHTML = this.createPlayHTML(app.gameModel.theScore[i][j]);
+            // event listener for clicking a single slot
+            slot.addEventListener('click', function() {
+                app.pauseSong();
+                app.toggleLoading();
+
+                app.updateHighlightedMin(app.gameModel.theScore[i].indexOf(app.gameModel.selectedNotes[i]));
+
+                // gather paths we need to load in for user to sample
+                let paths = [];
+                for (let k = 0; k < app.gameModel.theScore[i].length; k++) {
+                    paths.push(app.gameModel.selectedPath + app.gameModel.theScore[i][k] + '.wav');
                 }
+
+                // create buffers for sound files that user can sample
+                app.gameModel.sampleBufs = new Tone.Buffers(paths, function() {
+                    for (let j = 0; j < app.gameModel.theScore[i].length; j++) {
+                        let minuet = document.getElementById('min-' + j);
+                        minuet.innerHTML = this.createPlayHTML(app.gameModel.theScore[i][j]);
+
+                        // allows the user to sample individual minuets
+                        minuet.addEventListener('click', function() {
+                            // if sampling, stop it and start this one instead
+                            app.clearPulse();
+                            app.stopSampler();
+
+                            minuet.classList.add('pulse');
+                            app.updateHighlightedMin(j);
+
+                            app.gameModel.samplePlayer = new Tone.Player(app.gameModel.sampleBufs.get(j)).toMaster();
+                            app.gameModel.samplePlayer.start(Tone.now(), 2.0); // starts with 2 second offset
+
+                            // check for end of animation
+                            minuet.addEventListener('animationend', function() {
+                                app.clearPulse();
+                                app.stopSampler();
+                            }.bind(this));
+                        }.bind(this));
+                    }
+                    app.toggleLoading();
+                }.bind(this));
 
                 this.selectionContainer.style.display = 'block';
                 this.minuetContainer.style.display = 'block';
+
+                // update the currently selected slot
+                app.currentSlot = i;
             }.bind(this));
+
+            app.gameModel.allSlots.push(slot);
         }
-
-        /*
-        let self = this;
-
-        let index = 0;
-        app.gameModel.theScore.forEach(function(column) {
-            let columnContainer = document.createElement('div');
-            columnContainer.id = 'column-' + index;
-            columnContainer.classList.add('column');
-            self.playContainer.appendChild(columnContainer);
-
-            column.measures.forEach(function(element) {
-                let measureElem = document.createElement('div');
-                measureElem.id = 'note-' + index + '-' + element;
-                measureElem.innerHTML = '<label>' + element + '</label>';
-                measureElem.classList.add('note-container');
-
-                // bound an action for when clicked
-                measureElem.addEventListener('click', function(event) {
-                    let elmColumn = measureElem.id.split('-')[1];
-                    app.gameModel.selectedNotes[elmColumn] = element;
-                    app.gameModel.notePaths[elmColumn] = app.gameModel.selectedPath + element + '.wav';
-                    app.loadSelection();
-                }.bind(this));
-
-                columnContainer.appendChild(measureElem);
-            });
-            index++;
-        });
-        */
     }
 
     // refreshes the playField with new selections
     updatePlayfield(app) {
-        for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
-            let elm = document.getElementById('slot-' + i);
-            elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
+        for (let i = 0; i < app.gameModel.allSlots.length; i++) {
+            app.gameModel.allSlots[i].innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
         }
     }
 
-    // returns the innerHTML for a play-text element
+    // update which slot has the playing class
+    updateNowPlaying(app, slot) {
+        for (let i = 0; i < app.gameModel.allSlots.length; i++) {
+            app.gameModel.allSlots[i].classList.remove('playing');
+        }
+
+        if (slot)
+            slot.classList.add('playing');
+    }
+
+    // returns the simplified innerHTML for a given note
     createPlayHTML(note) {
-        return  '<div class="play-text">'   +
-                    note.match(/(\d+)/)[0]  +
-                '</div>';
-    }
-
-    loadSelection(app) {
-        if (app.gameModel.isPlaying) {
-            app.pauseSong();
-        }
-
-        app.resetSong();
-        app.clearSong();
-        app.loadSong();
-        app.updatePlayfield();
+        return note.match(/(\d+)/)[0];
     }
 
     togglePlayImage(playButton, isPlaying) {
@@ -432,24 +480,63 @@ class GameView {
         let path;
         switch (instrum) {
             case 'piano':
-                path = './img/buttonPiano.png'
+                path = './img/buttonPiano.png';
                 break;
 
             case 'clavinet':
-                path = './img/buttonClav.png'
+                path = './img/buttonClav.png';
                 break;
 
             case 'harpsichord':
-                path = './img/buttonHarpsi.png'
+                path = './img/buttonHarpsi.png';
                 break;
         }
 
         button.style.backgroundImage = 'url(\'' + path + '\')';
     }
+
+    // updates which min is currently hightlighted based on given index
+    updateHighlightedMin(app, min) {
+        for (let i = 0; i < app.gameModel.theScore[0].length; i++) {
+            let elm = document.getElementById('min-' + i);
+
+            if (i != min)
+                elm.classList.remove('highlight');
+            else
+                elm.classList.add('highlight');
+        }
+    }
+
+    // updates currently highlighted instrum
+    // TODO: condense this and the previous method into a single function
+    updateHighlightedInstrum(app, instrum) {
+        app.gameController.pianoButton.classList.remove('highlight');
+        app.gameController.clavButton.classList.remove('highlight');
+        app.gameController.harpsiButton.classList.remove('highlight');
+
+        instrum.classList.add('highlight');
+    }
+
+    // clears all pulsing mins
+    clearPulse(app) {
+        for (let i = 0; i < app.gameModel.theScore[0].length; i++) {
+            let elm = document.getElementById('min-' + i);
+
+            elm.classList.remove('pulse');
+        }
+    }
+
+    // toggles the loading screen
+    toggleLoading() {
+        if (this.loadingContainer.classList.contains('active'))
+            this.loadingContainer.classList.remove('active');
+        else
+            this.loadingContainer.classList.add('active');
+    }
 }
 
 module.exports = GameView;
-},{}],5:[function(require,module,exports){
+},{"Tone":7}],5:[function(require,module,exports){
 // needed for require.js
 let GameMain = require('./GameMain.js');
 var gameMain = new GameMain();
