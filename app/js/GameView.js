@@ -37,7 +37,7 @@ class GameView {
                         minuet.addEventListener('click', function() {
                             // if sampling, stop it and start this one instead
                             app.clearPulse();
-                            app.clearSampler();
+                            app.stopSampler();
 
                             minuet.classList.add('pulse');
                             app.updateHighlightedMin(j);
@@ -48,7 +48,7 @@ class GameView {
                             // check for end of animation
                             minuet.addEventListener('animationend', function() {
                                 app.clearPulse();
-                                app.clearSampler();
+                                app.stopSampler();
                             }.bind(this));
                         }.bind(this));
                     }

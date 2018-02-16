@@ -50,8 +50,8 @@ class GameMain {
     }
 
     // clears samplePlayer
-    clearSampler() {
-        this.gameModel.clearSampler();
+    stopSampler() {
+        this.gameModel.stopSampler();
     }
 
     // toggles image for play button

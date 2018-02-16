@@ -133,8 +133,8 @@ class GameModel {
             this.sampleBufs.dispose();
     }
 
-    // clears the samplePlayer only
-    clearSampler() {
+    // stops the samplePlayer from playing
+    stopSampler() {
         if (this.samplePlayer) {
             this.samplePlayer.stop();
         }

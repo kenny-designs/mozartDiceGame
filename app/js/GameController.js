@@ -35,7 +35,7 @@ class GameController {
         this.exitButton.addEventListener('click', function() {
             app.reloadSong();
             app.clearPulse();
-            app.clearSampler();
+            app.stopSampler();
 
             app.gameView.selectionContainer.style.display = 'none';
             app.gameView.instrumContainer.style.display = 'none';
