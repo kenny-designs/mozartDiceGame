@@ -121,9 +121,9 @@ class GameView {
             let elm = document.getElementById('min-' + i);
 
             if (i != min)
-                elm.classList.remove('highlight-min');
+                elm.classList.remove('highlight');
             else
-                elm.classList.add('highlight-min');
+                elm.classList.add('highlight');
         }
     }
 
