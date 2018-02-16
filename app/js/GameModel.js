@@ -3,14 +3,17 @@ const StartAudioContext = require('StartAudioContext');
 
 class GameModel {
     constructor() {
-        this.isPlaying = false;         // track if music playing
-        this.allEvents = [];            // events for lighting slots
-        this.allSlots = [];             // tracks all slots
-        this.selectedNotes = [];        // measures selected to be played
-        this.notePaths = [];            // paths to selected notes
-        this.theScore = [];             // available measures to choose from
-        this.selectedInstrum = 'piano'; // currently selected instrument
-        this.currentSlot = -1;          // currently open slot
+        this.isPlaying          = false;    // track if music playing
+        this.allEvents          = [];       // events for lighting slots
+        this.allSlots           = [];       // tracks all slots
+        this.selectedNotes      = [];       // measures selected to be played
+        this.notePaths          = [];       // paths to selected notes
+        this.theScore           = [];       // available measures to choose from
+        this.selectedInstrum    = 'piano';  // currently selected instrument
+        this.selectedPath       = '';       // currently selected path
+        this.currentSlot        = -1;       // currently open slot
+        this.sampleBufs         = null;     // bufs for sampling individual mins
+        this.samplePlayer       = null;     // player used to play sample minuets
 
         // object instrument choices
         this.instruments = {'piano'       : './audio/acoustic_grand_piano/',
@@ -75,26 +78,23 @@ class GameModel {
 
     // creates a random song
     randomSong() {
-        let selectedNotes = [];
+        this.selectedNotes = [];
 
         for (let i = 0; i < this.theScore.length; i++) {
-            selectedNotes.push(this.randMeasure(this.theScore[i]));
+            this.selectedNotes.push(this.randMeasure(this.theScore[i]));
         }
 
-        this.selectedNotes = selectedNotes;
-
+        // TODO: Find way to remove this and place within reloadRandom in GameMain
         this.loadPaths();
     }
 
     // load paths based off of the selectedNotes
     loadPaths() {
-        let notePaths = [];
+        this.notePaths = [];
 
         for (let i = 0; i < this.selectedNotes.length; i++) {
-            notePaths.push(this.selectedPath + this.selectedNotes[i] + '.wav');
+            this.notePaths.push(this.selectedPath + this.selectedNotes[i] + '.wav');
         }
-
-        this.notePaths = notePaths;
     }
 
     // load selectedNotes
@@ -121,7 +121,6 @@ class GameModel {
     }
 
     // method clears Tone of existing song
-    // TODO: This method might be causing the double up effect, fix ASAP!
     clearSong() {
         for (let evt in this.allEvents) {
             this.allEvents[evt].dispose();
@@ -129,6 +128,16 @@ class GameModel {
         this.allEvents = [];
 
         this.players.dispose();
+
+        if (this.sampleBufs)
+            this.sampleBufs.dispose();
+    }
+
+    // stops the samplePlayer from playing
+    stopSampler() {
+        if (this.samplePlayer) {
+            this.samplePlayer.stop();
+        }
     }
 }
 

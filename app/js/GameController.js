@@ -18,6 +18,7 @@ class GameController {
         // setup instrument select button
         this.instrumButton = document.getElementById('instrum-button');
         this.instrumButton.addEventListener('click', function() {
+            app.pauseSong();
             app.gameView.selectionContainer.style.display = 'block';
             app.gameView.instrumContainer.style.display = 'block'
         }.bind(this));
@@ -32,36 +33,37 @@ class GameController {
         // setup exit button to hide the selection-container
         this.exitButton = document.getElementById('exit-button');
         this.exitButton.addEventListener('click', function() {
+            app.reloadSong();
+            app.clearPulse();
+            app.stopSampler();
+
             app.gameView.selectionContainer.style.display = 'none';
             app.gameView.instrumContainer.style.display = 'none';
             app.gameView.minuetContainer.style.display = 'none';
         }.bind(this));
 
-        // switch to piano sound files
+        // switch to piano
         this.pianoButton = document.getElementById('piano-button');
         this.pianoButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'piano';
             app.gameModel.selectedPath = app.gameModel.instruments['piano'];
             app.updateInstrumImage();
-            app.reloadSong();
         }.bind(this));
 
-        // switch to clavinet sound files
+        // switch to clavinet
         this.clavButton = document.getElementById('clav-button');
         this.clavButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'clavinet';
             app.gameModel.selectedPath = app.gameModel.instruments['clavinet'];
             app.updateInstrumImage();
-            app.reloadSong();
         }.bind(this));
 
-        // switch to harpsichord sound files
+        // switch to harpsichord
         this.harpsiButton = document.getElementById('harpsi-button');
         this.harpsiButton.addEventListener('click', function() {
             app.gameModel.selectedInstrum = 'harpsichord';
             app.gameModel.selectedPath = app.gameModel.instruments['harpsichord'];
             app.updateInstrumImage();
-            app.reloadSong();
         }.bind(this));
 
         // adding event listeners to children divs of minuet-container
@@ -69,7 +71,6 @@ class GameController {
             if (event.target.classList.contains('circle')) {
                 let pos = event.target.id.match(/(\d+)/)[0];
                 app.gameModel.selectedNotes[app.currentSlot] = app.gameModel.theScore[app.currentSlot][pos];
-                app.reloadSong();
             }
         }.bind(this));
     }

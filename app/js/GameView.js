@@ -1,30 +1,59 @@
+const Tone = require('Tone');
+
 class GameView {
     constructor() {
         this.selectionContainer = document.getElementById('selection-container');
-        this.instrumContainer = document.getElementById('instrum-container');
-        this.minuetContainer = document.getElementById('minuet-container');
-        this.playContainer = document.getElementById('play-container');
-        this.loadingContainer = document.getElementById('loading-container');
-
-        this.init();
-    }
-
-    init() {
-        // code
+        this.instrumContainer   = document.getElementById('instrum-container');
+        this.minuetContainer    = document.getElementById('minuet-container');
+        this.loadingContainer   = document.getElementById('loading-container');
     }
 
     // creates the initial playfield for the player to interact with
     formPlayfield(app) {
         for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
-            let elm = document.getElementById('slot-' + i);
-            elm.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
+            let slot = document.getElementById('slot-' + i);
+            slot.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
 
-            elm.addEventListener('click', function() {
-                // populate minuetContainer with appropriate minuets
-                for (let j = 0; j < app.gameModel.theScore[i].length; j++) {
-                    let minuet = document.getElementById('min-' + j);
-                    minuet.innerHTML = this.createPlayHTML(app.gameModel.theScore[i][j]);
+            // event listener for clicking a single slot
+            slot.addEventListener('click', function() {
+                app.pauseSong();
+                app.toggleLoading();
+
+                app.updateHighlightedMin(app.gameModel.theScore[i].indexOf(app.gameModel.selectedNotes[i]));
+
+                // gather paths we need to load in for user to sample
+                let paths = [];
+                for (let k = 0; k < app.gameModel.theScore[i].length; k++) {
+                    paths.push(app.gameModel.selectedPath + app.gameModel.theScore[i][k] + '.wav');
                 }
+
+                // create buffers for sound files that user can sample
+                app.gameModel.sampleBufs = new Tone.Buffers(paths, function() {
+                    for (let j = 0; j < app.gameModel.theScore[i].length; j++) {
+                        let minuet = document.getElementById('min-' + j);
+                        minuet.innerHTML = this.createPlayHTML(app.gameModel.theScore[i][j]);
+
+                        // allows the user to sample individual minuets
+                        minuet.addEventListener('click', function() {
+                            // if sampling, stop it and start this one instead
+                            app.clearPulse();
+                            app.stopSampler();
+
+                            minuet.classList.add('pulse');
+                            app.updateHighlightedMin(j);
+
+                            app.gameModel.samplePlayer = new Tone.Player(app.gameModel.sampleBufs.get(j)).toMaster();
+                            app.gameModel.samplePlayer.start(Tone.now(), 2.0); // starts with 2 second offset
+
+                            // check for end of animation
+                            minuet.addEventListener('animationend', function() {
+                                app.clearPulse();
+                                app.stopSampler();
+                            }.bind(this));
+                        }.bind(this));
+                    }
+                    app.toggleLoading();
+                }.bind(this));
 
                 this.selectionContainer.style.display = 'block';
                 this.minuetContainer.style.display = 'block';
@@ -33,7 +62,7 @@ class GameView {
                 app.currentSlot = i;
             }.bind(this));
 
-            app.gameModel.allSlots.push(elm);
+            app.gameModel.allSlots.push(slot);
         }
     }
 
@@ -49,7 +78,9 @@ class GameView {
         for (let i = 0; i < app.gameModel.allSlots.length; i++) {
             app.gameModel.allSlots[i].classList.remove('playing');
         }
-        slot.classList.add('playing');
+
+        if (slot)
+            slot.classList.add('playing');
     }
 
     // returns the simplified innerHTML for a given note
@@ -82,6 +113,27 @@ class GameView {
         }
 
         button.style.backgroundImage = 'url(\'' + path + '\')';
+    }
+
+    // updates which min is currently hightlighted based on given index
+    updateHighlightedMin(app, min) {
+        for (let i = 0; i < app.gameModel.theScore[0].length; i++) {
+            let elm = document.getElementById('min-' + i);
+
+            if (i != min)
+                elm.classList.remove('highlight-min');
+            else
+                elm.classList.add('highlight-min');
+        }
+    }
+
+    // clears all pulsing mins
+    clearPulse(app) {
+        for (let i = 0; i < app.gameModel.theScore[0].length; i++) {
+            let elm = document.getElementById('min-' + i);
+
+            elm.classList.remove('pulse');
+        }
     }
 
     // toggles the loading screen

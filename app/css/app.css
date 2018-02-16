@@ -116,6 +116,25 @@ body {
     box-shadow: 0 0 0 3px;
 }
 
+.pulse {
+    animation-name: pulse;
+    animation-duration: 3s;
+}
+
+@keyframes pulse {
+    0%, 40%, 80%{
+        transform: scale(0.95, 0.95);
+    }
+
+    20%, 60%, 100%{
+        transform: scale(1.05, 1.05);
+    }
+}
+
+.highlight-min {
+    background-color: #f3e8d6 !important;
+}
+
 #selection-container {
     position: absolute;
     width: 100vw;

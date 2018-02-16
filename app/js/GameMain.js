@@ -12,7 +12,7 @@ class GameMain {
         this.init();
     }
 
-    // using init method for proper form
+    // form game
     init() {
         this.randomSong();
         this.loadSong();
@@ -49,6 +49,11 @@ class GameMain {
         this.gameModel.clearSong();
     }
 
+    // clears samplePlayer
+    stopSampler() {
+        this.gameModel.stopSampler();
+    }
+
     // toggles image for play button
     togglePlayImage() {
         this.gameView.togglePlayImage(this.gameController.playButton, this.gameModel.isPlaying);
@@ -57,6 +62,16 @@ class GameMain {
     // updates the cover instrum image
     updateInstrumImage() {
         this.gameView.updateInstrumImage(this.gameModel.selectedInstrum, this.gameController.instrumButton);
+    }
+
+    // updates which min is currently selected based on index
+    updateHighlightedMin(min) {
+        this.gameView.updateHighlightedMin(this, min);
+    }
+
+    // clears all pulsing mins
+    clearPulse() {
+        this.gameView.clearPulse(this);
     }
 
     // toggles the loading screen
@@ -93,6 +108,7 @@ class GameMain {
         this.loadSong();
         this.updatePlayfield();
         this.resetSong();
+        this.updateNowPlaying();
     }
 
     // general reloading of song
@@ -103,6 +119,7 @@ class GameMain {
         this.loadSong();
         this.updatePlayfield();
         this.resetSong();
+        this.updateNowPlaying();
     }
 }
 
