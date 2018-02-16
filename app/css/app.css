@@ -25,7 +25,7 @@ body {
 
 #options-container {
     background-color: #ebc256;
-    border-radius: 5px;
+    border-radius: 0.75vw;
     width: 45vw;
     height: 45vw;
 
@@ -33,13 +33,13 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-gap: 15px;
-    padding: 15px;
+    grid-gap: 1.5vw;
+    padding: 1.5vw;
 }
 
 #options-container div {
     background-color: #e6d3b2;
-    border-radius: 5px;
+    border-radius: 0.75vw;
 }
 
 #options-container div:hover {
@@ -81,7 +81,7 @@ body {
 
 #play-container {
     background-color: #ebc256;
-    border-radius: 5px;
+    border-radius: 0.75vw;
     width: 45vw;
     height: 45vw;
 
@@ -89,13 +89,13 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-gap: 15px;
-    padding: 15px;
+    grid-gap: 1.5vw;
+    padding: 1.5vw;
 }
 
 #play-container div {
     background-color: #e6d3b2;
-    border-radius: 5px;
+    border-radius: 0.75vw;
 }
 
 #play-container div:hover {
@@ -144,6 +144,7 @@ body {
     left: 0;
     background-color: rgba(0, 0, 0, 0.3);
     display: none;
+    overflow: hidden;
 }
 
 #instrum-container, #minuet-container {
@@ -170,21 +171,21 @@ body {
 }
 
 #piano-button {
-    top: -65vh; left: 0; bottom: 0; right: 0;
+    top: -30vw; left: 0; bottom: 0; right: 0;
     background-size: cover;
     background-position: center;
     background-image: url("../img/buttonPiano.png");
 }
 
 #clav-button {
-    top: 50vh; left: 25vw; bottom: 0; right: 0;
+    top: 25vw; left: 20vw; bottom: 0; right: 0;
     background-size: cover;
     background-position: center;
     background-image: url("../img/buttonClav.png");
 }
 
 #harpsi-button {
-    top: 50vh; left: -25vw; bottom: 0; right: 0;
+    top: 25vw; left: -20vw; bottom: 0; right: 0;
     background-size: cover;
     background-position: center;
     background-image: url("../img/buttonHarpsi.png");
@@ -261,11 +262,17 @@ body {
     #options-container {
         width: 46vh;
         height: 23vh;
+        border-radius: 0.75vh;
+        grid-gap: 1.5vh;
+        padding: 1.5vh;
     }
 
     #play-container {
         width: 45vh;
         height: 45vh;
+        border-radius: 0.75vh;
+        grid-gap: 1.5vh;
+        padding: 1.5vh;
     }
 
     .slots {
@@ -302,17 +309,17 @@ body {
     }
 
     #piano-button {
-        top: -55vw;
+        top: -35vh;
     }
 
     #clav-button {
-        top: 40vw;
-        left: 40vw;
+        top: 25vh;
+        left: 25vh;
     }
 
     #harpsi-button {
-        top: 40vw;
-        left: -40vw;
+        top: 25vh;
+        left: -25vh;
     }
 
     #min-0 {
