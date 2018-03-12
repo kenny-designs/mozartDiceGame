@@ -11,6 +11,7 @@ body {
 #main-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     height: 100vh;
@@ -23,18 +24,25 @@ body {
     height: 45vw;
 }
 
+/* Testing sheet-container */
+#sheet-container {
+    width: 82vw;
+    height: 15vw;
+    background-color: white;
+}
+
 #options-container {
     background-color: #ebc256;
     border-radius: 0.5vw;
-    width: 40vw;
-    height: 40vw;
+    width: 30vw;
+    height: 30vw;
 
     /* Creating 4x2 grid */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-gap: 1.5vw;
-    padding: 1.5vw;
+    grid-gap: 1vw;
+    padding: 1vw;
 }
 
 #options-container div {
@@ -82,15 +90,15 @@ body {
 #play-container {
     background-color: #ebc256;
     border-radius: 0.5vw;
-    width: 40vw;
-    height: 40vw;
+    width: 30vw;
+    height: 30vw;
 
     /* Creating 4x4 grid */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-gap: 1.5vw;
-    padding: 1.5vw;
+    grid-gap: 1vw;
+    padding: 1vw;
 }
 
 #play-container div {
@@ -108,7 +116,7 @@ body {
     justify-content: center;
     align-items: center;
     color: #b53232;
-    font-size: calc(100% + 2.5vw);
+    font-size: calc(100% + 2vw);
     transition: box-shadow linear 0.1s;
 }
 
