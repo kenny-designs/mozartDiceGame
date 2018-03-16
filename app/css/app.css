@@ -26,7 +26,7 @@ body {
 
 /* Testing sheet-container */
 #sheet-container {
-    width: 82vw;
+    width: 92vw;
     height: 15vw;
     background-color: white;
 }
@@ -90,7 +90,7 @@ body {
 #play-container {
     background-color: #ebc256;
     border-radius: 0.5vw;
-    width: 30vw;
+    width: 50vw;
     height: 30vw;
 
     /* Creating 4x4 grid */
@@ -265,6 +265,10 @@ body {
     #main-container {
         flex-direction: column;
         align-items: center;
+    }
+
+    #sheet-container {
+        display: none;
     }
 
     #options-container {
