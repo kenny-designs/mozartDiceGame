@@ -90,7 +90,7 @@ body {
 #play-container {
     background-color: #ebc256;
     border-radius: 0.5vw;
-    width: 50vw;
+    width: 60vw;
     height: 30vw;
 
     /* Creating 4x4 grid */
@@ -118,6 +118,15 @@ body {
     color: #b53232;
     font-size: calc(100% + 2vw);
     transition: box-shadow linear 0.1s;
+
+    /* Displaying music notation */
+    background-size: 99%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#slot-0 {
+    background-image: url("../img/notation/M96.png");
 }
 
 .playing {
