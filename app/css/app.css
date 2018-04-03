@@ -120,13 +120,73 @@ body {
     transition: box-shadow linear 0.1s;
 
     /* Displaying music notation */
-    background-size: 99%;
+    background-size: 90%;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 #slot-0 {
-    background-image: url("../img/notation/M96.png");
+    background-image: url("../img/notation/M1.png");
+}
+
+#slot-1 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-2 {
+    background-image: url("../img/notation/M16.png");
+}
+
+#slot-3 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-4 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-5 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-6 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-7 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-8 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-9 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-10 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-11 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-12 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-13 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-14 {
+    background-image: url("../img/notation/M2.png");
+}
+
+#slot-15 {
+    background-image: url("../img/notation/M2.png");
 }
 
 .playing {
