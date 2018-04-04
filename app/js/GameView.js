@@ -13,6 +13,7 @@ class GameView {
         for (let i = 0; i < app.gameModel.selectedNotes.length; i++) {
             let slot = document.getElementById('slot-' + i);
             slot.innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
+            slot.style.backgroundImage = 'url(./img/notation/' + app.gameModel.selectedNotes[i] + '.png)';
 
             // event listener for clicking a single slot
             slot.addEventListener('click', function() {
@@ -70,6 +71,8 @@ class GameView {
     updatePlayfield(app) {
         for (let i = 0; i < app.gameModel.allSlots.length; i++) {
             app.gameModel.allSlots[i].innerHTML = this.createPlayHTML(app.gameModel.selectedNotes[i]);
+            let slot = document.getElementById('slot-' + i);
+            slot.style.backgroundImage = 'url(./img/notation/' + app.gameModel.selectedNotes[i] + '.png)';
         }
     }
 
@@ -79,8 +82,9 @@ class GameView {
             app.gameModel.allSlots[i].classList.remove('playing');
         }
 
-        if (slot)
+        if (slot) {
             slot.classList.add('playing');
+        }
     }
 
     // returns the simplified innerHTML for a given note
@@ -115,12 +119,12 @@ class GameView {
         button.style.backgroundImage = 'url(\'' + path + '\')';
     }
 
-    // updates which min is currently hightlighted based on given index
+    // updates which min is currently highlighted based on given index
     updateHighlightedMin(app, min) {
         for (let i = 0; i < app.gameModel.theScore[0].length; i++) {
             let elm = document.getElementById('min-' + i);
 
-            if (i != min)
+            if (i !== min)
                 elm.classList.remove('highlight');
             else
                 elm.classList.add('highlight');

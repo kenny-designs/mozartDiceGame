@@ -129,8 +129,9 @@ class GameModel {
 
         this.players.dispose();
 
-        if (this.sampleBufs)
+        if (this.sampleBufs) {
             this.sampleBufs.dispose();
+        }
     }
 
     // stops the samplePlayer from playing
