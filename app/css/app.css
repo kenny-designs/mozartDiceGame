@@ -335,11 +335,8 @@ body {
         width: 15vh;
         height: 15vh;
         line-height: 15vh;
-        /*font-size: calc(100% + 3vh);*/
-    }
-
-    #exit-button, #mobile-button {
         font-size: calc(100% + 3vh);
+        background-size: 0; /* hide the background */
     }
 
     #piano-button {
