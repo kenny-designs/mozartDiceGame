@@ -11,6 +11,7 @@ body {
 #main-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     height: 100vh;
@@ -23,18 +24,27 @@ body {
     height: 45vw;
 }
 
+/* Testing sheet-container */
+#sheet-container {
+    /* TODO: setting to none for now. See about bringing back later */
+    display: none;
+    width: 92vw;
+    height: 15vw;
+    background-color: white;
+}
+
 #options-container {
     background-color: #ebc256;
     border-radius: 0.5vw;
-    width: 40vw;
-    height: 40vw;
+    width: 30vw;
+    height: 30vw;
 
     /* Creating 4x2 grid */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-gap: 1.5vw;
-    padding: 1.5vw;
+    grid-gap: 1vw;
+    padding: 1vw;
 }
 
 #options-container div {
@@ -82,15 +92,15 @@ body {
 #play-container {
     background-color: #ebc256;
     border-radius: 0.5vw;
-    width: 40vw;
-    height: 40vw;
+    width: 60vw;
+    height: 30vw;
 
     /* Creating 4x4 grid */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-gap: 1.5vw;
-    padding: 1.5vw;
+    grid-gap: 1vw;
+    padding: 1vw;
 }
 
 #play-container div {
@@ -108,8 +118,15 @@ body {
     justify-content: center;
     align-items: center;
     color: #b53232;
-    font-size: calc(100% + 2.5vw);
+    /* TODO: see if we can remove this */
+    /*font-size: calc(100% + 2vw);*/
+    font-size: 0;
     transition: box-shadow linear 0.1s;
+
+    /* Displaying music notation */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .playing {
@@ -132,7 +149,7 @@ body {
 }
 
 .highlight {
-    background-color: #f3e8d6 !important;
+    background-color: #fffbf5 !important;
 }
 
 #selection-container {
@@ -147,10 +164,15 @@ body {
     overflow: hidden;
 }
 
+#selection-container div:hover {
+    background-color: #d0b992 !important;
+}
+
 #instrum-container, #minuet-container {
     display: none;
 }
 
+/* TODO: Circles need not be circles anymore. Change to more appropriate name */
 .circle {
     position: absolute;
     margin: auto;
@@ -163,10 +185,17 @@ body {
     line-height: 13vw;
     box-shadow: 5px 5px 20px dimgrey;
     cursor: pointer;
-    font-size: calc(100% + 3vw);
+    /*font-size: calc(100% + 3vw);*/
+    font-size: 0;
+
+    /* Displaying music notation */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 #exit-button, #mobile-button {
+    font-size: calc(100% + 3vw);
     top: 0; left: 0; bottom: 0; right: 0;
 }
 
@@ -259,6 +288,10 @@ body {
         align-items: center;
     }
 
+    #sheet-container {
+        display: none;
+    }
+
     #options-container {
         width: 46vh;
         height: 23vh;
@@ -277,6 +310,7 @@ body {
 
     .slots {
         font-size: calc(100% + 2.5vh);
+        background-size: 0;
     }
 
     #play-button {
@@ -306,6 +340,7 @@ body {
         height: 15vh;
         line-height: 15vh;
         font-size: calc(100% + 3vh);
+        background-size: 0; /* hide the background */
     }
 
     #piano-button {
