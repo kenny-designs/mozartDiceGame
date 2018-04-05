@@ -1,0 +1,403 @@
+html {
+    height: 100vh;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #7d2c2c;
+}
+
+.content {
+    width: 45vw;
+    height: 45vw;
+}
+
+/* Testing sheet-container */
+#sheet-container {
+    /* TODO: setting to none for now. See about bringing back later */
+    display: none;
+    width: 92vw;
+    height: 15vw;
+    background-color: white;
+}
+
+#options-container {
+    background-color: #ebc256;
+    border-radius: 0.5vw;
+    width: 30vw;
+    height: 30vw;
+
+    /* Creating 4x2 grid */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 1vw;
+    padding: 1vw;
+}
+
+#options-container div {
+    background-color: #e6d3b2;
+    border-radius: 0.5vw;
+}
+
+#options-container div:hover {
+    background-color: #d0b992;
+    cursor: pointer;
+}
+
+#play-button {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonPlay.png");
+}
+
+#instrum-button {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonPiano.png");
+}
+
+#reset-button {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonReset.png");
+}
+
+#random-button {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonDice.png");
+}
+
+#play-container {
+    background-color: #ebc256;
+    border-radius: 0.5vw;
+    width: 60vw;
+    height: 30vw;
+
+    /* Creating 4x4 grid */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-gap: 1vw;
+    padding: 1vw;
+}
+
+#play-container div {
+    background-color: #e6d3b2;
+    border-radius: 0.5vw;
+}
+
+#play-container div:hover {
+    background-color: #d0b992;
+    cursor: pointer;
+}
+
+.slots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #b53232;
+    /* TODO: see if we can remove this */
+    /*font-size: calc(100% + 2vw);*/
+    font-size: 0;
+    transition: box-shadow linear 0.1s;
+
+    /* Displaying music notation */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.playing {
+    box-shadow: 0 0 0 3px;
+}
+
+.pulse {
+    animation-name: pulse;
+    animation-duration: 2s;
+}
+
+@keyframes pulse {
+    0%, 66%  {
+        transform: scale(0.95, 0.95);
+    }
+
+    33%, 100% {
+        transform: scale(1.05, 1.05);
+    }
+}
+
+.highlight {
+    background-color: #fffbf5 !important;
+}
+
+#selection-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 500;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+    overflow: hidden;
+}
+
+#selection-container div:hover {
+    background-color: #d0b992 !important;
+}
+
+#instrum-container, #minuet-container {
+    display: none;
+}
+
+/* TODO: Circles need not be circles anymore. Change to more appropriate name */
+.circle {
+    position: absolute;
+    margin: auto;
+    background-color: #e6d3b2;
+    color: #b53232;
+    border-radius: 50%;
+    width: 13vw;
+    height: 13vw;
+    text-align: center;
+    line-height: 13vw;
+    box-shadow: 5px 5px 20px dimgrey;
+    cursor: pointer;
+    /*font-size: calc(100% + 3vw);*/
+    font-size: 0;
+
+    /* Displaying music notation */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#exit-button, #mobile-button {
+    font-size: calc(100% + 3vw);
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+#piano-button {
+    top: -30vw; left: 0; bottom: 0; right: 0;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonPiano.png");
+}
+
+#clav-button {
+    top: 25vw; left: 20vw; bottom: 0; right: 0;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonClav.png");
+}
+
+#harpsi-button {
+    top: 25vw; left: -20vw; bottom: 0; right: 0;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/buttonHarpsi.png");
+}
+
+#min-0 {
+    top: -30vw; left: -80vw; bottom: 0; right: 0;
+}
+
+#min-1 {
+    top: -30vw; left: -40vw; bottom: 0; right: 0;
+}
+
+#min-2 {
+    top: -30vw; left: 0; bottom: 0; right: 0;
+}
+
+#min-3 {
+    top: -30vw; left: 40vw; bottom: 0; right: 0;
+}
+
+#min-4 {
+    top: -30vw; left: 80vw; bottom: 0; right: 0;
+}
+
+#min-5 {
+    top: 30vw; left: -80vw; bottom: 0; right: 0;
+}
+
+#min-6 {
+    top: 30vw; left: -48vw; bottom: 0; right: 0;
+}
+
+#min-7 {
+    top: 30vw; left: -17vw; bottom: 0; right: 0;
+}
+
+#min-8 {
+    top: 30vw; left: 17vw; bottom: 0; right: 0;
+}
+
+#min-9 {
+    top: 30vw; left: 48vw; bottom: 0; right: 0;
+}
+
+#min-10 {
+    top: 30vw; left: 80vw; bottom: 0; right: 0;
+}
+
+#loading-container, #mobile-container{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#loading-container {
+    display: none;
+}
+
+.active {
+    display: block !important;
+}
+
+@media screen and (orientation: portrait) {
+    #main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #sheet-container {
+        display: none;
+    }
+
+    #options-container {
+        width: 46vh;
+        height: 23vh;
+        border-radius: 0.5vh;
+        grid-gap: 1.5vh;
+        padding: 1.5vh;
+    }
+
+    #play-container {
+        width: 45vh;
+        height: 45vh;
+        border-radius: 0.5vh;
+        grid-gap: 1.5vh;
+        padding: 1.5vh;
+    }
+
+    .slots {
+        font-size: calc(100% + 2.5vh);
+        background-size: 0;
+    }
+
+    #play-button {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 3;
+    }
+
+    #instrum-button {
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+
+    #reset-button {
+        grid-column-start: 3;
+        grid-column-end: 4;
+    }
+
+    #random-button {
+        grid-column-start: 4;
+        grid-column-end: 5;
+    }
+
+    .circle {
+        width: 15vh;
+        height: 15vh;
+        line-height: 15vh;
+        font-size: calc(100% + 3vh);
+        background-size: 0; /* hide the background */
+    }
+
+    #piano-button {
+        top: -35vh;
+    }
+
+    #clav-button {
+        top: 25vh;
+        left: 25vh;
+    }
+
+    #harpsi-button {
+        top: 25vh;
+        left: -25vh;
+    }
+
+    #min-0 {
+        top: -40vh; left: -38vh;
+    }
+
+    #min-1 {
+        top: -70vh; left: -20vh;
+    }
+
+    #min-2 {
+        top: -40vh; left: 0;
+    }
+
+    #min-3 {
+        top: -70vh; left: 20vh;
+    }
+
+    #min-4 {
+        top: -40vh; left: 38vh;
+    }
+
+    #min-5 {
+        top: 70vh; left: -38vh;
+    }
+
+    #min-6 {
+        top: 35vh; left: -38vh;
+    }
+
+    #min-7 {
+        top: 70vh; left: 0;
+    }
+
+    #min-8 {
+        top: 35vh; left: 0;
+    }
+
+    #min-9 {
+        top: 70vh; left: 38vh;
+    }
+
+    #min-10 {
+        top: 35vh; left: 38vh;
+    }
+}
