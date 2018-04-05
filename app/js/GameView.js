@@ -33,6 +33,7 @@ class GameView {
                     for (let j = 0; j < app.gameModel.theScore[i].length; j++) {
                         let minuet = document.getElementById('min-' + j);
                         minuet.innerHTML = this.createPlayHTML(app.gameModel.theScore[i][j]);
+                        minuet.style.backgroundImage = 'url(./img/notation/' + app.gameModel.selectedNotes[j] + '.png)';
 
                         // allows the user to sample individual minuets
                         minuet.addEventListener('click', function() {
