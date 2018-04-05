@@ -3,17 +3,18 @@ const StartAudioContext = require('StartAudioContext');
 
 class GameModel {
     constructor() {
-        this.isPlaying          = false;    // track if music playing
+        this.isPlaying          = false;    // play state of music
         this.allEvents          = [];       // events for lighting slots
-        this.allSlots           = [];       // tracks all slots
-        this.selectedNotes      = [];       // measures selected to be played
-        this.notePaths          = [];       // paths to selected notes
-        this.theScore           = [];       // available measures to choose from
+        this.allSlots           = [];       // tracks each slot div in play-container
+        this.selectedNotes      = [];       // measures that have been selected to be played
+        this.notePaths          = [];       // path to audio files for the selected notes
+        this.theScore           = [];       // array of all available measures to choose from
+        this.players            = [];       // array of Tone.Players with current song
         this.selectedInstrum    = 'piano';  // currently selected instrument
-        this.selectedPath       = '';       // currently selected path
-        this.currentSlot        = -1;       // currently open slot
+        this.selectedPath       = '';       // path to the audio files for the currently selected instrument
+        this.currentSlot        = -1;       // which slot is currently open
         this.sampleBufs         = null;     // bufs for sampling individual mins
-        this.samplePlayer       = null;     // player used to play sample minuets
+        this.samplePlayer       = null;     // player that is used to play the sample minuets
 
         // object instrument choices
         this.instruments = {'piano'       : './audio/acoustic_grand_piano/',
@@ -93,11 +94,11 @@ class GameModel {
         this.notePaths = [];
 
         for (let i = 0; i < this.selectedNotes.length; i++) {
-            this.notePaths.push(this.selectedPath + this.selectedNotes[i] + '.wav');
+            this.notePaths.push(this.selectedPath + this.selectedNotes[i] + '.wav'); // TODO: is it okay to hard code this?
         }
     }
 
-    // load selectedNotes
+    // load selectedNotes so that they may be played
     loadSong(app) {
         app.toggleLoading();
         let offset = 0;
