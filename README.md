@@ -7,7 +7,7 @@ This game is being created as an educational tool to show the different ways mus
     <img src="./app/img/mozartUI.jpg" width=188 height=313 />
     <br>
     <i>Portrait view UI</i>
-    <br>
+    <br><br>
     <img src="./app/img/mozartUIHorizontal.png" width=313 height=188 />
     <br>
     <i>Landscape view UI</i>
