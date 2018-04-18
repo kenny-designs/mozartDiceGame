@@ -6,6 +6,7 @@ class GameView {
         this.instrumContainer   = document.getElementById('instrum-container');
         this.minuetContainer    = document.getElementById('minuet-container');
         this.loadingContainer   = document.getElementById('loading-container');
+        this.sheetContainer     = document.getElementById('sheet-container');
     }
 
     // creates the initial playfield for the player to interact with

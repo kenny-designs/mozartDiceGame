@@ -27,10 +27,21 @@ body {
 /* Testing sheet-container */
 #sheet-container {
     /* TODO: setting to none for now. See about bringing back later */
-    display: none;
-    width: 92vw;
-    height: 15vw;
-    background-color: white;
+    /* display: none; */
+    background-color: #e6d3b2;
+    border-radius: 0.5vw;
+    width: 94vw;
+    height: 30vh;
+    padding: 0 15px 0 15px;
+
+    /* Stave svg as background */
+    background-image: url(../img/svg/stave.svg);
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+
+.notes {
+    fill: red;
 }
 
 #options-container {
