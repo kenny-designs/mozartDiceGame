@@ -3,11 +3,15 @@
 
 This game is being created as an educational tool to show the different ways music can be pieced together. It can be played in your web browser [here.](https://kenny-designs.github.io/mozartDiceGame/dist/)
 
-<p align="center">
-  <img src="./app/img/mozartUI.jpg" width=188 height=313 />
-  <br>
-  <i>Screenshot of the new UI</i>
-</p>
+  <p align="center">
+    <img src="./app/img/mozartUI.jpg" width=188 height=313 />
+    <br>
+    <i>Portrait view UI</i>
+    <br><br>
+    <img src="./app/img/mozartUIHorizontal.png" width=683 height=384 />
+    <br>
+    <i>Landscape view UI</i>
+  </p>
 
 ## Editing the Code
 If you wish to make changes to the code, you'll need to have several things first. In particular, you will need npm. I recommend
