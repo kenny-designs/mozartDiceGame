@@ -26,7 +26,7 @@ body {
 
 /* Testing sheet-container */
 #sheet-container {
-    /* TODO: setting to none for now. See about bringing back later */
+    /* TODO: setting to none for now */
     display: none;
     width: 92vw;
     height: 15vw;
